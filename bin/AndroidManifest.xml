@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.performance.test"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="19" />
+
+    
+    <uses-feature android:glEsVersion="0x00020000" >
+    </uses-feature>
+    
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />    
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />    
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+   
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="edu.performance.test.Library"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="edu.performance.test.floatoperation.FloatOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.integeroperation.IntegerOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.stringoperation.StringOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.memoryoperation.MemoryOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.mailoperation.MailOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.nativo.stringoperation.StringOperationNativeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.fileoperation.FileOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.nativo.fileoperation.FileOperationNativeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="edu.performance.test.BatteryInformation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.draws.CircleActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.draws.RectangleActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.draws.ImageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.draws.ArcActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.draws.TextActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.CubeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.LessonThreeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.TeapotActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.threed.GLES20Activity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.screen.ScreenActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.screen.LightTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.screen.MediumTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.screen.HardTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.weboperation.WebOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.weboperation.WebViewActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.weboperation.WebOperation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.batterytest.BatteryOperation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.gpsoperation.GPSActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphoperation.GraphActivity"
+            android:screenOrientation="portrait" >
+        </activity>      
+        <activity
+            android:name="edu.performance.test.database.DatabaseOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.downloadoperation.DownloadOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.streamingoperation.StreamingActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+    </application>
+
+</manifest>

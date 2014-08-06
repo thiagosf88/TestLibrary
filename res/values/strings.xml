@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Test Library</string>
+
+    <style name="AppTheme"></style>
+
+    <string name="stretch"> \"AAAAA\"</string>
+    <string name="text">TEXT</string>
+    <string name="title_activity_screen">ScreenActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string-array name="snippets">
+        <item >Copyright laws are changing all over the world</item>
+        <item >Copyright laws are changing all over the world. Be sure to check the\ncopyright</item>
+        <item >Please read the \"legal small print,\" and other information about the
+eBook and Project Gutenberg at the bottom of this file.  Included is
+important information about your specific rights and restrictions in
+how the file may be used.  You can also find out about how to make a
+donation to Project Gutenberg, and how to get involved.</item>
+        <item >No, my brougham is waiting</item>
+        <item >_Clinically_ the disease is attended with the gradual and painless
+development during childhood or adolescence of a number of tumours or
+irregular projections of bone, at the ends of the long bones, the
+vertebral border of the scapula, and the cristal border of the ilium.
+They exhibit a rough symmetry; they rarely attain any size; and they
+usually cease growing when the skeleton attains maturity--the conversion</item>
+        <item >_Clinically_ the disease is attended with the gradual and painless
+development during childhood or adolescence of a number of tumours or
+irregular projections of bone, at the ends of the long bones, the
+vertebral border of the scapula, and the cristal border of the ilium.
+They exhibit a rough symmetry; they rarely attain any size; and they
+usually cease growing when the skeleton attains maturity--the conversion
+of cartilage into bone being then completed. While they originate from
+the ossifying junctions of the long bones, they tend, as the shaft
+increases in length, to project from the surface of the bone at some
+distance from the ossifying junction and to \"point\" away from it. They
+may cause symptoms by \"lockingCopyright laws are changing all over the world. Be sure to check the
+copyright laws for your country before downloading or redistributing
+this or any other Project Gutenberg eBook the adjacent joint or by pressing upon
+nerve-trunks or blood vessels.</item>
+        <item >Sarasate plays at the St. James\'s Hall this afternoon</item>
+        <item >When Natasha had been told that morning that Prince Andrew was
+seriously wounded and was traveling with their party, she had at first
+asked many questions: Where was he going? How was he wounded? Was it
+serious? And could she see him? But after she had been told that she
+could not see him, that he was seriously wounded but that his life was
+not in danger, she ceased to ask questions or to speak at all,</item>
+        <item >When Natasha had been told that morning that Prince Andrew was
+seriously wounded and was traveling with their party, she had at first
+asked many questions: Where was he going? How was he wounded? Was it
+serious? And could she see him? But after she had been told that she
+could not see him, that he was seriously wounded but that his life was
+not in danger, she ceased to ask questions or to speak at all,
+evidently disbelieving what they told her, and convinced that say what
+she might she would still be told the same. All the way she had sat
+motionless in a corner of the coach with wide open eyes, and the
+expression in them which the countess knew so well and feared so much,
+and now she sat in the same way on the bench where she had seated
+herself on arriving. She was planning something and either deciding or
+had already decided something in her mind. The countess knew this, but
+what it might be she did not know, and this alarmed and tormented her.</item>_ClinicallyWhen Natasha had been told that morning that Prince Andrew was
+seriously wounded and was traveling with their party, she had at first the disease is attended with the gradual and painless
+development during childhood or adolescence of a number of tumours or_Clinically_ the disease is attended with the gradual and painless
+development during childhood or adolescence of a number of tumours or
+irregular projections of bone, at the ends of the long bones, the
+vertebral border of the scapula, and the cristal border of the ilium.
+They exhibit a rough symmetry; they rarely attain any size; and they
+usually cease growing when the skeleton attains maturity--the conversion
+    </string-array>
+    <string-array name="webSites">
+        <item >http://www.google.com.br</item>
+        <item >http://www.amazon.com</item>
+        <item >http://www.uol.com.br</item>
+        <item >http://www.huffingtonpost.com</item>
+    </string-array>
+    <string-array name="light_test">
+        <item >First Label</item>
+        <item >Second Label</item>
+        <item >Thirth Label</item>
+        <item >Button</item>
+    </string-array>
+        <string name="first_label">First Label</string>
+        <string name="second_label">Second Label</string>
+        <string name="third_label">Third Label</string>
+        <string name="button_label">Button Label</string>
+        <string name="MultiAutoCompleteTextView">Multi Auto Complete Text View</string>
+        <string name="fourth_label">Fourth Label</string>
+        <string name="fifth_label">Fifth Label</string>
+        <string name="sixth_label">Sixth Label</string>
+        <string name="button_label2">Button Label 2</string>
+        <string name="button_label3">Button Label 3</string>
+        <string name="seventh_label">Seventh Label</string>
+        <string name="eighth_label">Eighth Label</string>
+        <string name="nineth_label">Ninth Label</string>
+        <string name="tenth_label">Tenth Label</string>
+        <string name="eleventh_label">Eleventh Label</string>
+        <string name="check_label">Check Option</string>
+        <string name="radio_label">Radio Option</string>
+        <string name="start_button">Start test</string>
+
+</resources>
