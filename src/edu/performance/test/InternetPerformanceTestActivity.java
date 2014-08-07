@@ -10,7 +10,7 @@ public abstract class InternetPerformanceTestActivity extends PerformanceTestAct
 	protected void onPause() {
 		super.onPause();
 		InternetController.setWifiAvailability(false, this);
-		InternetController.setMobileDataAvailability(this, false);
+		
 	}
 	
 	@Override
@@ -20,12 +20,12 @@ public abstract class InternetPerformanceTestActivity extends PerformanceTestAct
 	}
 	//TODO verificar se não é possível mudar isso tudo para dentro do onCreate.
 	public void execute(){
-		//InternetController.setWifiAvailability(true, this);
+		InternetController.setWifiAvailability(true, this);
 		
 		//TODO Change this to PerformanceTestActivity
 		avoidingInfiniteTasks();
 		
-		InternetController.setMobileDataAvailability(this, true);
+		
 		while(InternetController.getInternetAvailability(this) == false);
 	}
 	

@@ -14,6 +14,7 @@ import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.floatoperation.FloatOperation;
+import edu.performance.test.graphicoperation.draws.ArcActivity;
 import edu.performance.test.graphicoperation.draws.RectangleActivity;
 import edu.performance.test.util.WriteNeededFiles;
 
@@ -117,9 +118,12 @@ public class BatteryOperation extends Activity {
 		}
 		else {
 
-		aTest = new Intent(this, RectangleActivity.class);
+		aTest = new Intent(getApplicationContext(), ArcActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(Library.THELASTTEST, isTheLast());
+		aTest.putExtra(Library.THELASTTEST, true);
+		aTest.putExtra(Library.LEVEL_INT, 5);
+		
+		
 		// aTest.putExtra(Library.BATTERYTEST, true);
 
 		startActivityForResult(aTest, 1);

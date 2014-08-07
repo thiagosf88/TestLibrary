@@ -12,6 +12,7 @@ import edu.performance.test.InternetPerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
 import edu.performance.test.util.ActivityThread;
+import edu.performance.test.util.InternetController;
 
 public class StreamingActivity extends InternetPerformanceTestActivity implements
 		SurfaceHolder.Callback, OnPreparedListener, OnBufferingUpdateListener,
@@ -82,7 +83,13 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 	@Override
 	public void execute() {
 		
-		super.execute();
+InternetController.setWifiAvailability(true, this);
+		
+		//TODO Change this to PerformanceTestActivity
+		avoidingInfiniteTasks();
+		
+		
+		while(InternetController.getInternetAvailability(this) == false);
 		
 		try {
 			

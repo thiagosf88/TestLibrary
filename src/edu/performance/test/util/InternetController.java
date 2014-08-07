@@ -1,9 +1,5 @@
 package edu.performance.test.util;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -32,8 +28,8 @@ public class InternetController {
 		    return false;
 		
 	}
-	
-	public static void setMobileDataAvailability(Activity ref, boolean status){
+	/*
+	public static void setMobileDataAvailability(Context ref, boolean status){
 	    final ConnectivityManager conman = (ConnectivityManager) ref.getSystemService(Context.CONNECTIVITY_SERVICE);
 	    @SuppressWarnings("rawtypes")
 		Class conmanClass, iConnectivityManagerClass;
@@ -50,9 +46,13 @@ public class InternetController {
 		    //System.out.println(TestingConnectivityManager.getClass().getName());
 		    Method mts[] = iConnectivityManagerClass.getDeclaredMethods();
 		    for (Method m : mts){
-		    	System.out.println(m.getName() + " " + m.getReturnType() + m.getTypeParameters());
+		    	if(m.getName().contains("setMobileDataEnabled"))
+		    	System.out.println(m.getName() + " " + m.getReturnType());
+		    	for(int i = 0; i < m.getTypeParameters().length; i++){
+		    		System.out.println(m.getTypeParameters()[i]);
+		    	}
 		    }
-			setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.class);
+			setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", void.class);
 		    setMobileDataEnabledMethod.setAccessible(true);
 
 		    setMobileDataEnabledMethod.invoke(TestingConnectivityManager, status);
@@ -74,10 +74,13 @@ public class InternetController {
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+		}finally {
+
 		} 
 	   
 		
 	    
-	}
+	}*/ 
 
 }
