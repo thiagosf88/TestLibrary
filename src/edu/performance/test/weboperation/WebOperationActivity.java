@@ -48,19 +48,19 @@ public class WebOperationActivity extends PerformanceTestActivity {
 		webSite.putExtra(URL, websites[3]);
 		getPagesToAccess().add(webSite);
 
-		webSite = new Intent(this, WebOperation.class);
+		webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
 		webSite.putExtra(URL, websites[0]);
 		getPagesToAccess().add(webSite);
-		webSite = new Intent(this, WebOperation.class);
+		webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
 		webSite.putExtra(URL, websites[1]);
 		getPagesToAccess().add(webSite);
-		webSite = new Intent(this, WebOperation.class);
+		webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
 		webSite.putExtra(URL, websites[2]);
 		getPagesToAccess().add(webSite);
-		webSite = new Intent(this, WebOperation.class);
+		webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, true);
 		webSite.putExtra(URL, websites[3]);
 		getPagesToAccess().add(webSite);

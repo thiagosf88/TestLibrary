@@ -30,7 +30,7 @@ public class WebViewActivity extends InternetPerformanceTestActivity{
 	
 	
 	public void execute(){
-		
+		super.execute();
 		testTJMwebOperation(websites);
 		
 		 

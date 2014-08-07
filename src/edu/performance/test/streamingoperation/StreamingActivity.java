@@ -83,13 +83,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 	@Override
 	public void execute() {
 		
-InternetController.setWifiAvailability(true, this);
-		
-		//TODO Change this to PerformanceTestActivity
-		avoidingInfiniteTasks();
-		
-		
-		while(InternetController.getInternetAvailability(this) == false);
+super.execute();
 		
 		try {
 			

@@ -22,7 +22,7 @@ import edu.performance.test.util.WriteNeededFiles;
  * @author thiago
  *
  */
-public class WebOperation extends InternetPerformanceTestActivity {
+public class WebLatencyOperation extends InternetPerformanceTestActivity {
 
 	
 	String websites;

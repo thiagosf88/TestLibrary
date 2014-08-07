@@ -152,7 +152,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.weboperation.WebOperation"
+            android:name="edu.performance.test.weboperation.WebLatencyOperation"
             android:screenOrientation="portrait" >
         </activity>
         <activity
