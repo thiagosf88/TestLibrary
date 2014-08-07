@@ -225,7 +225,7 @@ public class Library extends Benchmark {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 27000);
 		aTest.putExtra(STATUS, "Testing Streaming skills..");
 		testsToDo.add(aTest);
 		
@@ -237,7 +237,7 @@ public class Library extends Benchmark {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, DownloadOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 27000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Download skills..");

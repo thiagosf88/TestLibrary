@@ -112,7 +112,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		mIntent.putExtras(extras);
 		mIntent.putExtra(Library.THELASTTEST, isTheLast);
 		setResult(RESULT_OK, mIntent);
-		System.out.println("Estou no FinishTest at PerformanceTestActi. Is it the last? " + isTheLast );
+		
 		 
 		finish();
 
@@ -148,7 +148,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
                 Intent mIntent = new Intent();
                 mIntent.putExtra(Library.THELASTTEST, isTheLast);
 				setResult(ThreeDActivity.RESULT_CANCELED, mIntent);
-				System.out.println("saindo. Is it the last? " + isTheLast);
+				
 				finish();
                 }
                 
