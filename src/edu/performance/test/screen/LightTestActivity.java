@@ -1,15 +1,13 @@
 package edu.performance.test.screen;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import edu.performance.test.Library;
+import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.R;
 
-public class LightTestActivity extends Activity {
+public class LightTestActivity extends PerformanceTestActivity {
 	
 	TextView l1, l2, l3;
 	Button b1;
@@ -19,6 +17,13 @@ public class LightTestActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		
+		execute();
+		
+	}
+
+	@Override
+	public void execute() {
 		
 		setContentView(R.layout.light_test);
 		
@@ -32,11 +37,7 @@ public class LightTestActivity extends Activity {
 		
 		b1 = (Button) findViewById(R.id.bt_start_test);
 		
-		Intent mIntent = new Intent();
-		mIntent.putExtra(Library.THELASTTEST, false);
-		setResult(RESULT_OK, mIntent);
-		System.out.println("saindo. Is it the last? " + false);
-		finish();
+		finishTest(null);
 		
 	}
 

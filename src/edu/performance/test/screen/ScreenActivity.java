@@ -11,15 +11,17 @@ public class ScreenActivity extends DrawActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.screen);
 		
-		co = new ScreenOperation(this, null);
+		execute();
 		
 	}
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
+		
+		setContentView(R.layout.screen);
+		
+		co = new ScreenOperation(this, null);
 		
 	}
 

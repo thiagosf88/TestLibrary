@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.widget.TextView;
-import edu.performance.test.graphicoperation.ThreeDActivity;
 import edu.performance.test.util.ActivityThread;
 
 public abstract class PerformanceTestActivity extends Activity implements PerformanceTestInterface{
@@ -21,6 +20,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 	protected String message;
 	protected TextView status;
 	public static final String MAXTIMEMS = "MAXTIMEMS";
+	
 	
 	
 	protected boolean isBatteryTest() {
@@ -41,10 +41,11 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		 status = (TextView)findViewById(R.id.status);
 		
 		if(getIntent().getExtras() != null){
-			isTheLast = getIntent().getExtras().getBoolean(Library.THELASTTEST);
+			setTheLast(getIntent().getExtras().getBoolean(Library.THELASTTEST));
 			message = getIntent().getExtras().getString(Library.STATUS);
 			setMAX_TIME_MS(getIntent().getExtras().getInt(MAXTIMEMS));
 			isBatteryTest = getIntent().getExtras().getBoolean(Library.BATTERYTEST);
+			
 			
 		}
 		
@@ -99,12 +100,12 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		mythread.start();
 		}
 /**
- * This method release the wakelock and calls the onDestroy method.
+ * This method save data from executed test and returns the control to Library Activity.
  * @param extras Some extra information to be passed to the control.
  */
 	public void finishTest(Bundle extras){
 		
-		if(mythread != null) // This is true when the test is performed on a different thread.
+		if(mythread != null) // This is true when the test is performed on a different thread. TEsts related on Screen normally will return false here.
 		mythread.setRunning(false);
 
 		Intent mIntent = new Intent();
@@ -131,7 +132,10 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		super.onDestroy();
 		
 	}
-	
+	/**
+	 * This method is used to assure that the the tests will have a max time to finish.
+	 * If the test is taking a long time it will be canceled.
+	 */
 	protected void avoidingInfiniteTasks(){
 		
 		new Thread(new Runnable() {
@@ -139,15 +143,15 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
             public void run() {
                 try {
                     Thread.sleep(getMAX_TIME_MS());
-                    isTimeOver = false;
+                    setTimeOver(false);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 if(!isBatteryTest()){
-                isTimeOver = true;
+                setTimeOver(true);
                 Intent mIntent = new Intent();
-                mIntent.putExtra(Library.THELASTTEST, isTheLast);
-				setResult(ThreeDActivity.RESULT_CANCELED, mIntent);
+                mIntent.putExtra(Library.THELASTTEST, isTheLast());
+				setResult(PerformanceTestActivity.RESULT_CANCELED, mIntent);
 				
 				finish();
                 }
@@ -155,6 +159,14 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
                 
             }
         }).start();
+	}
+
+	public boolean isTimeOver() {
+		return isTimeOver;
+	}
+
+	public void setTimeOver(boolean isTimeOver) {
+		this.isTimeOver = isTimeOver;
 	}
 
 }

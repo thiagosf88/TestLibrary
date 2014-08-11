@@ -15,7 +15,6 @@ import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.floatoperation.FloatOperation;
 import edu.performance.test.graphicoperation.draws.ArcActivity;
-import edu.performance.test.graphicoperation.draws.RectangleActivity;
 import edu.performance.test.util.WriteNeededFiles;
 
 public class BatteryOperation extends Activity {

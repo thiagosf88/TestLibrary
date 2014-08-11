@@ -16,7 +16,6 @@ import android.database.Cursor;
 import android.os.Debug;
 import android.os.SystemClock;
 import android.util.Log;
-import edu.performance.test.graphicoperation.Operation;
 import edu.performance.test.util.WriteNeededFiles;
 
 /**
@@ -100,11 +99,6 @@ public aspect MetricsByAspects {
 
 	}
 	
-	@Pointcut("call(* edu.performance.test.Library.*.*(..))")
-	public void AuxiliarMethods() {
-
-	}
-	
 	@Pointcut("call(* edu.performance.test.*.*.testTpJM*(..))")
 	public void TestMethodsThroughputAndMemoryJava() {
 
@@ -114,7 +108,7 @@ public aspect MetricsByAspects {
 
 	}
 	
-	@Pointcut("execution(* edu.performance.test.screen.*.onCreate(..))")
+	@Pointcut("execution(* edu.performance.test.screen.*.execute(..))")
 	public void TestMethodsTimeAndMemoryInterfaceCreated() {
 
 	}
@@ -234,7 +228,7 @@ public aspect MetricsByAspects {
 
 	}
 
-	@Before("TestMethodsTimeAndMemoryJava() ||  TestMethodsTimeAndMemoryInterfaceCreated()"
+	@Before(" (TestMethodsTimeAndMemoryJava() ||  TestMethodsTimeAndMemoryInterfaceCreated()) && !within(Library)"
 			+ "")
 	public void logBeforeTM(JoinPoint joinPoint) {
 		start = System.nanoTime();
@@ -242,8 +236,8 @@ public aspect MetricsByAspects {
 		Debug.startAllocCounting();
 	}
 
-	@After("TestMethodsTimeAndMemoryJava() || TestMethodsTimeAndMemoryInterfaceFinished()"
-			+ " || TestMethodsTimeAndMemoryInterfaceFinished2() ")
+	@After("(TestMethodsTimeAndMemoryJava() || TestMethodsTimeAndMemoryInterfaceFinished()"
+			+ " || TestMethodsTimeAndMemoryInterfaceFinished2()) && !within(Library) ")
 	public void logAfterTM(JoinPoint joinPoint) {
 		Debug.stopAllocCounting();
 		double elapsedTime = (System.nanoTime() - start) / nanoSegRate;

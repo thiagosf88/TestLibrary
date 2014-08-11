@@ -49,7 +49,7 @@ class GpsOperation extends Service implements LocationListener {
 	// Declaring a Location Manager
 	protected LocationManager locationManager;
 
-	public GpsOperation(Context context) {
+	public GpsOperation(int level, Context context) {
 		this.mContext = context;
 		this.level = 3;
 		

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import edu.performance.test.downloadoperation.DownloadOperationActivity;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.fileoperation.FileOperationActivity;
 import edu.performance.test.floatoperation.FloatOperationActivity;
+import edu.performance.test.gpsoperation.GPSActivity;
 import edu.performance.test.graphicoperation.CubeActivity;
 import edu.performance.test.graphicoperation.LessonThreeActivity;
 import edu.performance.test.graphicoperation.draws.ArcActivity;
@@ -35,12 +37,13 @@ import edu.performance.test.graphicoperation.draws.CircleActivity;
 import edu.performance.test.graphicoperation.draws.ImageActivity;
 import edu.performance.test.graphicoperation.draws.RectangleActivity;
 import edu.performance.test.graphicoperation.draws.TextActivity;
-import edu.performance.test.graphoperation.GraphActivity;
+import edu.performance.test.graphoperation.GraphOperationActivity;
 import edu.performance.test.integeroperation.IntegerOperationActivity;
 import edu.performance.test.mailoperation.MailOperationActivity;
 import edu.performance.test.memoryoperation.MemoryOperationActivity;
 import edu.performance.test.nativo.fileoperation.FileOperationNativeActivity;
 import edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity;
+import edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity;
 import edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity;
 import edu.performance.test.nativo.stringoperation.StringOperationNativeActivity;
 import edu.performance.test.screen.HardTestActivity;
@@ -60,7 +63,7 @@ import edu.performance.test.weboperation.WebOperationActivity;
  * @author Thiago
  * 
  */
-public class Library extends Benchmark {
+public class Library extends Activity {
 
 	private int countIntent = 0;
 	private List<Intent> testsToDo;
@@ -221,19 +224,19 @@ public class Library extends Benchmark {
 	
 	private void allTests(){
 		
-		aTest = new Intent(appRef, StreamingActivity.class); 
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 27000);
-		aTest.putExtra(STATUS, "Testing Streaming skills..");
-		testsToDo.add(aTest);
+		
 		
 		aTest = new Intent(appRef, BatteryOperation.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, true);
 		aTest.putExtra(STATUS, "Testing battery skills...");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, DatabaseOperationActivity.class); //verificar se está realmente fazendo algo
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(STATUS, "Testing Database skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, DownloadOperationActivity.class); 
@@ -243,68 +246,35 @@ public class Library extends Benchmark {
 		aTest.putExtra(STATUS, "Testing Download skills..");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, LessonThreeActivity.class);
+		aTest = new Intent(appRef, FileOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 0);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
+				+ rawResourceNames[fileIndexes.BIG_TXT]);
+		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
+		aTest.putExtra(STATUS, "Testing File skills..");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, WebOperationActivity.class);
+		aTest = new Intent(appRef, FloatOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Web skills..");
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, LessonThreeActivity.class);
+		aTest.putExtra(STATUS, "Testing Float skills..");
+		testsToDo.add(aTest);			
+				
+		aTest = new Intent(appRef, GPSActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 50);
 		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
-		aTest = new Intent(appRef, LessonThreeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 100);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
-		
-		/*aTest = new Intent(appRef, TeapotActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);*/
-		
-		aTest = new Intent(appRef, CubeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
-					
-		aTest = new Intent(appRef, ImageActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(STATUS, "Testing 3D skills..");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, ImageActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, ImageActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 50);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
+		//Graphic Operation 3D ---------------------------------------------------------------
 		
+			//----------
 		aTest = new Intent(appRef, CubeActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
@@ -329,55 +299,37 @@ public class Library extends Benchmark {
 		aTest.putExtra(STATUS, "Testing 3D skills..");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, FloatOperationNativeActivity.class); 
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Native Float skills..");
-		testsToDo.add(aTest);
+			//--------------
 		
-		
-		
-		aTest = new Intent(appRef, RectangleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, RectangleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 100);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, RectangleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 1000);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, CircleActivity.class);
+		aTest = new Intent(appRef, LessonThreeActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 0);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, CircleActivity.class);
+			
+		aTest = new Intent(appRef, LessonThreeActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(LEVEL_INT, 50);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, CircleActivity.class);
+		aTest = new Intent(appRef, LessonThreeActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 100);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
+		
+		
+		
+		//------------------------------------------------------------------------------------
+		
+		
+		//GraphicOperation 2D------------------------------------------------------------------
+		
+			//----------
 		
 		aTest = new Intent(appRef, ArcActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
@@ -400,7 +352,81 @@ public class Library extends Benchmark {
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, GraphActivity.class);
+			//---------
+		
+		aTest = new Intent(appRef, CircleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+			//---------
+		
+		aTest = new Intent(appRef, ImageActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 3);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, ImageActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, ImageActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 50);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+			//--------
+		
+		aTest = new Intent(appRef, RectangleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, RectangleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 100);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, RectangleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+			//---------
+		
+		aTest = new Intent(appRef, TextActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+			
+			//----------
+		
+		
+		
+		
+		
+		//--------------------------------------------------------------------------------------------
+		
+		//Graph Operation -------------------------------------------------------------------
+		
+		aTest = new Intent(appRef, GraphOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
@@ -408,7 +434,7 @@ public class Library extends Benchmark {
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, GraphActivity.class);
+		aTest = new Intent(appRef, GraphOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
@@ -416,7 +442,7 @@ public class Library extends Benchmark {
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, GraphActivity.class);
+		aTest = new Intent(appRef, GraphOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
@@ -424,30 +450,61 @@ public class Library extends Benchmark {
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, GraphActivity.class);
+		aTest = new Intent(appRef, GraphOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
-		testsToDo.add(aTest);
+		testsToDo.add(aTest); 
 		
-				
+		//------------------------------------------------------------------------------------------------------------------
 		
-		
-		/*aTest = new Intent(appRef, StreamingActivity.class); 
+		aTest = new Intent(appRef, IntegerOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Streaming skills..");
-		testsToDo.add(aTest);*/
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(STATUS, "Testing Integer skills..");
+		testsToDo.add(aTest);
 		
-					
+		aTest = new Intent(appRef, MailOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(STATUS, "Testing Mail skills..");
+		testsToDo.add(aTest);
+		
 		aTest = new Intent(appRef, MemoryOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Memory skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, FileOperationNativeActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
+				+ rawResourceNames[fileIndexes.BIG_TXT]);
+		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
+		aTest.putExtra(STATUS, "Testing Native File skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, FloatOperationNativeActivity.class); 
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(STATUS, "Testing Native Float skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, IntegerOperationNativeActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(STATUS, "Testing Native Integer skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationNativeActivity.class); 
@@ -472,76 +529,14 @@ public class Library extends Benchmark {
 		aTest.putExtra(STATUS, "Testing String skills..");
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, StringOperationActivity.class); 
+		// Screen Activity --------------------------------------------------------
+		
+		aTest = new Intent(appRef, ScreenActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(THELASTTEST, false);		
 		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(SEARCHABLE, new FileOperation()
-		.testJreadSequentialAcessFile(
-				WriteNeededFiles.DIRECTORY_NAME + "/"
-						+ rawResourceNames[fileIndexes.SMALL_TXT],
-				0));
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing String skills..");
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, IntegerOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 1000);
-		aTest.putExtra(STATUS, "Testing Integer skills..");
 		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, FloatOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Float skills..");
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, FileOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
-				+ rawResourceNames[fileIndexes.BIG_TXT]);
-		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(STATUS, "Testing Native File skills..");
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, FileOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
-				+ rawResourceNames[fileIndexes.BIG_TXT]);
-		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(STATUS, "Testing File skills..");
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, DatabaseOperationActivity.class); //verificar se está realmente fazendo algo
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Database skills..");
-		testsToDo.add(aTest);
-		
-		
-		aTest = new Intent(appRef, WebOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Web skills..");
-		testsToDo.add(aTest);
-		
-		
-		aTest = new Intent(appRef, FloatOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Float Native skills..");
-		testsToDo.add(aTest);		
 		
 		aTest = new Intent(appRef, HardTestActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
@@ -564,38 +559,36 @@ public class Library extends Benchmark {
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
-		aTest = new Intent(appRef, MailOperationActivity.class); 
+		//--------------------------------------------------------------------------------------
+		
+		aTest = new Intent(appRef, StreamingActivity.class); 
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 27000);
+		aTest.putExtra(STATUS, "Testing Streaming skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, StringOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Mail skills..");
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(SEARCHABLE, new FileOperation()
+		.testJreadSequentialAcessFile(
+				WriteNeededFiles.DIRECTORY_NAME + "/"
+						+ rawResourceNames[fileIndexes.SMALL_TXT],
+				0));
+		aTest.putExtra(SNIPPETS, snippets);	
+		aTest.putExtra(STATUS, "Testing String skills..");
 		testsToDo.add(aTest);
 		
-		
-		/*twodTest = new Intent(appRef, ImageActivity.class);
-			twodTest.putExtra(THELASTTEST, false);
-			testsToDo.add(twodTest);*/
-		
-		aTest = new Intent(appRef, TextActivity.class);
+		aTest = new Intent(appRef, WebOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(STATUS, "Testing Web skills..");
 		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, CircleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, ScreenActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, true);		
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		testsToDo.add(aTest);			
 		
 		
 		
@@ -640,7 +633,7 @@ public class Library extends Benchmark {
 			System.out.println(testsToDo.get(countIntent).getClass() + " fails!!!! :(");
 		}
 		
-		if (requestCode == 1 && !results.getBoolean(THELASTTEST) && countIntent < testsToDo.size()) {
+		if (requestCode == 1 && !results.getBoolean(THELASTTEST)) {
 			executeTest(testsToDo.get(++countIntent));
 		}
 		else{

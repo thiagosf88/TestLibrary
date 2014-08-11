@@ -47,7 +47,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Contains shared programming interfaces.

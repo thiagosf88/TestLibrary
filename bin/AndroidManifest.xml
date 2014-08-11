@@ -164,7 +164,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphoperation.GraphActivity"
+            android:name="edu.performance.test.graphoperation.GraphOperationActivity"
             android:screenOrientation="portrait" >
         </activity>      
         <activity

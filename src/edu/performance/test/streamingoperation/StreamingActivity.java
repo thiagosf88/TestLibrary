@@ -12,7 +12,6 @@ import edu.performance.test.InternetPerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
 import edu.performance.test.util.ActivityThread;
-import edu.performance.test.util.InternetController;
 
 public class StreamingActivity extends InternetPerformanceTestActivity implements
 		SurfaceHolder.Callback, OnPreparedListener, OnBufferingUpdateListener,
