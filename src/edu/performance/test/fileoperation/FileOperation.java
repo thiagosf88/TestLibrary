@@ -31,7 +31,10 @@ public class FileOperation extends ReadAndWrite {
 		super(activity);
 		this.setFilePath(filePath);
 		this.setStretch(stretch);
-		activity.executeTest();
+		if(activity != null)
+			activity.executeTest();
+		else
+			System.err.println("File Activity is null!!!");
 	}
 	/**
 	 * This constructor can not be used to instance objects which will run tests.
@@ -42,13 +45,15 @@ public class FileOperation extends ReadAndWrite {
 	}
 
 	public void execute() {
-		testJreadSequentialAcessFile(this.getFilePath(), this.getLevel());
-		testJwriteSequentialFile(this.getDirName(), this.getFilePath(),
+		
+		testJwriteSequentialFile(this.getFilePath(),
 				this.getStretch()); // não testado ainda
 		testJreadRandomAcessFile(this.getFilePath(), this.getPositions()[0],
 				this.getLevel());
 		testJwriteRandowAcessFile(this.getFilePath(), this.getPositions()[0],
 				this.getStretch());
+		
+		testJreadSequentialAcessFile(this.getFilePath());
 		
 		activity.finishTest(null);
 
@@ -86,7 +91,7 @@ public class FileOperation extends ReadAndWrite {
 	 * @param level
 	 *            ??
 	 */
-	public String testJreadSequentialAcessFile(String filePath, int level) {
+	public String testJreadSequentialAcessFile(String filePath) {
 
 		BufferedReader br = null;
 
@@ -208,14 +213,12 @@ public class FileOperation extends ReadAndWrite {
 	 * This method creates a directory structure and a file to write inside it a
 	 * part of text determined by strecth.
 	 * 
-	 * @param dirName
-	 *            Determines the name of folder where the file will be created.
 	 * @param filename
 	 *            Indicates the name of the file that will be created.
 	 * @param stretch
 	 *            Is the part of the text that will be written inside the file.
 	 */
-	public void testJwriteSequentialFile(String dirName, String filename,
+	public void testJwriteSequentialFile(String filename,
 			String stretch) {
 
 		File file = new File(filename);

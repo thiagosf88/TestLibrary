@@ -44,13 +44,13 @@ public class GraphOperation extends PerformanceTest<Integer> implements
 		
 		for (int t = 0; t < d.V(); t++) {
             if (sp.hasPathTo(t)) {
-                System.out.printf("%d to %d (%.2f)  ", source, t, sp.distTo(t));
+                //System.out.printf("%d to %d (%.2f)  ", source, t, sp.distTo(t));
                 if (sp.hasPathTo(t)) {
                     for (DirectedEdge e : sp.pathTo(t)) {
-                    	System.out.print(e + "   ");
+                    	//System.out.print(e + "   ");
                     }
                 }
-                System.out.println();
+                //System.out.println();
             }
             else {
             	System.out.printf("%d to %d         no path\n", source, t);

@@ -121,8 +121,7 @@ public aspect MetricsByAspects {
 	@Pointcut("call(* edu.performance.test.streamingoperation.*.finish(..))")
 	public void TestMethodsTimeAndMemoryInterfaceFinished2() {
 
-	}
-	
+	}	
 	
 	//@Pointcut("execution(* edu.performance.test.*.*.*Activity.onCreate(..))")
 	@Pointcut("execution(* edu.performance.test.*.*.*.surfaceCreated(..))")

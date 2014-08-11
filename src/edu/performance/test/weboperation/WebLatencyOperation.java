@@ -94,7 +94,7 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
 					: "Exception without message!!!";
 	
-			rw.testJwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME,
+			rw.testJwriteSequentialFile(
 					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/ErrorsL" + host.replace("http://", "")
 							+ ".txt", message);
 		}

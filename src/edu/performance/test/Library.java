@@ -188,8 +188,7 @@ public class Library extends Activity {
 			
 			appRef = this;
 			
-			//Close Internet connection before execute tests.
-			InternetController.setWifiAvailability(false, appRef);
+			
 			
 			allTests();
 
@@ -198,7 +197,7 @@ public class Library extends Activity {
 			String message = (e.getMessage() != null)
 					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
 					: "Exception without message!!!";
-			rw.testJwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME,
+			rw.testJwriteSequentialFile(
 					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/Errors.xml",
 					message);
 			System.err.println(message);
@@ -224,6 +223,18 @@ public class Library extends Activity {
 	
 	private void allTests(){
 		
+		aTest = new Intent(appRef, FileOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
+				+ rawResourceNames[fileIndexes.BIG_TXT]);
+		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
+		aTest.putExtra(STATUS, "Testing File skills..");
+		testsToDo.add(aTest);
+		
+		
+		//____________________ em ordem
 		
 		
 		aTest = new Intent(appRef, BatteryOperation.class);
@@ -263,13 +274,13 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing Float skills..");
 		testsToDo.add(aTest);			
 				
-		aTest = new Intent(appRef, GPSActivity.class);
+		/*aTest = new Intent(appRef, GPSActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(STATUS, "Testing 3D skills..");
-		testsToDo.add(aTest);
+		aTest.putExtra(LEVEL_INT, 3);
+		aTest.putExtra(STATUS, "Testing GPS skills..");
+		testsToDo.add(aTest);*/
 		
 		
 		//Graphic Operation 3D ---------------------------------------------------------------
@@ -523,8 +534,7 @@ public class Library extends Activity {
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testJreadSequentialAcessFile(
 				WriteNeededFiles.DIRECTORY_NAME + "/"
-						+ rawResourceNames[fileIndexes.SMALL_TXT],
-				0));
+						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
 		testsToDo.add(aTest);
@@ -577,8 +587,7 @@ public class Library extends Activity {
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testJreadSequentialAcessFile(
 				WriteNeededFiles.DIRECTORY_NAME + "/"
-						+ rawResourceNames[fileIndexes.SMALL_TXT],
-				0));
+						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
 		testsToDo.add(aTest);
@@ -630,7 +639,7 @@ public class Library extends Activity {
 		System.out.println("!" + results.getBoolean(THELASTTEST) + " | " + requestCode + " = 1 | " + resultCode + " = " + RESULT_OK);
 		if(resultCode == RESULT_CANCELED){
 			//TODO This need a specific treatment when some test fails. To create list with error messages of each test for example.
-			System.out.println(testsToDo.get(countIntent).getClass() + " fails!!!! :(");
+			System.out.println(testsToDo.get(countIntent).getStringExtra(STATUS) + " failed!!!! :(");
 		}
 		
 		if (requestCode == 1 && !results.getBoolean(THELASTTEST)) {
@@ -699,6 +708,8 @@ public class Library extends Activity {
 	
 	
 	void executeTest(Intent test){
+		//Close Internet connection before execute tests.
+		InternetController.setWifiAvailability(false, appRef);
 		
 		startActivityForResult(test, 1);
 	}

@@ -51,7 +51,7 @@ class GpsOperation extends Service implements LocationListener {
 
 	public GpsOperation(int level, Context context) {
 		this.mContext = context;
-		this.level = 3;
+		this.level = level;
 		
 		((PerformanceTestActivity)mContext).executeTest(); 
 	}

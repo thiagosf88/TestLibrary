@@ -17,7 +17,11 @@ public class FileOperationActivity extends PerformanceTestActivity {
 			
 		}
 		else return;
-		operation = new FileOperation(this, filePath, stretch);
+		
+			status.setText(message);
+			operation = new FileOperation(this, filePath, stretch);
+		
+		
 		
 	}
 	

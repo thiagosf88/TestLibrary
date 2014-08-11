@@ -49,6 +49,8 @@ public class DatabaseOperation extends PerformanceTest<Integer>  implements Perf
 		testTpJMupdateTasks(tasks);
 		testTpJMdeleteLists(lists);
 		testTpJMdeleteTasks(tasks);
+		mDbHelper.close();
+
 		activity.finishTest(null);
 	}
 
