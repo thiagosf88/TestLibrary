@@ -46,14 +46,14 @@ public class FileOperation extends ReadAndWrite {
 
 	public void execute() {
 		
-		testJwriteSequentialFile(this.getFilePath(),
+		testTJMwriteSequentialFile(this.getFilePath(),
 				this.getStretch()); // não testado ainda
-		testJreadRandomAcessFile(this.getFilePath(), this.getPositions()[0],
+		testTJMreadRandomAcessFile(this.getFilePath(), this.getPositions()[0],
 				this.getLevel());
-		testJwriteRandowAcessFile(this.getFilePath(), this.getPositions()[0],
+		testTJMwriteRandowAcessFile(this.getFilePath(), this.getPositions()[0],
 				this.getStretch());
 		
-		testJreadSequentialAcessFile(this.getFilePath());
+		testTJMreadSequentialAcessFile(this.getFilePath());
 		
 		activity.finishTest(null);
 
@@ -91,7 +91,7 @@ public class FileOperation extends ReadAndWrite {
 	 * @param level
 	 *            ??
 	 */
-	public String testJreadSequentialAcessFile(String filePath) {
+	public String testTJMreadSequentialAcessFile(String filePath) {
 
 		BufferedReader br = null;
 
@@ -114,8 +114,9 @@ public class FileOperation extends ReadAndWrite {
 					break;
 
 				text = text.concat(test);
+				
 			}
-
+			
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -137,7 +138,7 @@ public class FileOperation extends ReadAndWrite {
 	 *            Determines the size of byte array that will receive the read
 	 *            text.
 	 */
-	public void testJreadRandomAcessFile(String filename, int position,
+	public void testTJMreadRandomAcessFile(String filename, int position,
 			int level) {
 
 		RandomAccessFile randomAccessFile = null;
@@ -152,7 +153,7 @@ public class FileOperation extends ReadAndWrite {
 			randomAccessFile.read(buffer);
 
 			// Print out the buffer contents
-			// System.out.println(new String(buffer));
+			 System.out.println(new String(buffer));
 
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
@@ -182,7 +183,7 @@ public class FileOperation extends ReadAndWrite {
 	 * @param stretch
 	 *            Is the part of text that will be written in the file.
 	 */
-	public void testJwriteRandowAcessFile(String filename, int position,
+	public void testTJMwriteRandowAcessFile(String filename, int position,
 			String stretch) {
 
 		RandomAccessFile randomAccessFile = null;
@@ -218,7 +219,7 @@ public class FileOperation extends ReadAndWrite {
 	 * @param stretch
 	 *            Is the part of the text that will be written inside the file.
 	 */
-	public void testJwriteSequentialFile(String filename,
+	public void testTJMwriteSequentialFile(String filename,
 			String stretch) {
 
 		File file = new File(filename);
@@ -237,7 +238,14 @@ public class FileOperation extends ReadAndWrite {
 			System.out.println(e.getMessage());
 		}
 	}
-
+/**
+ * This is a auxiliary method to create some files which will be necessary in some tests.
+ * @param appRef Activity reference to get raw resources
+ * @param rawResourceId Unique Identifier to file resources
+ * @param resourceName Name given to the file
+ * @param dirName Directory name where the file will be created
+ * @return Return true if the file was successfully created.
+ */
 	public static boolean testTJMWriteFile(Library appRef, int rawResourceId,
 			String resourceName, String dirName) {
 

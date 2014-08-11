@@ -18,7 +18,7 @@ import edu.performance.test.PerformanceTestInterface;
 public class FloatOperation extends PerformanceTest<Double> implements PerformanceTestInterface{
 
 	public FloatOperation(PerformanceTestActivity activity) {
-		super(new Double(10000), activity);
+		super(new Double(999983), activity);
 		if(activity != null)
 		activity.executeTest();
 	}

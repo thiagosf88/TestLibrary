@@ -58,7 +58,7 @@ public class BatteryOperation extends Activity {
 			System.err.println(batt);
 			FileOperation rw = new FileOperation();
 
-			rw.testJwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/batt_" + level
+			rw.testTJMwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/batt_" + level
 							+ ".txt", batt);
 			batteryPreviousLevel = level;// / scale;
 			// if(ant <= MIN_LEVEL_TO_EXIT){

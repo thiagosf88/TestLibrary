@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
-import edu.performance.test.PerformanceTestActivity;
+import edu.performance.test.util.InternetController;
 
 /**
  * This class is responsible to test GPS sensor. Are missing some details of
@@ -53,10 +53,11 @@ class GpsOperation extends Service implements LocationListener {
 		this.mContext = context;
 		this.level = level;
 		
-		((PerformanceTestActivity)mContext).executeTest(); 
+		((GPSActivity)mContext).executeTest(); 
 	}
 
 	public void execute() {
+InternetController.setWifiAvailability(true, (GPSActivity)mContext);
 
 		double contLat = 0, contLon = 0;
 		for (int i = 1; i <= getLevel(); i++) {
@@ -67,6 +68,9 @@ class GpsOperation extends Service implements LocationListener {
 			System.out.println("Your Location is - \nLat: " + (contLat / i)
 					+ "\nLong: " + contLon / i);
 		}
+		
+		InternetController.setWifiAvailability(false, (GPSActivity)mContext);
+		((GPSActivity)mContext).finishTest(null);
 	}
 
 	public void testJgetLocation() {
@@ -117,8 +121,8 @@ class GpsOperation extends Service implements LocationListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Your Location is - \nLat: " + latitude + "\nLong: "
-				+ longitude);
+		//System.out.println("Your Location is - \nLat: " + latitude + "\nLong: "
+				//+ longitude);
 		// return location;
 	}
 

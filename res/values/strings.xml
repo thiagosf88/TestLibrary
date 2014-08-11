@@ -5,7 +5,20 @@
 
     <style name="AppTheme"></style>
 
-    <string name="stretch"> \"AAAAA\"</string>
+    <string name="stretch"> \"When my father built Bald Hills he thought the place was his: his
+land, his air, his peasants. But Napoleon came and swept him aside,
+unconscious of his existence, as he might brush a chip from his
+path, and his Bald Hills and his whole life fell to pieces. Princess
+Mary says it is a trial sent from above. What is the trial for, when
+he is not here and will never return? He is not here! For whom then is
+the trial intended? The Fatherland, the destruction of Moscow! And
+tomorrow I shall be killed, perhaps not even by a Frenchman but by one
+of our own men, by a soldier discharging a musket close to my ear as
+one of them did yesterday, and the French will come and take me by
+head and heels and fling me into a hole that I may not stink under
+their noses, and new conditions of life will arise, which will seem
+quite ordinary to others and about which I shall know nothing. I shall
+not exist\"</string>
     <string name="text">TEXT</string>
     <string name="title_activity_screen">ScreenActivity</string>
     <string name="hello_world">Hello world!</string>

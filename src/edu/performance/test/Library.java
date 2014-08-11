@@ -52,6 +52,7 @@ import edu.performance.test.screen.MediumTestActivity;
 import edu.performance.test.screen.ScreenActivity;
 import edu.performance.test.streamingoperation.StreamingActivity;
 import edu.performance.test.stringoperation.StringOperationActivity;
+import edu.performance.test.util.ActivityController;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
 import edu.performance.test.weboperation.WebOperationActivity;
@@ -188,8 +189,6 @@ public class Library extends Activity {
 			
 			appRef = this;
 			
-			
-			
 			allTests();
 
 		} catch (Exception e) {
@@ -197,7 +196,7 @@ public class Library extends Activity {
 			String message = (e.getMessage() != null)
 					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
 					: "Exception without message!!!";
-			rw.testJwriteSequentialFile(
+			rw.testTJMwriteSequentialFile(
 					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/Errors.xml",
 					message);
 			System.err.println(message);
@@ -223,16 +222,7 @@ public class Library extends Activity {
 	
 	private void allTests(){
 		
-		aTest = new Intent(appRef, FileOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
-				+ rawResourceNames[fileIndexes.BIG_TXT]);
-		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(STATUS, "Testing File skills..");
-		testsToDo.add(aTest);
-		
+			
 		
 		//____________________ em ordem
 		
@@ -274,13 +264,13 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing Float skills..");
 		testsToDo.add(aTest);			
 				
-		/*aTest = new Intent(appRef, GPSActivity.class);
+		aTest = new Intent(appRef, GPSActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
 		aTest.putExtra(STATUS, "Testing GPS skills..");
-		testsToDo.add(aTest);*/
+		testsToDo.add(aTest);
 		
 		
 		//Graphic Operation 3D ---------------------------------------------------------------
@@ -532,7 +522,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
-		.testJreadSequentialAcessFile(
+		.testTJMreadSequentialAcessFile(
 				WriteNeededFiles.DIRECTORY_NAME + "/"
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
@@ -585,7 +575,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
-		.testJreadSequentialAcessFile(
+		.testTJMreadSequentialAcessFile(
 				WriteNeededFiles.DIRECTORY_NAME + "/"
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
