@@ -52,7 +52,6 @@ import edu.performance.test.screen.MediumTestActivity;
 import edu.performance.test.screen.ScreenActivity;
 import edu.performance.test.streamingoperation.StreamingActivity;
 import edu.performance.test.stringoperation.StringOperationActivity;
-import edu.performance.test.util.ActivityController;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
 import edu.performance.test.weboperation.WebOperationActivity;
@@ -222,13 +221,13 @@ public class Library extends Activity {
 	
 	private void allTests(){
 		
-			
+		
 		
 		//____________________ em ordem
 		
 		
 		aTest = new Intent(appRef, BatteryOperation.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, true);
 		aTest.putExtra(STATUS, "Testing battery skills...");
@@ -241,14 +240,14 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, DownloadOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 27000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 27000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Download skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FileOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
@@ -258,14 +257,14 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FloatOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Float skills..");
 		testsToDo.add(aTest);			
 				
 		aTest = new Intent(appRef, GPSActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
@@ -277,7 +276,7 @@ public class Library extends Activity {
 		
 			//----------
 		aTest = new Intent(appRef, CubeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
@@ -285,7 +284,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, CubeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 100);
@@ -293,7 +292,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, CubeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 500);
@@ -303,21 +302,21 @@ public class Library extends Activity {
 			//--------------
 		
 		aTest = new Intent(appRef, LessonThreeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 0);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 			
 		aTest = new Intent(appRef, LessonThreeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 50);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, LessonThreeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 100);
 		aTest.putExtra(BATTERYTEST, false);
@@ -333,21 +332,21 @@ public class Library extends Activity {
 			//----------
 		
 		aTest = new Intent(appRef, ArcActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 1);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, ArcActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, ArcActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 5);
 		aTest.putExtra(BATTERYTEST, false);
@@ -356,7 +355,7 @@ public class Library extends Activity {
 			//---------
 		
 		aTest = new Intent(appRef, CircleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
@@ -365,21 +364,21 @@ public class Library extends Activity {
 			//---------
 		
 		aTest = new Intent(appRef, ImageActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, ImageActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, ImageActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 50);
 		aTest.putExtra(BATTERYTEST, false);
@@ -388,21 +387,21 @@ public class Library extends Activity {
 			//--------
 		
 		aTest = new Intent(appRef, RectangleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, RectangleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 100);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, RectangleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 1000);
 		aTest.putExtra(BATTERYTEST, false);
@@ -411,7 +410,7 @@ public class Library extends Activity {
 			//---------
 		
 		aTest = new Intent(appRef, TextActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
@@ -428,7 +427,7 @@ public class Library extends Activity {
 		//Graph Operation -------------------------------------------------------------------
 		
 		aTest = new Intent(appRef, GraphOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.TINY_G_TXT]);
@@ -436,7 +435,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, GraphOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.MEDIUM_G_TXT]);
@@ -444,7 +443,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, GraphOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
@@ -452,7 +451,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, GraphOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
@@ -462,7 +461,7 @@ public class Library extends Activity {
 		//------------------------------------------------------------------------------------------------------------------
 		
 		aTest = new Intent(appRef, IntegerOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 1000);
@@ -470,14 +469,14 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MailOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Mail skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
@@ -485,7 +484,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FileOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
@@ -501,7 +500,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, IntegerOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 1000);
@@ -509,7 +508,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
@@ -517,7 +516,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, StringOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
@@ -532,28 +531,28 @@ public class Library extends Activity {
 		// Screen Activity --------------------------------------------------------
 		
 		aTest = new Intent(appRef, ScreenActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);		
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, HardTestActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(STATUS, "Testing Screen skills..");
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MediumTestActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(STATUS, "Testing Screen skills..");
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, LightTestActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(STATUS, "Testing Screen skills..");
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
@@ -565,12 +564,12 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 27000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 27000);
 		aTest.putExtra(STATUS, "Testing Streaming skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, StringOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
@@ -583,7 +582,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, WebOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Web skills..");

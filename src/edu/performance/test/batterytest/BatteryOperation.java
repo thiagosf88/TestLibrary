@@ -21,6 +21,7 @@ public class BatteryOperation extends Activity {
 
 	private double MIN_LEVEL_TO_EXIT = 100;
 	private double batteryPreviousLevel = 100;
+	private double currentVoltage = 0;
 	int times = 0;
 	Intent batteryIntent = null;
 	boolean isTheLast;
@@ -31,40 +32,12 @@ public class BatteryOperation extends Activity {
 	private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context arg0, Intent intent) {
-			String batt = "";
-			int health = intent.getIntExtra(BatteryManager.EXTRA_HEALTH, 0);
-			int icon_small = intent.getIntExtra(
-					BatteryManager.EXTRA_ICON_SMALL, 0);
+			
 			int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-			int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-			boolean present = intent.getExtras().getBoolean(
-					BatteryManager.EXTRA_PRESENT);
-			int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
-			int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, 0);
-			String technology = intent.getExtras().getString(
-					BatteryManager.EXTRA_TECHNOLOGY);
-			int temperature = intent.getIntExtra(
-					BatteryManager.EXTRA_TEMPERATURE, 0);
-			int voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
-
-			// if(ant > level){
-			batt = "Health: " + health + "\n" + "Icon Small:" + icon_small
-					+ "\n" + "Level: " + level + "\n" + "Plugged: " + plugged
-					+ "\n" + "Present: " + present + "\n" + "Scale: " + scale
-					+ "\n" + "Status: " + status + "\n" + "Technology: "
-					+ technology + "\n" + "Temperature: " + temperature + "\n"
-					+ "Voltage: " + voltage + "\n" + "ant: "
-					+ batteryPreviousLevel + " times: " + times;
-			System.err.println(batt);
-			FileOperation rw = new FileOperation();
-
-			rw.testTJMwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/batt_" + level
-							+ ".txt", batt);
-			batteryPreviousLevel = level;// / scale;
-			// if(ant <= MIN_LEVEL_TO_EXIT){
-			// bt.cancel(false);
-			// }
-			// }
+			
+			batteryPreviousLevel = level;			
+			
+			createInformationFile(intent);
 
 		}
 	};
@@ -87,6 +60,7 @@ public class BatteryOperation extends Activity {
 
 		int rawlevel = batteryIntent.getIntExtra("level", -1);
 		double scale = batteryIntent.getIntExtra("scale", -1);
+		currentVoltage = batteryIntent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
 		if (rawlevel >= 0 && scale > 0) {
 			batteryPreviousLevel = rawlevel;// / scale;
 			MIN_LEVEL_TO_EXIT = batteryPreviousLevel - 1;
@@ -117,7 +91,7 @@ public class BatteryOperation extends Activity {
 		else {
 
 		aTest = new Intent(getApplicationContext(), ArcActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIMEMS, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 5);
 		
@@ -145,6 +119,14 @@ public class BatteryOperation extends Activity {
 				startActivityForResult(aTest, 1);
 				times++;
 			} else {
+				
+				batteryIntent = this.registerReceiver(this.mBatInfoReceiver,
+						new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+				
+				createInformationFile(batteryIntent);
+				
+				
 				unregisterReceiver(mBatInfoReceiver);
 				Intent mIntent = new Intent();
 				mIntent.putExtra(Library.THELASTTEST, isTheLast());
@@ -193,6 +175,8 @@ public class BatteryOperation extends Activity {
 		}
 
 	}
+	
+	
 
 	public PerformanceTestInterface getTest() {
 		return test;
@@ -204,6 +188,43 @@ public class BatteryOperation extends Activity {
 
 	public boolean isTheLast() {
 		return isTheLast;
+	}
+	
+	public void createInformationFile(Intent intent){
+		batteryIntent = this.registerReceiver(this.mBatInfoReceiver,
+				new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+		
+		String batt = "";
+		int health = intent.getIntExtra(BatteryManager.EXTRA_HEALTH, 0);
+		int icon_small = intent.getIntExtra(
+				BatteryManager.EXTRA_ICON_SMALL, 0);
+		int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+		int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+		boolean present = intent.getExtras().getBoolean(
+				BatteryManager.EXTRA_PRESENT);
+		int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 0);
+		int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, 0);
+		String technology = intent.getExtras().getString(
+				BatteryManager.EXTRA_TECHNOLOGY);
+		int temperature = intent.getIntExtra(
+				BatteryManager.EXTRA_TEMPERATURE, 0);
+		int voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
+
+		// if(ant > level){
+		batt = "Health: " + health + "\n" + "Icon Small:" + icon_small
+				+ "\n" + "Level: " + level + "\n" + "Plugged: " + plugged
+				+ "\n" + "Present: " + present + "\n" + "Scale: " + scale
+				+ "\n" + "Status: " + status + "\n" + "Technology: "
+				+ technology + "\n" + "Temperature: " + temperature + "\n"
+				+ "Diff Voltage: " + (currentVoltage - voltage) + "\n" + "ant: "
+				+ batteryPreviousLevel + " times: " + times;
+
+		currentVoltage = voltage;
+		FileOperation rw = new FileOperation();
+
+		rw.testTJMwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/batt_" + level
+						+ ".txt", batt);
 	}
 
 }

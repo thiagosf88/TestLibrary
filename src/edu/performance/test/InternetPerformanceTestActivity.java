@@ -29,6 +29,10 @@ public abstract class InternetPerformanceTestActivity extends PerformanceTestAct
 		while(InternetController.getInternetAvailability(this) == false);
 	}
 	
+	protected int getMAX_TIME_MS() {
+		return super.getMAX_TIME_MS();
+	}
+	
 
 
 

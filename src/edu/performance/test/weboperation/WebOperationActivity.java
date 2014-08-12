@@ -2,6 +2,7 @@ package edu.performance.test.weboperation;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import edu.performance.test.Library;
@@ -31,41 +32,68 @@ public class WebOperationActivity extends PerformanceTestActivity {
 		websites = getResources().getStringArray(R.array.webSites);
 		
 		pagesToAccess = new ArrayList<Intent>();
+		
+		status.setText(message);
+		
 		Intent webSite = new Intent(this, WebViewActivity.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[0]);
+		webSite.putExtra(Library.STATUS, websites[0]);
 		getPagesToAccess().add(webSite);
 		webSite = new Intent(this, WebViewActivity.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[1]);
+		webSite.putExtra(Library.STATUS, websites[1]);
 		getPagesToAccess().add(webSite);
 		webSite = new Intent(this, WebViewActivity.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[2]);
+		webSite.putExtra(Library.STATUS, websites[2]);
 		getPagesToAccess().add(webSite);
 		webSite = new Intent(this, WebViewActivity.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[3]);
+		webSite.putExtra(Library.STATUS, websites[3]);
 		getPagesToAccess().add(webSite);
-
-		webSite = new Intent(this, WebLatencyOperation.class);
+		
+		 webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[0]);
+		webSite.putExtra(Library.STATUS, websites[0]);
 		getPagesToAccess().add(webSite);
 		webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[1]);
+		webSite.putExtra(Library.STATUS, websites[1]);
 		getPagesToAccess().add(webSite);
 		webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[2]);
+		webSite.putExtra(Library.STATUS, websites[2]);
 		getPagesToAccess().add(webSite);
 		webSite = new Intent(this, WebLatencyOperation.class);
 		webSite.putExtra(ISTHELASTPAGE, true);
+		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		webSite.putExtra(Library.THELASTTEST, false);
 		webSite.putExtra(URL, websites[3]);
+		webSite.putExtra(Library.STATUS, websites[3]);
 		getPagesToAccess().add(webSite);
 		
-		status.setText(message);
+		
 		execute();
 	}
 	
@@ -74,10 +102,10 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
 		if (data == null)
 			return;
-		//System.out.println("rqC: " + requestCode + " rC: " + resultCode + " data: " + data);
+
 		Bundle results = data.getExtras();
-		System.out.println("Is the last page? "+ results.getBoolean(ISTHELASTPAGE));
-		if (!results.getBoolean(ISTHELASTPAGE) && requestCode == 1 && resultCode == RESULT_OK &&  countIntent < (getPagesToAccess().size() - 1)) {
+		
+		if (!results.getBoolean(ISTHELASTPAGE) && requestCode == 1 && resultCode == Activity.RESULT_OK) {
 			testingPages(getPagesToAccess().get(++countIntent));
 		}
 		else{

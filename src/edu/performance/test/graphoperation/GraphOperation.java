@@ -35,6 +35,7 @@ public class GraphOperation extends PerformanceTest<Integer> implements
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private void testTJMShorterPathDijstra(EdgeWeightedDigraph d){
 		//tiny_g
 		int source = 0;

@@ -13,7 +13,7 @@ public class Teapot {
     float[] m2;
     float sensorValues[] = new float[3];
     float _accelerometer[] = new float[3];
-    private int sensorMode;
+    //private int sensorMode;
 
     private float xrot = 0;
     private float yrot = 0;
@@ -256,12 +256,12 @@ public class Teapot {
         mVertexBuffer = vbb.asShortBuffer();
         mVertexBuffer.put(teapot_indices);
         mVertexBuffer.position(0);
-        sensorMode = TeapotActivity.ACCEL_ID;
+        //sensorMode = TeapotActivity.ACCEL_ID;
         Log.d("glesteapot", "Teapot()");
     }
 
     public void setSensor(int sensor) {
-        sensorMode = sensor;
+        //sensorMode = sensor;
     }
 
     public void onSensorValueChanged(float[] values) {
@@ -269,11 +269,11 @@ public class Teapot {
     }
 
     public void draw(GL10 gl) {
-    	long startTime = System.currentTimeMillis();
+    	//long startTime = System.currentTimeMillis();
         int num_teapot_indices = teapot_indices.length;
         int i = 0, start = 0;
         float kTeapotScale = 3.0f;
-        long elapsed = System.currentTimeMillis() - startTime;
+        //long elapsed = System.currentTimeMillis() - startTime;
         //gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         
         

@@ -23,30 +23,6 @@ package edu.performance.test.util;
  * @version 1.0
  */
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringReader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.StringTokenizer;
-
-import android.Manifest;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.util.Log;
 
 /**
  * Contains shared programming interfaces.
@@ -54,13 +30,13 @@ import android.util.Log;
  */
 public final class Api {
 	
-        /** application version string */
+        /** application version string *//*
         public static final String VERSION = "1.4.7-dev";
-        /** special application UID used to indicate "any application" */
+        *//** special application UID used to indicate "any application" *//*
         public static final int SPECIAL_UID_ANY = -10;
-        /** special application UID used to indicate the Linux Kernel */
+        *//** special application UID used to indicate the Linux Kernel *//*
         public static final int SPECIAL_UID_KERNEL      = -11;
-        /** root script filename */
+        *//** root script filename *//*
         private static final String SCRIPT_FILE = "droidwall.sh";
         
         // Preferences
@@ -86,11 +62,11 @@ public final class Api {
         // Flag indicating if this is an ARMv6 device (-1: unknown, 0: no,  1: yes)
         private static int isARMv6 = -1;
 
-    /**
+    *//**
      * Display a simple alert box
      * @param ctx context
      * @param msg message
-     */
+     *//*
         public static void alert(Context ctx, CharSequence msg) {
         if (ctx != null) {
                 new AlertDialog.Builder(ctx)
@@ -99,10 +75,10 @@ public final class Api {
                 .show();
         }
     }
-        /**
+        *//**
          * Check if this is an ARMv6 device
          * @return true if this is ARMv6
-         */
+         *//*
         private static boolean isARMv6() {
                 if (isARMv6 == -1) {
                         BufferedReader r = null;
@@ -125,11 +101,11 @@ public final class Api {
                 }
                 return (isARMv6 == 1);
         }
-        /**
+        *//**
          * Create the generic shell script header used to determine which iptables binary to use.
          * @param ctx context
          * @return script header
-         */
+         *//*
         private static String scriptHeader(Context ctx) {
                 final String dir = ctx.getCacheDir().getAbsolutePath();
                 final String myiptables = dir + (isARMv6() ? "/iptables_g1" : "/iptables_n1");
@@ -167,7 +143,7 @@ public final class Api {
                         "fi\n" +
                         "";
         }
-        /**
+        *//**
          * Copies a raw resource file, given its ID to the given location
          * @param ctx context
          * @param resid resource id
@@ -175,7 +151,7 @@ public final class Api {
          * @param mode file permissions (E.g.: "755")
          * @throws IOException on error
          * @throws InterruptedException when interrupted
-         */
+         *//*
         private static void copyRawFile(Context ctx, int resid, File file, String mode) throws IOException, InterruptedException
         {
                 final String abspath = file.getAbsolutePath();
@@ -192,13 +168,13 @@ public final class Api {
                 // Change the permissions
                 Runtime.getRuntime().exec("chmod "+mode+" "+abspath).waitFor();
         }
-    /**
+    *//**
      * Purge and re-add all rules (internal implementation).
      * @param ctx application context (mandatory)
      * @param uidsWifi list of selected UIDs for WIFI to allow or disallow (depending on the working mode)
      * @param uids3g list of selected UIDs for 2G/3G to allow or disallow (depending on the working mode)
      * @param showErrors indicates if errors should be alerted
-     */
+     *//*
         private static boolean applyIptablesRulesImpl(Context ctx, List<Integer> uidsWifi, List<Integer> uids3g, boolean showErrors) {
                 if (ctx == null) {
                         return false;
@@ -274,22 +250,22 @@ public final class Api {
                         }
                         if (any_3g) {
                                 if (blacklist) {
-                                        /* block any application on this interface */
+                                         block any application on this interface 
                                         script.append("$IPTABLES -A droidwall-3g -j ").append(targetRule).append(" || exit\n");
                                 }
                         } else {
-                                /* release/block individual applications on this interface */
+                                 release/block individual applications on this interface 
                                 for (final Integer uid : uids3g) {
                                         if (uid >= 0) script.append("$IPTABLES -A droidwall-3g -m owner --uid-owner ").append(uid).append(" -j ").append(targetRule).append(" || exit\n");
                                 }
                         }
                         if (any_wifi) {
                                 if (blacklist) {
-                                        /* block any application on this interface */
+                                         block any application on this interface 
                                         script.append("$IPTABLES -A droidwall-wifi -j ").append(targetRule).append(" || exit\n");
                                 }
                         } else {
-                                /* release/block individual applications on this interface */
+                                 release/block individual applications on this interface 
                                 for (final Integer uid : uidsWifi) {
                                         if (uid >= 0) script.append("$IPTABLES -A droidwall-wifi -m owner --uid-owner ").append(uid).append(" -j ").append(targetRule).append(" || exit\n");
                                 }
@@ -341,12 +317,12 @@ public final class Api {
                 }
                 return false;
     }
-    /**
+    *//**
      * Purge and re-add all saved rules (not in-memory ones).
      * This is much faster than just calling "applyIptablesRules", since it don't need to read installed applications.
      * @param ctx application context (mandatory)
      * @param showErrors indicates if errors should be alerted
-     */
+     *//*
         public static boolean applySavedIptablesRules(Context ctx, boolean showErrors) {
                 if (ctx == null) {
                         return false;
@@ -385,11 +361,11 @@ public final class Api {
                 return applyIptablesRulesImpl(ctx, uids_wifi, uids_3g, showErrors);
         }
         
-    /**
+    *//**
      * Purge and re-add all rules.
      * @param ctx application context (mandatory)
      * @param showErrors indicates if errors should be alerted
-     */
+     *//*
         public static boolean applyIptablesRules(Context ctx, boolean showErrors) {
                 if (ctx == null) {
                         return false;
@@ -398,10 +374,10 @@ public final class Api {
                 return applySavedIptablesRules(ctx, showErrors);
     }
         
-        /**
+        *//**
          * Save current rules using the preferences storage.
          * @param ctx application context (mandatory)
-         */
+         *//*
         public static void saveRules(Context ctx) {
                 final SharedPreferences prefs = ctx.getSharedPreferences(PREFS_NAME, 0);
                 final DroidApp[] apps = getApps(ctx);
@@ -425,12 +401,12 @@ public final class Api {
                 edit.commit();
     }
     
-    /**
+    *//**
      * Purge all iptables rules.
      * @param ctx mandatory context
      * @param showErrors indicates if errors should be alerted
      * @return true if the rules were purged
-     */
+     *//*
         public static boolean purgeIptables(Context ctx, boolean showErrors) {
         StringBuilder res = new StringBuilder();
                 try {
@@ -451,10 +427,10 @@ public final class Api {
                 }
     }
         
-        /**
+        *//**
          * Display iptables rules output
          * @param ctx application context
-         */
+         *//*
         public static void showIptablesRules(Context ctx) {
                 try {
                 final StringBuilder res = new StringBuilder();
@@ -467,11 +443,11 @@ public final class Api {
                 }
         }
 
-        /**
+        *//**
          * Display logs
          * @param ctx application context
      * @return true if the clogs were cleared
-         */
+         *//*
         public static boolean clearLog(Context ctx) {
                 try {
                         final StringBuilder res = new StringBuilder();
@@ -486,10 +462,10 @@ public final class Api {
                 }
                 return false;
         }
-        /**
+        *//**
          * Display logs
          * @param ctx application context
-         */
+         *//*
         public static void showLog(Context ctx) {
                 try {
                 StringBuilder res = new StringBuilder();
@@ -575,10 +551,10 @@ public final class Api {
                 }
         }
 
-    /**
+    *//**
      * @param ctx application context (mandatory)
      * @return a list of applications
-     */
+     *//*
         public static DroidApp[] getApps(Context ctx) {
                 if (applications != null) {
                         // return cached instance
@@ -670,7 +646,7 @@ public final class Api {
                         if (changed) {
                                 edit.commit();
                         }
-                        /* add special applications to the list */
+                         add special applications to the list 
                         final DroidApp special[] = {
                                 new DroidApp(SPECIAL_UID_ANY,"(Any application) - Same as selecting all applications", false, false),
                                 new DroidApp(SPECIAL_UID_KERNEL,"(Kernel) - Linux kernel", false, false),
@@ -701,12 +677,12 @@ public final class Api {
                 }
                 return null;
         }
-        /**
+        *//**
          * Check if we have root access
          * @param ctx mandatory context
      * @param showErrors indicates if errors should be alerted
          * @return boolean true if we have root
-         */
+         *//*
         public static boolean hasRootAccess(Context ctx, boolean showErrors) {
                 if (hasroot) return true;
                 final StringBuilder res = new StringBuilder();
@@ -726,14 +702,14 @@ public final class Api {
                 }
                 return false;
         }
-    /**
+    *//**
      * Runs a script, wither as root or as a regular user (multiple commands separated by "\n").
          * @param ctx mandatory context
      * @param script the script to be executed
      * @param res the script output response (stdout + stderr)
      * @param timeout timeout in milliseconds (-1 for none)
      * @return the script exit code
-     */
+     *//*
         public static int runScript(Context ctx, String script, StringBuilder res, long timeout, boolean asroot) {
                 final File file = new File(ctx.getCacheDir(), SCRIPT_FILE);
                 final ScriptRunner runner = new ScriptRunner(file, script, res, asroot);
@@ -754,18 +730,18 @@ public final class Api {
                 } catch (InterruptedException ex) {}
                 return runner.exitcode;
         }
-    /**
+    *//**
      * Runs a script as root (multiple commands separated by "\n").
          * @param ctx mandatory context
      * @param script the script to be executed
      * @param res the script output response (stdout + stderr)
      * @param timeout timeout in milliseconds (-1 for none)
      * @return the script exit code
-     */
+     *//*
         public static int runScriptAsRoot(Context ctx, String script, StringBuilder res, long timeout) {
                 return runScript(ctx, script, res, timeout, true);
     }
-    /**
+    *//**
      * Runs a script as root (multiple commands separated by "\n") with a default timeout of 20 seconds.
          * @param ctx mandatory context
      * @param script the script to be executed
@@ -773,11 +749,11 @@ public final class Api {
      * @param timeout timeout in milliseconds (-1 for none)
      * @return the script exit code
      * @throws IOException on any error executing the script, or writing it to disk
-     */
+     *//*
         public static int runScriptAsRoot(Context ctx, String script, StringBuilder res) throws IOException {
                 return runScriptAsRoot(ctx, script, res, 40000);
         }
-    /**
+    *//**
      * Runs a script as a regular user (multiple commands separated by "\n") with a default timeout of 20 seconds.
          * @param ctx mandatory context
      * @param script the script to be executed
@@ -785,16 +761,16 @@ public final class Api {
      * @param timeout timeout in milliseconds (-1 for none)
      * @return the script exit code
      * @throws IOException on any error executing the script, or writing it to disk
-     */
+     *//*
         public static int runScript(Context ctx, String script, StringBuilder res) throws IOException {
                 return runScript(ctx, script, res, 40000, false);
         }
-        /**
+        *//**
          * Asserts that the binary files are installed in the cache directory.
          * @param ctx context
      * @param showErrors indicates if errors should be alerted
          * @return false if the binary files could not be installed
-         */
+         *//*
         public static boolean assertBinaries(Context ctx, boolean showErrors) {
                 boolean changed = false;
                 try {
@@ -825,21 +801,21 @@ public final class Api {
                 }
                 return true;
         }
-        /**
+        *//**
          * Check if the firewall is enabled
          * @param ctx mandatory context
          * @return boolean
-         */
+         *//*
         public static boolean isEnabled(Context ctx) {
                 if (ctx == null) return false;
                 return ctx.getSharedPreferences(PREFS_NAME, 0).getBoolean(PREF_ENABLED, false);
         }
         
-        /**
+        *//**
          * Defines if the firewall is enabled and broadcasts the new status
          * @param ctx mandatory context
          * @param enabled enabled flag
-         */
+         *//*
         public static void setEnabled(Context ctx, boolean enabled) {
                 if (ctx == null) return;
                 final SharedPreferences prefs = ctx.getSharedPreferences(PREFS_NAME, 0);
@@ -852,25 +828,25 @@ public final class Api {
                         alert(ctx, "Error writing to preferences");
                         return;
                 }
-                /* notify */
+                 notify 
                 final Intent message = new Intent(Api.STATUS_CHANGED_MSG);
         message.putExtra(Api.STATUS_EXTRA, enabled);
         ctx.sendBroadcast(message);
         }
 
-    /**
+    *//**
      * Small structure to hold an application info
-     */
+     *//*
         public static final class DroidApp {
-                /** linux user id */
+                *//** linux user id *//*
         int uid;
-        /** application names belonging to this user id */
+        *//** application names belonging to this user id *//*
         String names[];
-        /** indicates if this application is selected for wifi */
+        *//** indicates if this application is selected for wifi *//*
         boolean selected_wifi;
-        /** indicates if this application is selected for 3g */
+        *//** indicates if this application is selected for 3g *//*
         boolean selected_3g;
-        /** toString cache */
+        *//** toString cache *//*
         String tostr;
         
         public DroidApp() {
@@ -881,9 +857,9 @@ public final class Api {
                 this.selected_wifi = selected_wifi;
                 this.selected_3g = selected_3g;
         }
-        /**
+        *//**
          * Screen representation of this application
-         */
+         *//*
         @Override
         public String toString() {
                 if (tostr == null) {
@@ -899,9 +875,9 @@ public final class Api {
                 return tostr;
         }
     }
-    /**
+    *//**
      * Small internal structure used to hold log information
-     */
+     *//*
         private static final class LogInfo {
                 private int totalBlocked; // Total number of packets blocked
                 private HashMap<String, Integer> dstBlocked; // Number of packets blocked per destination IP address
@@ -909,9 +885,9 @@ public final class Api {
                         this.dstBlocked = new HashMap<String, Integer>();
                 }
         }
-        /**
+        *//**
          * Internal thread used to execute scripts (as root or not).
-         */
+         *//*
         private static final class ScriptRunner extends Thread {
                 private final File file;
                 private final String script;
@@ -920,13 +896,13 @@ public final class Api {
                 public int exitcode = -1;
                 private Process exec;
                 
-                /**
+                *//**
                  * Creates a new script runner.
                  * @param file temporary script file
                  * @param script script to run
                  * @param res response output
                  * @param asroot if true, executes the script as root
-                 */
+                 *//*
                 public ScriptRunner(File file, String script, StringBuilder res, boolean asroot) {
                         this.file = file;
                         this.script = script;
@@ -980,12 +956,12 @@ public final class Api {
                                 destroy();
                         }
                 }
-                /**
+                *//**
                  * Destroy this script runner
-                 */
+                 *//*
                 public synchronized void destroy() {
                         if (exec != null) exec.destroy();
                         exec = null;
                 }
-        }
+        }*/
 }

@@ -158,6 +158,11 @@ public aspect MetricsByAspects {
 	public void TestMethodsFinish() {
 
 	}
+	
+	@Pointcut("(within(Library) || within(edu.performance.test.batterytest.BatteryOperation))")
+	public void InClassesNotMonitored(){
+		
+	}
 
 
 
@@ -227,8 +232,7 @@ public aspect MetricsByAspects {
 
 	}
 
-	@Before(" (TestMethodsTimeAndMemoryJava() ||  TestMethodsTimeAndMemoryInterfaceCreated()) && !within(Library)"
-			+ "")
+	@Before(" (TestMethodsTimeAndMemoryJava() ||  TestMethodsTimeAndMemoryInterfaceCreated()) && !InClassesNotMonitored()")
 	public void logBeforeTM(JoinPoint joinPoint) {
 		start = System.nanoTime();
 		start2 = SystemClock.uptimeMillis();
@@ -236,7 +240,7 @@ public aspect MetricsByAspects {
 	}
 
 	@After("(TestMethodsTimeAndMemoryJava() || TestMethodsTimeAndMemoryInterfaceFinished()"
-			+ " || TestMethodsTimeAndMemoryInterfaceFinished2()) && !within(Library) ")
+			+ " || TestMethodsTimeAndMemoryInterfaceFinished2()) && !InClassesNotMonitored() ")
 	public void logAfterTM(JoinPoint joinPoint) {
 		Debug.stopAllocCounting();
 		double elapsedTime = (System.nanoTime() - start) / nanoSegRate;
@@ -317,7 +321,7 @@ public aspect MetricsByAspects {
 
 	}
 	@Before("TestMethodsTimeAndMemorySurfaceCreated() || TestMethodsTimeAndMemorySurfaceCreated2()"
-			+ " || TestMethodsTimeAndMemorySurfaceCreated3()")
+			+ " || TestMethodsTimeAndMemorySurfaceCreated3() ")
 	public void logBeforeActivity(JoinPoint joinPoint) {
 		
 		Debug.startAllocCounting();

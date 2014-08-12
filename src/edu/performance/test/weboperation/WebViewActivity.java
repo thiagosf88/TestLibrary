@@ -16,13 +16,14 @@ public class WebViewActivity extends InternetPerformanceTestActivity{
 		super.onCreate(savedInstanceState);
 
 		if (getIntent().getExtras() != null) {
-			isTheLastPage = getIntent().getExtras().getBoolean(
-					WebOperationActivity.ISTHELASTPAGE);
+			setTheLastPage(getIntent().getExtras().getBoolean(
+					WebOperationActivity.ISTHELASTPAGE));
 			websites = getIntent().getExtras().getString(
 					WebOperationActivity.URL);
 		}
 		setContentView(R.layout.webview);
 		myWebView = (WebView) findViewById(R.id.webview);
+		
 		myWebView.setWebViewClient(new TestWebView(this));
 
 		execute();
@@ -31,7 +32,7 @@ public class WebViewActivity extends InternetPerformanceTestActivity{
 	
 	public void execute(){
 		super.execute();
-		testTJMwebOperation(websites);
+		testTJMwebOperation(websites);	
 		
 		 
 	}
@@ -44,7 +45,15 @@ public class WebViewActivity extends InternetPerformanceTestActivity{
 	public boolean isTheLastPage() {
 		return isTheLastPage;
 	}
+
+
+	public void setTheLastPage(boolean isTheLastPage) {
+		this.isTheLastPage = isTheLastPage;
+	}
 	
+	protected int getMAX_TIME_MS() {
+		return super.getMAX_TIME_MS();
+	}
 	
 	
 

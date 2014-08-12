@@ -567,7 +567,7 @@ public class LessonTwoRenderer implements GLSurfaceView.Renderer
         float magicNumber = 6.0f;
 		
 		float xTranslate = -magicNumber, yTranslate = -magicNumber, zTranslate = -10.0f;//-(1.75f * level);
-		float xRotate = 1.0f, yRotate = 0.0f, zRotate = 0.0f;
+		//float xRotate = 1.0f, yRotate = 0.0f, zRotate = 0.0f;
 
 		for (int i = 0; i < level; i++){
 			Matrix.setIdentityM(mModelMatrix, 0);

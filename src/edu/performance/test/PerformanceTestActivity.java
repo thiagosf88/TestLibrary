@@ -13,13 +13,14 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 	
 	protected PowerManager powerManager = null;
 	protected WakeLock wakeLock = null;
-	private boolean isTheLast, isBatteryTest = false, isTimeOver;
+	private boolean isTheLast = true, isBatteryTest = false, isTimeOver;
 	protected ActivityThread mythread;
 	//public static final String ISTHELASTPAGE = "ISTHELASTPAGE";
 	PerformanceTestInterface operation;
-	protected String message;
+	protected String message = "Empty message!!!";
 	protected TextView status;
-	public static final String MAXTIMEMS = "MAXTIMEMS";
+	public static final String MAXTIME = "MAXTIMEMS";
+	protected int MAX_TIME_MS = 17000; //Magic max time to avoid infinite tasks
 	
 	
 	
@@ -31,7 +32,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		this.isTheLast = isTheLast;
 	}
 
-	protected int MAX_TIME_MS;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,18 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		 status = (TextView)findViewById(R.id.status);
 		
 		if(getIntent().getExtras() != null){
-			setTheLast(getIntent().getExtras().getBoolean(Library.THELASTTEST));
-			message = getIntent().getExtras().getString(Library.STATUS);
-			setMAX_TIME_MS(getIntent().getExtras().getInt(MAXTIMEMS));
-			isBatteryTest = getIntent().getExtras().getBoolean(Library.BATTERYTEST);
+			
+			if(getIntent().hasExtra(Library.THELASTTEST))
+				setTheLast(getIntent().getExtras().getBoolean(Library.THELASTTEST));
+			
+			if(getIntent().hasExtra(Library.STATUS))
+				message = getIntent().getExtras().getString(Library.STATUS);
+			
+			if(getIntent().hasExtra(MAXTIME))
+				setMAX_TIME_MS(getIntent().getExtras().getInt(MAXTIME));
+			
+			if(getIntent().hasExtra(Library.BATTERYTEST))
+				isBatteryTest = getIntent().getExtras().getBoolean(Library.BATTERYTEST);
 			
 			
 		}
@@ -105,7 +114,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
  */
 	public void finishTest(Bundle extras){
 		
-		if(mythread != null) // This is true when the test is performed on a different thread. TEsts related on Screen normally will return false here.
+		if(mythread != null) // This is true when the test is performed on a different thread. Tests related on Screen normally will return false here.
 		mythread.setRunning(false);
 
 		Intent mIntent = new Intent();

@@ -12,6 +12,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import edu.performance.test.InternetPerformanceTestActivity;
 import edu.performance.test.R;
 import edu.performance.test.fileoperation.FileOperation;
@@ -39,11 +40,13 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.performance_test);
+		status = (TextView)findViewById(R.id.status);
+		status.setText(message);
 		if(getIntent().getExtras() != null){
 			isTheLastPage = getIntent().getExtras().getBoolean(WebOperationActivity.ISTHELASTPAGE);
 			websites = getIntent().getExtras().getString(WebOperationActivity.URL);			
 		}		 
-		status.setText(message);
+		status.setText("Testing latency to reach: " + websites);
 		executeTest();
 		
 	}
@@ -63,6 +66,7 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 			for (int i = 0; i < 5; i++) {// aumentar para 30 depois
 				
 				testTJMLatency(websites);
+				
 			}
 			
 			Bundle extras = new Bundle();

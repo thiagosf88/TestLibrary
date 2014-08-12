@@ -13,14 +13,14 @@ public class TestWebView extends WebViewClient {
 	public TestWebView(WebViewActivity wva){
 		actRef = wva;
 	}
-/*
+
 	@Override
     public boolean shouldOverrideUrlLoading(WebView view, String urlNewString) {
-        running++;
+
         view.loadUrl(urlNewString);
         return true;
     }
-
+/*
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         running = Math.max(running, 1); // First request move it to 1.
@@ -36,19 +36,19 @@ public class TestWebView extends WebViewClient {
 			actRef.finish();
         }
     }*/
-	
+
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
     	new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(actRef.getMAX_TIME_MS());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 if(timeout) {
-                    gettingOut("Timeout!!"); 
+                    gettingOut("Timeout!!", false); 
                 }
             }
         }).start();
@@ -56,15 +56,23 @@ public class TestWebView extends WebViewClient {
 	
 	public void onPageFinished(WebView view, String url) {
 		timeout = false;
-		gettingOut(url + " loaded!");
+		gettingOut(url + " loaded!", true);
 	}
 	
-	private void gettingOut(String message){
-		System.out.println(message);
+	private void gettingOut(String message, boolean loaded){
+		
 		Intent mIntent = new Intent();
 		mIntent.putExtra(WebOperationActivity.ISTHELASTPAGE, actRef.isTheLastPage());
+		if(loaded){
 		actRef.setResult(Activity.RESULT_OK, mIntent);
-		actRef.finish();
+		System.out.println(message);
+		}
+		else{
+			actRef.setResult(Activity.RESULT_CANCELED, mIntent);
+			System.err.println(message);
+		}
+		
+		actRef.finishTest(null);
 	}
 	
 }
