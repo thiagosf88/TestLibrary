@@ -2,7 +2,7 @@ package edu.performance.test;
 
 /**
  * This abstract class contains a attribute that will be needed in almost of the
- * executed tests in this application and her childs should implement the
+ * executed tests in this application and her children should implement the
  * execute method.
  * 
  * @author Thiago

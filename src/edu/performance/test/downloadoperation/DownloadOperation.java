@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.util.WriteNeededFiles;
@@ -22,8 +23,8 @@ import edu.performance.test.util.WriteNeededFiles;
  */
 class DownloadOperation extends PerformanceTest<Integer>{
 
-	public DownloadOperation(PerformanceTestActivity activity) {
-		super(new Integer(3), activity);
+	public DownloadOperation(PerformanceTestActivity activity, Integer level) {
+		super(level, activity);
 
 		activity.executeTest();
 	}
@@ -33,7 +34,7 @@ class DownloadOperation extends PerformanceTest<Integer>{
 	public void execute() {
 		
 		testAdownloadOperation(this.getLevel());
-		activity.finishTest(null);
+		
 	}
 	/**
 	 * This method performs downloading files from the website
@@ -80,9 +81,14 @@ class DownloadOperation extends PerformanceTest<Integer>{
 			// closing streams
 			output.close();
 			input.close();
-
+			
+			activity.finishTest(null);
 		} catch (IOException ioe) {
-			// Log.e("Error: ", e.getMessage());
+			
+			Bundle extras = new Bundle();
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			
+			activity.finishTest(extras);
 			System.err.println("Error in download operation: " + ioe.getMessage());
 		}
 	}

@@ -19,7 +19,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 	PerformanceTestInterface operation;
 	protected String message = "Empty message!!!";
 	protected TextView status;
-	public static final String MAXTIME = "MAXTIMEMS";
+	public static final String MAXTIME = "MAXTIMEMS", RESULT_WAS_OK = "RESULTWASOK";
 	protected int MAX_TIME_MS = 17000; //Magic max time to avoid infinite tasks
 	
 	
@@ -118,11 +118,15 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		mythread.setRunning(false);
 
 		Intent mIntent = new Intent();
-		if(extras != null)
+		if(extras != null){
 		mIntent.putExtras(extras);
+		if(extras.containsKey(PerformanceTestActivity.RESULT_WAS_OK))
+			if(!extras.getBoolean(PerformanceTestActivity.RESULT_WAS_OK))
+				setResult(RESULT_CANCELED, mIntent);
+			else
+				setResult(RESULT_OK, mIntent);
+		}
 		mIntent.putExtra(Library.THELASTTEST, isTheLast);
-		setResult(RESULT_OK, mIntent);
-		
 		 
 		finish();
 

@@ -220,7 +220,13 @@ public class Library extends Activity {
 	
 	
 	private void allTests(){
-		
+		aTest = new Intent(appRef, DownloadOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 27000);
+		aTest.putExtra(THELASTTEST,true);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 3);
+		aTest.putExtra(STATUS, "Testing Download skills..");
+		testsToDo.add(aTest);
 		
 		
 		//____________________ em ordem
@@ -243,6 +249,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 27000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 3);
 		aTest.putExtra(STATUS, "Testing Download skills..");
 		testsToDo.add(aTest);
 		

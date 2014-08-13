@@ -42,6 +42,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 		webSite.putExtra(URL, websites[0]);
 		webSite.putExtra(Library.STATUS, websites[0]);
 		getPagesToAccess().add(webSite);
+		
 		webSite = new Intent(this, WebViewActivity.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
 		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);
@@ -49,6 +50,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 		webSite.putExtra(URL, websites[1]);
 		webSite.putExtra(Library.STATUS, websites[1]);
 		getPagesToAccess().add(webSite);
+		
 		webSite = new Intent(this, WebViewActivity.class);
 		webSite.putExtra(ISTHELASTPAGE, false);
 		webSite.putExtra(PerformanceTestActivity.MAXTIME, 17000);

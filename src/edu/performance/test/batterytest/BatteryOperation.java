@@ -5,15 +5,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.widget.TextView;
 import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.fileoperation.FileOperation;
-import edu.performance.test.floatoperation.FloatOperation;
 import edu.performance.test.graphicoperation.draws.ArcActivity;
 import edu.performance.test.util.WriteNeededFiles;
 
@@ -21,11 +18,11 @@ public class BatteryOperation extends Activity {
 
 	private double MIN_LEVEL_TO_EXIT = 100;
 	private double batteryPreviousLevel = 100;
-	private double currentVoltage = 0;
+	private double firstVoltage = 0;
 	int times = 0;
 	Intent batteryIntent = null;
 	boolean isTheLast;
-	BatteryTest bt;
+	//private TextView status;
 	PerformanceTestInterface test;
 	Intent aTest;
 
@@ -41,7 +38,7 @@ public class BatteryOperation extends Activity {
 
 		}
 	};
-	private TextView status;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,7 @@ public class BatteryOperation extends Activity {
 
 		int rawlevel = batteryIntent.getIntExtra("level", -1);
 		double scale = batteryIntent.getIntExtra("scale", -1);
-		currentVoltage = batteryIntent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
+		firstVoltage = batteryIntent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
 		if (rawlevel >= 0 && scale > 0) {
 			batteryPreviousLevel = rawlevel;// / scale;
 			MIN_LEVEL_TO_EXIT = batteryPreviousLevel - 1;
@@ -122,11 +119,8 @@ public class BatteryOperation extends Activity {
 				
 				batteryIntent = this.registerReceiver(this.mBatInfoReceiver,
 						new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-
 				
-				createInformationFile(batteryIntent);
-				
-				
+				createInformationFile(batteryIntent);				
 				unregisterReceiver(mBatInfoReceiver);
 				Intent mIntent = new Intent();
 				mIntent.putExtra(Library.THELASTTEST, isTheLast());
@@ -137,46 +131,6 @@ public class BatteryOperation extends Activity {
 
 	}
 
-	private class BatteryTest extends AsyncTask<Integer, String, Void> {
-
-		@Override
-		protected void onPreExecute() {
-			test = new FloatOperation(null);
-
-		}
-
-		@Override
-		protected Void doInBackground(Integer... params) {
-			while (batteryPreviousLevel > MIN_LEVEL_TO_EXIT) {
-				publishProgress("Starting float");
-
-				test.execute();
-				publishProgress("Float finished");
-
-				times++;
-			}
-			return null;
-		}
-
-		protected void onProgressUpdate(String... mensagem) {
-			status.setText(mensagem[0] + " battery level: "
-					+ batteryPreviousLevel + "\n min: " + MIN_LEVEL_TO_EXIT);
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-
-			unregisterReceiver(mBatInfoReceiver);
-			Intent mIntent = new Intent();
-			mIntent.putExtra(Library.THELASTTEST, isTheLast());
-			setResult(Activity.RESULT_OK, mIntent);
-			finish();
-
-		}
-
-	}
-	
-	
 
 	public PerformanceTestInterface getTest() {
 		return test;
@@ -217,10 +171,10 @@ public class BatteryOperation extends Activity {
 				+ "\n" + "Present: " + present + "\n" + "Scale: " + scale
 				+ "\n" + "Status: " + status + "\n" + "Technology: "
 				+ technology + "\n" + "Temperature: " + temperature + "\n"
-				+ "Diff Voltage: " + (currentVoltage - voltage) + "\n" + "ant: "
+				+ "Diff Voltage: " + (firstVoltage - voltage) + "\n" + "ant: "
 				+ batteryPreviousLevel + " times: " + times;
 
-		currentVoltage = voltage;
+
 		FileOperation rw = new FileOperation();
 
 		rw.testTJMwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/batt_" + level
