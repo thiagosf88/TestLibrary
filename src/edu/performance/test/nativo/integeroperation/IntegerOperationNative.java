@@ -1,5 +1,6 @@
 package edu.performance.test.nativo.integeroperation;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 
@@ -27,7 +28,9 @@ public class IntegerOperationNative extends PerformanceTest<Integer> {
 
 		System.out.println(testNIntegerOperationSieve(this.getLevel()));
 
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 	/**

@@ -37,7 +37,9 @@ public class LightTestActivity extends PerformanceTestActivity {
 		
 		b1 = (Button) findViewById(R.id.bt_start_test);
 		
-		finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		finishTest(extras);
 		
 	}
 

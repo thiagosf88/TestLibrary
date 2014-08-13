@@ -1,5 +1,6 @@
 package edu.performance.test.graphoperation;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
@@ -27,7 +28,10 @@ public class GraphOperation extends PerformanceTest<Integer> implements
 		In in = new In(WriteNeededFiles.DIRECTORY_NAME + "/medium_g.txt");
 		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(in);
 		System.out.println(ewd);
-		activity.finishTest(null);
+		
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 		
         
 		//d = new DijkstraSP(eg);

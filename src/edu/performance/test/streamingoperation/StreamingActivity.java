@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import edu.performance.test.InternetPerformanceTestActivity;
+import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
 import edu.performance.test.util.ActivityThread;
@@ -64,7 +65,9 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 					
 			 
 			
-			finishTest(null);
+			Bundle extras = new Bundle();			
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+			finishTest(extras);
 			if (mediaPlayer != null) {
 				mediaPlayer.release();
 				mediaPlayer = null;

@@ -23,7 +23,7 @@ import edu.performance.test.util.WriteNeededFiles;
  */
 class DownloadOperation extends PerformanceTest<Integer>{
 
-	public DownloadOperation(PerformanceTestActivity activity, Integer level) {
+	public DownloadOperation(PerformanceTestActivity activity, int level) {
 		super(level, activity);
 
 		activity.executeTest();
@@ -82,7 +82,9 @@ class DownloadOperation extends PerformanceTest<Integer>{
 			output.close();
 			input.close();
 			
-			activity.finishTest(null);
+			Bundle extras = new Bundle();			
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+			activity.finishTest(extras);
 		} catch (IOException ioe) {
 			
 			Bundle extras = new Bundle();

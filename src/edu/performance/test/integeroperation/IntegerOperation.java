@@ -1,5 +1,6 @@
 package edu.performance.test.integeroperation;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 
@@ -23,7 +24,10 @@ public class IntegerOperation extends PerformanceTest<Integer> {
 		testAIntegerOperationSieveJava(this.getLevel());
 		testAIntegerOperationFibonacciJava(this.getLevel());
 		testAIntegerOperationAckermann(this.getLevel(), this.getLevel());
-		activity.finishTest(null);
+		
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 	/**

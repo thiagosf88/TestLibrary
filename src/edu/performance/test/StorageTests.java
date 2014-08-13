@@ -7,7 +7,7 @@ package edu.performance.test;
  * @author thiago
  * 
  */
-public abstract class ReadAndWrite extends PerformanceTest<Integer> {
+public abstract class StorageTests extends PerformanceTest<Integer> {
 
 	private String filePath;
 	private String dirName;
@@ -15,7 +15,7 @@ public abstract class ReadAndWrite extends PerformanceTest<Integer> {
 	private int positions[];
 	private int offset;
 	
-	public ReadAndWrite(PerformanceTestActivity activity) {
+	public StorageTests(PerformanceTestActivity activity) {
 		super(new Integer(1), activity);
 		filePath = "";
 		offset = 10000;
@@ -23,7 +23,7 @@ public abstract class ReadAndWrite extends PerformanceTest<Integer> {
 		
 	}
 
-	public ReadAndWrite(PerformanceTestActivity activity, int level, String filePath, String stretch,
+	public StorageTests(PerformanceTestActivity activity, int level, String filePath, String stretch,
 			int[] positions, int offset) {
 		super(level, activity);
 		this.filePath = filePath;

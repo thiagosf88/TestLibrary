@@ -3,6 +3,7 @@ package edu.performance.test.database;
 import java.util.ArrayList;
 
 import android.database.Cursor;
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
@@ -27,8 +28,8 @@ public class DatabaseOperation extends PerformanceTest<Integer>  implements Perf
 	 * 
 	 * @param activity
 	 */
-	public DatabaseOperation(PerformanceTestActivity activity) {
-		super(new Integer(1000), activity);
+	public DatabaseOperation(PerformanceTestActivity activity, int level) {
+		super(level, activity);
 		
 		mDbHelper = new TarefasDbAdapter(activity.getApplicationContext());
 		activity.executeTest();
@@ -51,7 +52,9 @@ public class DatabaseOperation extends PerformanceTest<Integer>  implements Perf
 		testTpJMdeleteTasks(tasks);
 		mDbHelper.close();
 
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 	/**

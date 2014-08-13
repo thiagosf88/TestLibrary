@@ -16,6 +16,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.util.WriteNeededFiles;
@@ -126,10 +127,14 @@ public class MailOperation extends PerformanceTest<Integer> {
 		try {
 			testAMailOperation(this.getLevel(), "thiago.soares@ymail.com");
 		} catch (RuntimeException ae) {
-			System.out.println("This email tests could not to be performed. :(");
+			Bundle extras = new Bundle();			
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			activity.finishTest(extras);
 		}
 		}
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 }

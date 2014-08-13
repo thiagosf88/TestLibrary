@@ -1,5 +1,6 @@
 package edu.performance.test.nativo.stringoperation;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 
@@ -31,7 +32,9 @@ public class StringOperationNative extends PerformanceTest<Integer> {
 		testTNMsearchString(searchable, snippets[this.getLevel() + 3]);
 		testTNMsearchString(searchable, snippets[this.getLevel() + 6]);
 		
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 	/**

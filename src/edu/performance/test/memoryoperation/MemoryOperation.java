@@ -2,6 +2,7 @@ package edu.performance.test.memoryoperation;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 
@@ -34,7 +35,9 @@ public class MemoryOperation extends PerformanceTest<Integer> {
 		
 		testTJMcopyObjectArrayList();
 		
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 	/**

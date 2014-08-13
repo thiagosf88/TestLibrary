@@ -1,5 +1,6 @@
 package edu.performance.test.nativo.floatoperation;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 
@@ -31,7 +32,9 @@ class FloatOperationNative extends PerformanceTest<Double> {
 		testNFloatOperationdeg2rad(this.getLevel());
 		testNFloatOperationrad2deg(this.getLevel());
 		
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 
 	}
 

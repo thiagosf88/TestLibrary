@@ -50,7 +50,9 @@ public class MediumTestActivity extends PerformanceTestActivity{
 		dp1 = (DatePicker) findViewById(R.id.datePicker1);
 		m1 = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView1);
 		
-		finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		finishTest(extras);
 		
 	}
 

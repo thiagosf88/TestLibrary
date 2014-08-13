@@ -1,16 +1,24 @@
 package edu.performance.test.database;
 
 import android.os.Bundle;
+import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class DatabaseOperationActivity extends PerformanceTestActivity {
 	
 	DatabaseOperation operation;
+	protected int level = 10;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		operation = new DatabaseOperation(this);
+		if(getIntent().getExtras() != null){
+			if(getIntent().hasExtra(Library.LEVEL_INT)){
+				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			}
+		}
+		
+		operation = new DatabaseOperation(this, level);
 		
 	}
 	

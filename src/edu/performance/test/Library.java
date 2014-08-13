@@ -128,6 +128,7 @@ public class Library extends Activity {
 	public static final String SNIPPETS = "SNIPPETS";
 	public static final String BATTERYTEST = "BATTERYTEST";
 	public static final String LEVEL_INT = "LEVEL_INT";
+	public static final String LEVEL_DOUBLE = "LEVEL_DOUBLE";
 	
 	//It is necessary to load native code.
 	static {
@@ -219,7 +220,8 @@ public class Library extends Activity {
 	}
 	
 	
-	private void allTests(){		
+	private void allTests(){	
+			
 		//____________________ em ordem
 		
 		
@@ -233,6 +235,7 @@ public class Library extends Activity {
 		aTest = new Intent(appRef, DatabaseOperationActivity.class); //verificar se está realmente fazendo algo
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 100);
 		aTest.putExtra(STATUS, "Testing Database skills..");
 		testsToDo.add(aTest);
 		
@@ -240,7 +243,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 27000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
+		aTest.putExtra(LEVEL_INT, 1);
 		aTest.putExtra(STATUS, "Testing Download skills..");
 		testsToDo.add(aTest);
 		
@@ -258,6 +261,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_DOUBLE, 999983);
 		aTest.putExtra(STATUS, "Testing Float skills..");
 		testsToDo.add(aTest);			
 				

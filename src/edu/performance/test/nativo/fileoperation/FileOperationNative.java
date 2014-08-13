@@ -1,7 +1,8 @@
 package edu.performance.test.nativo.fileoperation;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.ReadAndWrite;
+import edu.performance.test.StorageTests;
 
 /**
  * This class performs file manipulation. Currently the implemented operations
@@ -9,7 +10,7 @@ import edu.performance.test.ReadAndWrite;
  * 
  * @author Thiago
  */
-public class FileOperationNative extends ReadAndWrite {
+public class FileOperationNative extends StorageTests {
 
 	public FileOperationNative(PerformanceTestActivity activity, String filePath, String stretch) {
 		super(activity);
@@ -28,7 +29,9 @@ public class FileOperationNative extends ReadAndWrite {
 		testNwriteRandomAcessFile(this.getFilePath(), this.getPositions()[0],
 				this.getStretch());
 		
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 
 	}
 

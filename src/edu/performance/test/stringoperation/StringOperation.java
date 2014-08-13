@@ -1,5 +1,6 @@
 package edu.performance.test.stringoperation;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 
@@ -33,7 +34,9 @@ public class StringOperation extends PerformanceTest<Integer> {
 		testTJMsearchString(snippets[this.getLevel() + 3]);
 		testTJMsearchString(snippets[this.getLevel() + 6]);
 
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 	/**

@@ -2,6 +2,7 @@ package edu.performance.test.floatoperation;
 
 import java.util.Random;
 
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
@@ -17,8 +18,8 @@ import edu.performance.test.PerformanceTestInterface;
  */
 public class FloatOperation extends PerformanceTest<Double> implements PerformanceTestInterface{
 
-	public FloatOperation(PerformanceTestActivity activity) {
-		super(new Double(999983), activity);
+	public FloatOperation(PerformanceTestActivity activity, double level) {
+		super(level, activity);
 		if(activity != null)
 		activity.executeTest();
 	}
@@ -91,8 +92,10 @@ public class FloatOperation extends PerformanceTest<Double> implements Performan
 		testJFloatOperationdeg2rad(this.getLevel());
 		testJFloatOperationrad2deg(this.getLevel());
 		
-		if(activity != null)
-		activity.finishTest(null);
+
+			Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 	}
 
 	// ----- Linpack --------------------------------------------------------

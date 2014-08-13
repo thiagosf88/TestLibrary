@@ -13,9 +13,10 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 
 import android.content.res.Resources.NotFoundException;
+import android.os.Bundle;
 import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.ReadAndWrite;
+import edu.performance.test.StorageTests;
 
 /**
  * This class extends ReadAndWrite because some new attributes are needed beside
@@ -25,7 +26,7 @@ import edu.performance.test.ReadAndWrite;
  * 
  * @author Thiago
  */
-public class FileOperation extends ReadAndWrite {
+public class FileOperation extends StorageTests {
 
 	public FileOperation(PerformanceTestActivity activity, String filePath, String stretch) {
 		super(activity);
@@ -55,32 +56,13 @@ public class FileOperation extends ReadAndWrite {
 		
 		testTJMreadSequentialAcessFile(this.getFilePath());
 		
-		activity.finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 
 	}
 
-	/*
-	 * @Override public void onCreate(Bundle savedInstanceState) {
-	 * 
-	 * super.onCreate(savedInstanceState);
-	 * //setContentView(R.layout.activity_read_and_write); Randomly randomly =
-	 * new Randomly();
-	 * 
-	 * /** Here data array has that schema [0] times [1] offset
-	 * 
-	 * 
-	 * 
-	 * 
-	 * randomly.writeRandomAccessFile(Environment.getExternalStorageDirectory().
-	 * getAbsolutePath() + "/big_escrever.txt", positions[0], stretch);
-	 * System.out.println("fim da escrita"); for(int i = 0; i <
-	 * Integer.parseInt(data[0]);i++){
-	 * randomly.readRandomAccessFile(Environment.
-	 * getExternalStorageDirectory().getAbsolutePath() + "/big.txt",
-	 * positions[i], Integer.parseInt(data[1]));
-	 * 
-	 * } System.out.println("terminando"); finish(); }
-	 */
+
 	/**
 	 * This method tries to open a existent file determined by path and read it
 	 * sequentially. It is missing to use level parameter.

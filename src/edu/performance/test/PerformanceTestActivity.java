@@ -117,15 +117,19 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		if(mythread != null) // This is true when the test is performed on a different thread. Tests related on Screen normally will return false here.
 		mythread.setRunning(false);
 
-		Intent mIntent = new Intent();
+		Intent mIntent = new Intent();		
+		
+		setResult(RESULT_OK, mIntent); 
+		//TODO Talvez seja interessante que todos enviem algum bundle, ou seja, ele nunca seja nulo.
 		if(extras != null){
 		mIntent.putExtras(extras);
+		
 		if(extras.containsKey(PerformanceTestActivity.RESULT_WAS_OK))
 			if(!extras.getBoolean(PerformanceTestActivity.RESULT_WAS_OK))
 				setResult(RESULT_CANCELED, mIntent);
-			else
-				setResult(RESULT_OK, mIntent);
 		}
+
+		
 		mIntent.putExtra(Library.THELASTTEST, isTheLast);
 		 
 		finish();

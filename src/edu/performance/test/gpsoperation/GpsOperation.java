@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.util.InternetController;
 
 /**
@@ -70,7 +71,10 @@ InternetController.setWifiAvailability(true, (GPSActivity)mContext);
 		}
 		
 		InternetController.setWifiAvailability(false, (GPSActivity)mContext);
-		((GPSActivity)mContext).finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		((GPSActivity)mContext).finishTest(extras);
+		
 	}
 
 	public void testJgetLocation() {

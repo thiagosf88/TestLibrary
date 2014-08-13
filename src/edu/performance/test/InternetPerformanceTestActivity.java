@@ -16,11 +16,11 @@ public abstract class InternetPerformanceTestActivity extends PerformanceTestAct
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+		InternetController.setWifiAvailability(true, this);
 	
 	}
 	//TODO verificar se não é possível mudar isso tudo para dentro do onCreate.
 	public void execute(){
-		InternetController.setWifiAvailability(true, this);
 		
 		//TODO Change this to PerformanceTestActivity
 		avoidingInfiniteTasks();

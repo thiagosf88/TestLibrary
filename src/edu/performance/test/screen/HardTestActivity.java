@@ -63,7 +63,9 @@ public class HardTestActivity extends PerformanceTestActivity{
 		cb1 = (CheckBox) findViewById(R.id.checkBox1);
 		elv1 = (ExpandableListView) findViewById(R.id.expandableListView1);
 		
-		finishTest(null);
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		finishTest(extras);
 		
 	}
 
