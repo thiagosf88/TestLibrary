@@ -8,15 +8,20 @@ public class GraphOperationActivity extends PerformanceTestActivity {
 	
 	GraphOperation operation;
 	
-	protected int level;
+	protected String level;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if(getIntent().getExtras() != null){
-					
-			level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			if(getIntent().hasExtra(Library.LEVEL_FILENAME))		
+			level = getIntent().getExtras().getString(Library.LEVEL_FILENAME);
+			else{
+				Bundle extras = new Bundle();
+				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+				finishTest(extras);
+			}
 		}
-		operation = new GraphOperation(level, this);
+		operation = new GraphOperation(this, level);
 		
 	}
 

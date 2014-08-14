@@ -13,8 +13,8 @@ import edu.performance.test.PerformanceTestActivity;
  */
 public class IntegerOperation extends PerformanceTest<Integer> {
 
-	public IntegerOperation(PerformanceTestActivity activity) {
-		super(new Integer(1), activity);
+	public IntegerOperation(PerformanceTestActivity activity, int level) {
+		super(level, activity);
 
 		activity.executeTest();
 	}

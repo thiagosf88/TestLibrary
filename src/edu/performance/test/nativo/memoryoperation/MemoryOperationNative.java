@@ -12,8 +12,8 @@ import edu.performance.test.PerformanceTestActivity;
  */
 public class MemoryOperationNative extends PerformanceTest<Integer> {
 
-	public MemoryOperationNative(PerformanceTestActivity activity) {
-		super(new Integer(10), activity);
+	public MemoryOperationNative(PerformanceTestActivity activity, int level) {
+		super(level, activity);
 		activity.executeTest();
 	}
 

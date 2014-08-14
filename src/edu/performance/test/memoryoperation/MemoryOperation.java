@@ -19,17 +19,17 @@ public class MemoryOperation extends PerformanceTest<Integer> {
 	private Object[] arrayOfObjects = null;
 	private Object content = null;
 
-	public MemoryOperation(PerformanceTestActivity activity) {
-		super(new Integer(10000), activity);
+	public MemoryOperation(PerformanceTestActivity activity, int level) {
+		super(level, activity);
 		activity.executeTest();
 	}
 
 	@Override
 	public void execute() {
 		
-		testTJMcreateObjectArray(this.getContent());
+		testTJMcreateObjectArray(this.getContent(), this.getLevel());
 		
-		testTJMcreateObjectArrayList(this.getContent());
+		testTJMcreateObjectArrayList(this.getContent(), this.getLevel());
 		
 		testTJMcopyObjectArray();
 		
@@ -46,12 +46,13 @@ public class MemoryOperation extends PerformanceTest<Integer> {
 	 * 
 	 * @param content
 	 *            Object that will be put in the arrayList.
+	 * @param level Determines the size of Array
 	 */
-	private void testTJMcreateObjectArrayList(Object content) {
+	private void testTJMcreateObjectArrayList(Object content, int level) {
 
 		arrayOfThings = new ArrayList<Object>();
 
-		for (int i = 0; i < this.getLevel(); i++) {
+		for (int i = 0; i < level; i++) {
 			arrayOfThings.add(content);
 		}
 
@@ -63,12 +64,13 @@ public class MemoryOperation extends PerformanceTest<Integer> {
 	 * 
 	 * @param content
 	 *            Object that will be put in the array.
+	 * @param level Determines the size of Array
 	 */
-	private void testTJMcreateObjectArray(Object content) {
+	private void testTJMcreateObjectArray(Object content, int level) {
 
-		arrayOfObjects = new Object[this.getLevel()];
+		arrayOfObjects = new Object[level];
 
-		for (int i = 0; i < this.getLevel(); i++) {
+		for (int i = 0; i < level; i++) {
 			arrayOfObjects[i] = new Object();
 			arrayOfObjects[i] = content;
 		}

@@ -19,7 +19,6 @@ import javax.mail.internet.MimeMultipart;
 import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.util.WriteNeededFiles;
 
 /**
  * This class extends AsyncTask and it sends downloading files from oi website.
@@ -28,11 +27,11 @@ import edu.performance.test.util.WriteNeededFiles;
  * 
  * @author Thiago
  */
-public class MailOperation extends PerformanceTest<Integer> {
+public class MailOperation extends PerformanceTest<String> {
 	
 	
-	public MailOperation(PerformanceTestActivity activity) {
-		super(new Integer(1), activity);
+	public MailOperation(PerformanceTestActivity activity, String level) {
+		super(level, activity);
 		activity.executeTest();
 	}
 
@@ -42,13 +41,13 @@ public class MailOperation extends PerformanceTest<Integer> {
 	 * send.
 	 * 
 	 * @param level
-	 *            Defines the number of email(s) will be send.
+	 *            Defines the name file will be attached in email which will be send.
 	 * @param to
 	 *            Determines the email that will be the test email(s).
 	 */
 
 
-	void testAMailOperation(int level, String to) {
+	void testAMailOperation(String level, String to) {
 		String host = "smtp.mail.yahoo.com";
 		String port = "587";
 		// boolean auth = true;
@@ -97,7 +96,7 @@ public class MailOperation extends PerformanceTest<Integer> {
 		        Multipart multipart = new MimeMultipart();
 
 		        messageBodyPart = new MimeBodyPart();
-		        String file = WriteNeededFiles.DIRECTORY_NAME + "/small.txt" ;
+		        String file = level ;
 		        String fileName = "attachmentName.txt";
 		        DataSource source = new FileDataSource(file);
 		        messageBodyPart.setDataHandler(new DataHandler(source));
@@ -123,7 +122,7 @@ public class MailOperation extends PerformanceTest<Integer> {
 	}
 
 	public void execute() {
-		for(int i = 0; i < this.getLevel(); i++){
+		
 		try {
 			testAMailOperation(this.getLevel(), "thiago.soares@ymail.com");
 		} catch (RuntimeException ae) {
@@ -131,7 +130,7 @@ public class MailOperation extends PerformanceTest<Integer> {
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			activity.finishTest(extras);
 		}
-		}
+		
 		Bundle extras = new Bundle();			
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
 		activity.finishTest(extras);

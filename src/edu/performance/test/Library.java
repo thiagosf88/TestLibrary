@@ -102,7 +102,7 @@ public class Library extends Activity {
 	WakeLock wakeLock = null;
 	
 	int[] rawResourceIds = { R.raw.big, R.raw.listas, R.raw.tarefas,
-			R.raw.small, R.raw.tiny_g, R.raw.medium_g};
+			R.raw.small, R.raw.tiny_g, R.raw.medium_g, R.raw.medium2_g, R.raw.medium3_g};
 	String[] rawResourceNames = { "big.txt", "listas.xml", "tarefas.xml",
 			"small.txt", "tiny_g.txt", "medium_g.txt", "medium2_g.txt", "medium3_g.txt" };
 	HashMap<String, String> dirNames = null;
@@ -129,6 +129,7 @@ public class Library extends Activity {
 	public static final String BATTERYTEST = "BATTERYTEST";
 	public static final String LEVEL_INT = "LEVEL_INT";
 	public static final String LEVEL_DOUBLE = "LEVEL_DOUBLE";
+	public static final String LEVEL_FILENAME = "LEVEL_FILENAME";
 	
 	//It is necessary to load native code.
 	static {
@@ -220,8 +221,7 @@ public class Library extends Activity {
 	}
 	
 	
-	private void allTests(){	
-			
+	private void allTests(){		
 		//____________________ em ordem
 		
 		
@@ -431,8 +431,8 @@ public class Library extends Activity {
 		aTest = new Intent(appRef, GraphOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.TINY_G_TXT]);
+		aTest.putExtra(BATTERYTEST, false);		
+		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.TINY_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
@@ -440,7 +440,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.MEDIUM_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
@@ -448,7 +448,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
@@ -456,7 +456,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest); 
 		
@@ -474,13 +474,14 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Mail skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(LEVEL_INT, 1000);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Memory skills..");
 		testsToDo.add(aTest);
@@ -489,7 +490,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
+		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
 				+ rawResourceNames[fileIndexes.BIG_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing Native File skills..");
@@ -499,6 +500,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Native Float skills..");
+		aTest.putExtra(LEVEL_DOUBLE, 9979);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, IntegerOperationNativeActivity.class); 
@@ -531,7 +533,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		// Screen Activity --------------------------------------------------------
-		
+		//TODO Falta definir level
 		aTest = new Intent(appRef, ScreenActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);		
@@ -561,7 +563,7 @@ public class Library extends Activity {
 		testsToDo.add(aTest);
 		
 		//--------------------------------------------------------------------------------------
-		
+		//TODO Falta definir level
 		aTest = new Intent(appRef, StreamingActivity.class); 
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
@@ -583,6 +585,7 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing String skills..");
 		testsToDo.add(aTest);
 		
+		//TODO Falta definir level
 		aTest = new Intent(appRef, WebOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, true);

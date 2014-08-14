@@ -7,18 +7,28 @@ import edu.performance.test.PerformanceTestActivity;
 public class FileOperationNativeActivity extends PerformanceTestActivity {
 	
 	FileOperationNative operation;
-	
+	protected String level;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String filePath = "", stretch = "";
+		String stretch = "";
 		if(getIntent().getExtras() != null){
-			filePath = getIntent().getExtras().getString(Library.FILEPATH);
-			stretch = getIntent().getExtras().getString(Library.STRETCH);
+			if(getIntent().hasExtra(Library.LEVEL_FILENAME)
+					&& getIntent().hasExtra(Library.STRETCH)){
+			
+				stretch = getIntent().getExtras().getString(Library.STRETCH);					
+				level = getIntent().getExtras().getString(Library.LEVEL_FILENAME);
+			}
+				else{
+					Bundle extras = new Bundle();
+					extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+					finishTest(extras);
+				}
+			
 			
 		}
 		else return;
 		
-		operation = new FileOperationNative(this, filePath, stretch);
+		operation = new FileOperationNative(this, level, stretch);
 		
 	}
 	

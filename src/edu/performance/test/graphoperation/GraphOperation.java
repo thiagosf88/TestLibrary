@@ -1,5 +1,7 @@
 package edu.performance.test.graphoperation;
 
+import java.io.IOException;
+
 import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
@@ -8,13 +10,12 @@ import edu.performance.test.graphoperation.legacy.DijkstraSP;
 import edu.performance.test.graphoperation.legacy.DirectedEdge;
 import edu.performance.test.graphoperation.legacy.EdgeWeightedDigraph;
 import edu.performance.test.graphoperation.legacy.In;
-import edu.performance.test.util.WriteNeededFiles;
 
-public class GraphOperation extends PerformanceTest<Integer> implements
+public class GraphOperation extends PerformanceTest<String> implements
 		PerformanceTestInterface {
 	
 	DijkstraSP d;
-	public GraphOperation(Integer level, PerformanceTestActivity activity) {
+	public GraphOperation(PerformanceTestActivity activity, String level) {
 		super(level, activity);
 		if(activity != null)
 			activity.executeTest();
@@ -24,8 +25,16 @@ public class GraphOperation extends PerformanceTest<Integer> implements
 
 	@Override
 	public void execute() {
-		
-		In in = new In(WriteNeededFiles.DIRECTORY_NAME + "/medium_g.txt");
+		In in = null;
+		try{
+		 in = new In(this.getLevel());
+		}
+		catch (Exception e) {
+			Bundle extras = new Bundle();	
+			System.out.println(this.getLevel());
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			activity.finishTest(extras);
+		}
 		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(in);
 		System.out.println(ewd);
 		
@@ -35,12 +44,12 @@ public class GraphOperation extends PerformanceTest<Integer> implements
 		
         
 		//d = new DijkstraSP(eg);
-		testTJMShorterPathDijstra(ewd);
+		testTJMShorterPathDijstra(ewd, this.getLevel());
 		
 	}
 	
 	@SuppressWarnings("unused")
-	private void testTJMShorterPathDijstra(EdgeWeightedDigraph d){
+	private void testTJMShorterPathDijstra(EdgeWeightedDigraph d, String level){
 		//tiny_g
 		int source = 0;
 	

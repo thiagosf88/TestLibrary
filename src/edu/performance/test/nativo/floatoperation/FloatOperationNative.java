@@ -15,8 +15,8 @@ import edu.performance.test.PerformanceTestActivity;
  */
 class FloatOperationNative extends PerformanceTest<Double> {
 	
-	public FloatOperationNative(PerformanceTestActivity activity) {
-		super(new Double(1000), activity);
+	public FloatOperationNative(PerformanceTestActivity activity, double level) {
+		super(level, activity);
 
 		activity.executeTest();
 	}

@@ -14,8 +14,8 @@ import edu.performance.test.PerformanceTestActivity;
  */
 public class IntegerOperationNative extends PerformanceTest<Integer> {
 
-	public IntegerOperationNative(PerformanceTestActivity activity) {
-		super(new Integer(100), activity);
+	public IntegerOperationNative(PerformanceTestActivity activity, int level) {
+		super(level, activity);
 		
 		activity.executeTest();
 	}
