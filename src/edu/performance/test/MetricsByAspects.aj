@@ -184,7 +184,7 @@ public aspect MetricsByAspects {
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
 			out.write("\t<method> \n"
-					+ "\t\t<name>" + joinPoint.getSignature().getName() + "</0name>\n"
+					+ "\t\t<name>" + joinPoint.getSignature().getName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
@@ -215,7 +215,7 @@ public aspect MetricsByAspects {
 		long nativeallocated = Debug.getNativeHeapAllocatedSize();
 		try {
 			out.write("\t<method>\n"
-					+ "\t\t<name>" + joinPoint.getSignature().getName() + "</1name>\n"
+					+ "\t\t<name>" + joinPoint.getSignature().getName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
@@ -255,7 +255,7 @@ public aspect MetricsByAspects {
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
 			out.write("\t<method>\n"
-					+ "\t\t<name>" + joinPoint.getSignature().toShortString() + "</2name>\n"
+					+ "\t\t<name>" + joinPoint.getSignature().toShortString() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
@@ -299,7 +299,7 @@ public aspect MetricsByAspects {
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
 			out.write("\t<method>\n"
-					+ "\t\t<name>" + joinPoint.getSignature().toShortString() + "</3name>\n"
+					+ "\t\t<name>" + joinPoint.getSignature().toShortString() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
@@ -360,7 +360,7 @@ public aspect MetricsByAspects {
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
 			out.write("\t<method>\n"
-					+ "\t\t<name>" + joinPoint.getTarget().getClass().getSimpleName() + "</4name>\n"
+					+ "\t\t<name>" + joinPoint.getTarget().getClass().getSimpleName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
@@ -398,7 +398,7 @@ public aspect MetricsByAspects {
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
 			out.write("\t<method>\n"
-					+ "\t\t<name>" + joinPoint.getTarget().getClass().getSimpleName() + "</5name>\n"
+					+ "\t\t<name>" + joinPoint.getTarget().getClass().getSimpleName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
@@ -444,7 +444,7 @@ public aspect MetricsByAspects {
 				if(s instanceof Cursor)
 					message = message.concat("\n\t\t\t<item>\"" + ((Cursor)s).getCount() + "\"</item>");
 				else
-					message = message.concat("\n\t\t\t<item>\"" + s.toString() + "\"</item>");
+					message = message.concat("\n\t\t\t<item>\"" + ((s.toString() != null && s.toString().length() < 80)? s.toString() : "TooBigOrNull!" ) + "\"</item>");
 		}
 		
 		return message;

@@ -55,6 +55,7 @@ import edu.performance.test.stringoperation.StringOperationActivity;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
 import edu.performance.test.weboperation.WebOperationActivity;
+import edu.performance.test.weboperation.WebServiceActivity;
 
 
 /**
@@ -130,6 +131,7 @@ public class Library extends Activity {
 	public static final String LEVEL_INT = "LEVEL_INT";
 	public static final String LEVEL_DOUBLE = "LEVEL_DOUBLE";
 	public static final String LEVEL_FILENAME = "LEVEL_FILENAME";
+	public static final String LEVEL_WEBSITE = "LEVEL_WEBSITE";
 	
 	//It is necessary to load native code.
 	static {
@@ -221,9 +223,9 @@ public class Library extends Activity {
 	}
 	
 	
-	private void allTests(){		
-		//____________________ em ordem
+	private void allTests(){	
 		
+		//____________________ em ordem		
 		
 		aTest = new Intent(appRef, BatteryOperation.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
@@ -588,10 +590,20 @@ public class Library extends Activity {
 		//TODO Falta definir level
 		aTest = new Intent(appRef, WebOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, true);
+		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Web skills..");
 		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, WebServiceActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, true);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read");
+		aTest.putExtra(STATUS, "Testing WebService skills..");
+		testsToDo.add(aTest);
+		
+		
 		
 		
 		

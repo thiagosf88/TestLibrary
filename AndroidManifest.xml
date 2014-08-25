@@ -181,6 +181,10 @@
             android:name="edu.performance.test.streamingoperation.StreamingActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="edu.performance.test.weboperation.WebServiceActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         
     </application>
 

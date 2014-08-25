@@ -16,6 +16,11 @@ public class DatabaseOperationActivity extends PerformanceTestActivity {
 			if(getIntent().hasExtra(Library.LEVEL_INT)){
 				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
 			}
+			else{
+				Bundle extras = new Bundle();
+				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+				finishTest(extras);
+			}
 		}
 		
 		operation = new DatabaseOperation(this, level);

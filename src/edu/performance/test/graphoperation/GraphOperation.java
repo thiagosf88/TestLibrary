@@ -1,7 +1,5 @@
 package edu.performance.test.graphoperation;
 
-import java.io.IOException;
-
 import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
@@ -31,12 +29,12 @@ public class GraphOperation extends PerformanceTest<String> implements
 		}
 		catch (Exception e) {
 			Bundle extras = new Bundle();	
-			System.out.println(this.getLevel());
+			
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			activity.finishTest(extras);
 		}
 		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(in);
-		System.out.println(ewd);
+		
 		
 		Bundle extras = new Bundle();			
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
