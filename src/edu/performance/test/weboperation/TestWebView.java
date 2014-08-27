@@ -72,7 +72,7 @@ public class TestWebView extends WebViewClient {
 			System.err.println(message);
 		}
 		
-		actRef.finishTest(null);
+		actRef.finishTest(mIntent.getExtras());
 	}
 	
 }

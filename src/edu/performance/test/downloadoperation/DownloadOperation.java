@@ -29,7 +29,7 @@ class DownloadOperation extends PerformanceTest<Integer>{
 		activity.executeTest();
 	}
 
-	String[] urls = { "M1.zip", "M50.zip", "M10.zip" };
+	String[] urls = { "M1.zip", "M10.zip", "M50.zip", "M500.zip" };
 
 	public void execute() {
 		

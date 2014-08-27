@@ -32,7 +32,7 @@ public class IntegerOperation extends PerformanceTest<Integer> {
 
 	/**
 	 * This method calculates the quantity of prime number lower than level.
-	 * This method is a call to native c/c++ function.
+	 * 
 	 * 
 	 * @param level
 	 *            Defines the number used as ceiling.
@@ -69,8 +69,7 @@ public class IntegerOperation extends PerformanceTest<Integer> {
 	}
 
 	/**
-	 * This method calculates Fibonacci number until the index level. This
-	 * method is a call to native c/c++ function.
+	 * This method calculates Fibonacci number until the index level. 
 	 * 
 	 * @param level
 	 *            Indicates the index of the last number of Fibonacci sequence
@@ -92,8 +91,7 @@ public class IntegerOperation extends PerformanceTest<Integer> {
 	 * This method implements the Ackermann-Peter function. This a
 	 * fully-computable whose result increases quickly. Because of that the
 	 * parameter values must be really small. Currently this implementation is
-	 * limiting m in 4 and n in 3. This method is a call to native c/c++
-	 * function.
+	 * limiting m in 4 and n in 3. 
 	 * 
 	 * @param m
 	 * @param n

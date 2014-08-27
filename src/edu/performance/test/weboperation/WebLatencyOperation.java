@@ -77,7 +77,6 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 	}
 
 	
-//Creio que o problema é estar na thread pŕincipal
 	private void testTJMLatency(String host) {
 
 		try {
@@ -89,10 +88,12 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 			}
 
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			new Exception("From ClientProtocol : " + e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			new Exception("From IOException : " + e.getMessage());
 		} catch (RuntimeException e) {
+			new Exception("From RuntimeException : " + e.getMessage());
+		} catch (Exception e){
 			FileOperation rw = new FileOperation();
 			String message = (e.getMessage() != null)
 					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
@@ -102,6 +103,7 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/ErrorsL" + host.replace("http://", "")
 							+ ".txt", message);
 		}
+		
 
 	}
 	public boolean isTheLastPage() {

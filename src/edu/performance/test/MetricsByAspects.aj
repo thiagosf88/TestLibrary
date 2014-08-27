@@ -32,7 +32,7 @@ public aspect MetricsByAspects {
 	private long startActivity = 0;
 	double nanoSegRate = 1000000.0;
 	BufferedWriter out = null;
-	private final String dataFileName = "data.xml";
+	private final String dataFileName = "testAppBrowser.xml";
 	//Variables to get FPS rate
 	protected long startTime;
 	protected long fpsStartTime;

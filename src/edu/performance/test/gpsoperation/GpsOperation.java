@@ -61,6 +61,7 @@ class GpsOperation extends Service implements LocationListener {
 InternetController.setWifiAvailability(true, (GPSActivity)mContext);
 
 		double contLat = 0, contLon = 0;
+		//TODO VErificar se não é possível dosar a precisão o gps e assim mudar o level da carga
 		for (int i = 1; i <= getLevel(); i++) {
 			testJgetLocation();
 			stopUsingGPS();
