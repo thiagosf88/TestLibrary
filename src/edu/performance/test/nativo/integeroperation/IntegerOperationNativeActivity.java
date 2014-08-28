@@ -17,7 +17,14 @@ public class IntegerOperationNativeActivity extends PerformanceTestActivity {
 				Bundle extras = new Bundle();
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
+				finish();
 			}
+		}
+		else{
+			Bundle extras = new Bundle();
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			finishTest(extras);
+			finish();
 		}
 		
 		operation = new IntegerOperationNative(this, level);

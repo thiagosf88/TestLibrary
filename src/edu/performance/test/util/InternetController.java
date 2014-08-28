@@ -16,16 +16,28 @@ public class InternetController {
 	}
 	
 	public static boolean getInternetAvailability(Activity ref){
+	
 		
 		    ConnectivityManager cm =
 		        (ConnectivityManager) ref.getSystemService(Context.CONNECTIVITY_SERVICE);
-		    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		    final NetworkInfo netInfo = cm.getActiveNetworkInfo();
 		    if (netInfo != null && netInfo.isConnected()) {
-		    	
-		        return true;
-		    }
-		    
-		    return false;
+		    	new Thread(new Runnable() {
+		            @Override
+		            public void run() {
+		                try {
+		                    Thread.sleep(3000);
+		                } catch (InterruptedException e) {
+		                    e.printStackTrace();
+		                }
+		                
+		                
+		            }
+		            
+		        }).start();
+	}
+		    	return (netInfo != null && netInfo.isConnected());
+
 		
 	}
 	/*

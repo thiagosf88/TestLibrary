@@ -15,7 +15,19 @@ public class FloatOperationActivity extends PerformanceTestActivity {
 			if(getIntent().hasExtra(Library.LEVEL_DOUBLE)){
 				level = getIntent().getExtras().getInt(Library.LEVEL_DOUBLE);
 			}
-		}
+			else{
+				Bundle extras = new Bundle();
+				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+				finishTest(extras);
+				return;
+			}
+	}
+	else{
+		Bundle extras = new Bundle();
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+		finishTest(extras);
+		finish();
+	}
 		
 		operation = new FloatOperation(this, level);
 		

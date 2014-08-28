@@ -221,6 +221,14 @@ public class Library extends Activity {
 	
 	private void browserTest(){
 		
+		aTest = new Intent(appRef, DownloadOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 120000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 2);
+		aTest.putExtra(STATUS, "Testing Download skills..\n Max time (2 min)");
+		testsToDo.add(aTest);
+		
 		aTest = new Intent(appRef, WebServiceActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
@@ -260,15 +268,7 @@ public class Library extends Activity {
 		aTest.putExtra(LEVEL_INT, 1500);
 		aTest.putExtra(STATUS, "Testing Native Memory skills..");
 		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, DownloadOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 27000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 2);
-		aTest.putExtra(STATUS, "Testing Download skills..");
-		testsToDo.add(aTest);
-		
+			
 		aTest = new Intent(appRef, MediumTestActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(STATUS, "Testing Screen skills..");
@@ -298,16 +298,15 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 555);
+		aTest.putExtra(LEVEL_DOUBLE, 9979);
 		aTest.putExtra(STATUS, "Testing Float skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FloatOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 555);
-		aTest.putExtra(STATUS, "Testing Float Native skills..");
+		aTest.putExtra(STATUS, "Testing Native Float skills..");
+		aTest.putExtra(LEVEL_DOUBLE, 9979);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, GraphOperationActivity.class);

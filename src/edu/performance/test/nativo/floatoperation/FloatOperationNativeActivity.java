@@ -18,7 +18,14 @@ public class FloatOperationNativeActivity extends PerformanceTestActivity {
 				Bundle extras = new Bundle();
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
+				finish();
 			}
+		}
+		else{
+			Bundle extras = new Bundle();
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			finishTest(extras);
+			finish();
 		}
 		
 		operation = new FloatOperationNative(this, level);
