@@ -103,6 +103,8 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 	 */
 	public void executeTest(){
 		mythread = new ActivityThread(this);
+		
+		avoidingInfiniteTasks();
 
 		mythread.setRunning(true);
 		status.setText(message);

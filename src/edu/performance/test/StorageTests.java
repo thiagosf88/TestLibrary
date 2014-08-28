@@ -15,8 +15,8 @@ public abstract class StorageTests extends PerformanceTest<Integer> {
 	private int positions[];
 	private int offset;
 	
-	public StorageTests(PerformanceTestActivity activity) {
-		super(new Integer(1), activity);
+	public StorageTests(PerformanceTestActivity activity, int level) {
+		super(level, activity);
 		filePath = "";
 		offset = 10000;
 		positions = new int[] { 20000, 40000, 100000 };

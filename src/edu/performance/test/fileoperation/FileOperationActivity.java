@@ -7,19 +7,38 @@ import edu.performance.test.PerformanceTestActivity;
 public class FileOperationActivity extends PerformanceTestActivity {
 	
 	FileOperation operation;
+	protected int level;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		String filePath = "", stretch = "";
 		if(getIntent().getExtras() != null){
-			filePath = getIntent().getExtras().getString(Library.FILEPATH);
+			if(getIntent().hasExtra(Library.LEVEL_FILENAME)
+					&& getIntent().hasExtra(Library.STRETCH)
+					&& getIntent().hasExtra(Library.LEVEL_INT)){
+			filePath = getIntent().getExtras().getString(Library.LEVEL_FILENAME);
 			stretch = getIntent().getExtras().getString(Library.STRETCH);
 			
+			level = getIntent().getExtras().getInt(Library.LEVEL_INT);
 		}
-		else return;
+			else{
+				Bundle extras = new Bundle();
+				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+				finishTest(extras);
+				finish();
+			}
+		
+		
+	}
+	else{
+		Bundle extras = new Bundle();
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+		finishTest(extras);
+		finish();
+	}
 		
 			status.setText(message);
-			operation = new FileOperation(this, filePath, stretch);
+			operation = new FileOperation(this, filePath, stretch, level);
 		
 		
 		

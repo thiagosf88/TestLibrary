@@ -24,28 +24,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import edu.performance.test.database.DatabaseOperationActivity;
-import edu.performance.test.downloadoperation.DownloadOperationActivity;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.fileoperation.FileOperationActivity;
-import edu.performance.test.floatoperation.FloatOperationActivity;
-import edu.performance.test.gpsoperation.GPSActivity;
-import edu.performance.test.graphicoperation.CubeActivity;
-import edu.performance.test.graphicoperation.LessonThreeActivity;
-import edu.performance.test.graphicoperation.draws.ArcActivity;
-import edu.performance.test.graphicoperation.draws.CircleActivity;
-import edu.performance.test.graphicoperation.draws.ImageActivity;
-import edu.performance.test.graphicoperation.draws.RectangleActivity;
-import edu.performance.test.graphicoperation.draws.TextActivity;
-import edu.performance.test.graphoperation.GraphOperationActivity;
 import edu.performance.test.integeroperation.IntegerOperationActivity;
 import edu.performance.test.mailoperation.MailOperationActivity;
 import edu.performance.test.memoryoperation.MemoryOperationActivity;
-import edu.performance.test.nativo.fileoperation.FileOperationNativeActivity;
-import edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity;
-import edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity;
-import edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity;
-import edu.performance.test.nativo.stringoperation.StringOperationNativeActivity;
-import edu.performance.test.screen.MediumTestActivity;
+import edu.performance.test.screen.LightTestActivity;
 import edu.performance.test.stringoperation.StringOperationActivity;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
@@ -88,7 +72,7 @@ public class Library extends Activity {
 					+ "\"Then put on your hat and come. I am going through the City first, and we can have some lunch on the way. I observe that there is a good deal of German music on the programme, which is rather more to my taste than Italian or French. It is introspective, and I want to introspect. Come along!\"" };
 
 	public static class fileIndexes {
-		public static final int BIG_TXT = 0, LISTAS_XML = BIG_TXT + 1,
+		public static final int BIG_TXT = 0, MEDIUM_TXT = BIG_TXT + 1,LISTAS_XML = MEDIUM_TXT + 1,
 				TAREFAS_XML = LISTAS_XML + 1, SMALL_TXT = TAREFAS_XML + 1,
 				TINY_G_TXT = SMALL_TXT + 1, MEDIUM_G_TXT = TINY_G_TXT + 1,
 				MEDIUM2_G_TXT = MEDIUM_G_TXT + 1, MEDIUM3_G_TXT = MEDIUM2_G_TXT + 1;
@@ -97,9 +81,9 @@ public class Library extends Activity {
 	PowerManager powerManager = null;
 	WakeLock wakeLock = null;
 	
-	int[] rawResourceIds = { R.raw.big, R.raw.listas, R.raw.tarefas,
+	int[] rawResourceIds = { R.raw.big,R.raw.medium, R.raw.listas, R.raw.tarefas,
 			R.raw.small, R.raw.tiny_g, R.raw.medium_g, R.raw.medium2_g, R.raw.medium3_g};
-	String[] rawResourceNames = { "big.txt", "listas.xml", "tarefas.xml",
+	String[] rawResourceNames = { "big.txt", "medium.txt", "listas.xml", "tarefas.xml",
 			"small.txt", "tiny_g.txt", "medium_g.txt", "medium2_g.txt", "medium3_g.txt" };
 	HashMap<String, String> dirNames = null;
 	Library appRef = null;
@@ -127,6 +111,8 @@ public class Library extends Activity {
 	public static final String LEVEL_DOUBLE = "LEVEL_DOUBLE";
 	public static final String LEVEL_FILENAME = "LEVEL_FILENAME";
 	public static final String LEVEL_WEBSITE = "LEVEL_WEBSITE";
+	public static final String NETWORK_TEST = "NETWORKTEST";
+	
 	
 	//It is necessary to load native code.
 	static {
@@ -188,8 +174,9 @@ public class Library extends Activity {
 			appRef = this;
 			
 			//allTests();
-			//todoListTests();
-			browserTest();
+			todoListTests();
+			//browserTest();
+			//sheetsTest();
 			
 		} catch (Exception e) {
 			FileOperation rw = new FileOperation();
@@ -219,7 +206,157 @@ public class Library extends Activity {
 		// finish();
 	}
 	
-	private void browserTest(){
+	/*private void sheetsTest(){
+		
+		aTest = new Intent(appRef, DatabaseOperationActivity.class); 
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(STATUS, "Testing Database skills..");
+		aTest.putExtra(NETWORK_TEST, false);
+		testsToDo.add(aTest);
+		//------------------------CPU------------------------------------
+				aTest = new Intent(appRef, IntegerOperationActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_INT, 555);
+				aTest.putExtra(STATUS, "Testing Integer skills..");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, IntegerOperationNativeActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_INT, 555);
+				aTest.putExtra(STATUS, "Testing Integer Native skills..");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, FloatOperationActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_DOUBLE, 9979);
+				aTest.putExtra(STATUS, "Testing Float skills..");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, FloatOperationNativeActivity.class); 
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(STATUS, "Testing Native Float skills..");
+				aTest.putExtra(LEVEL_DOUBLE, 9979);
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, GraphOperationActivity.class);
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
+				aTest.putExtra(STATUS, "Testing Graph skills...");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, StringOperationActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_INT, 10);
+				aTest.putExtra(SEARCHABLE, new FileOperation()
+				.testTJMreadSequentialAcessFile(
+						WriteNeededFiles.DIRECTORY_NAME + "/"
+								+ rawResourceNames[fileIndexes.MEDIUM_TXT]));
+				aTest.putExtra(SNIPPETS, snippets);	
+				aTest.putExtra(STATUS, "Testing String skills..");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, StringOperationNativeActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_INT, 10);
+				aTest.putExtra(SEARCHABLE, new FileOperation()
+				.testTJMreadSequentialAcessFile(
+						WriteNeededFiles.DIRECTORY_NAME + "/"
+								+ rawResourceNames[fileIndexes.MEDIUM_TXT]));
+				aTest.putExtra(SNIPPETS, snippets);	
+				aTest.putExtra(STATUS, "Testing String skills..");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				//-----------------------------------------------------------------------------------------------------------------------
+				
+				aTest = new Intent(appRef, MediumTestActivity.class);
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(STATUS, "Testing Screen skills..");
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, FileOperationActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_INT, 3);
+				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+						+ rawResourceNames[fileIndexes.MEDIUM_TXT]);
+				aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
+				aTest.putExtra(STATUS, "Testing File skills..");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, FileOperationNativeActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_INT, 3);
+				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+						+ rawResourceNames[fileIndexes.MEDIUM_TXT]);
+				aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
+				aTest.putExtra(STATUS, "Testing Native File skills..");
+				aTest.putExtra(NETWORK_TEST, false);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, MailOperationActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
+				aTest.putExtra(STATUS, "Testing Mail skills..");
+				aTest.putExtra(NETWORK_TEST, true);
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, WebServiceActivity.class);
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, true);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read?num=10");
+				aTest.putExtra(STATUS, "Testing WebService skills..");
+				aTest.putExtra(NETWORK_TEST, true);
+				testsToDo.add(aTest);
+				
+				
+				btStartTest.setOnClickListener(new OnClickListener()
+			    {
+
+			        public void onClick(View v)
+			        {   
+			             doTests();
+			        } 
+
+			    });
+				
+				btStartTest.setActivated(true);
+		
+		
+	}*/
+	
+	/*private void browserTest(){
 		
 		aTest = new Intent(appRef, DownloadOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 120000);
@@ -227,14 +364,16 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 2);
 		aTest.putExtra(STATUS, "Testing Download skills..\n Max time (2 min)");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, WebServiceActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read?num=25");
+		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read");
 		aTest.putExtra(STATUS, "Testing WebService skills..");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);
 		
 		
@@ -243,6 +382,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 50);
 		aTest.putExtra(STATUS, "Testing Database skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, WebOperationActivity.class);
@@ -251,6 +391,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
 		aTest.putExtra(STATUS, "Testing Web skills..");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationActivity.class); 
@@ -259,6 +400,7 @@ public class Library extends Activity {
 		aTest.putExtra(LEVEL_INT, 1500);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Memory skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationNativeActivity.class); 
@@ -267,6 +409,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 1500);
 		aTest.putExtra(STATUS, "Testing Native Memory skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 			
 		aTest = new Intent(appRef, MediumTestActivity.class);
@@ -274,6 +417,7 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing Screen skills..");
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);				
 		
 		
@@ -284,6 +428,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 555);
 		aTest.putExtra(STATUS, "Testing Integer skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, IntegerOperationNativeActivity.class); 
@@ -292,6 +437,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 555);
 		aTest.putExtra(STATUS, "Testing Integer Native skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FloatOperationActivity.class); 
@@ -300,6 +446,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_DOUBLE, 9979);
 		aTest.putExtra(STATUS, "Testing Float skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FloatOperationNativeActivity.class); 
@@ -307,6 +454,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Native Float skills..");
 		aTest.putExtra(LEVEL_DOUBLE, 9979);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, GraphOperationActivity.class);
@@ -315,6 +463,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, StringOperationActivity.class); 
@@ -328,6 +477,7 @@ public class Library extends Activity {
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, StringOperationNativeActivity.class); 
@@ -341,6 +491,7 @@ public class Library extends Activity {
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		//-----------------------------------------------------------------------------------------------------------------------
@@ -352,6 +503,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(STATUS, "Testing 3D skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, LessonThreeActivity.class);
@@ -359,6 +511,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 0);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);		
 
 		aTest = new Intent(appRef, ArcActivity.class);
@@ -366,6 +519,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 1);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, CircleActivity.class);
@@ -373,6 +527,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, ImageActivity.class);
@@ -380,6 +535,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, RectangleActivity.class);
@@ -387,6 +543,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, TextActivity.class);
@@ -394,6 +551,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		//--------------------------------------------------------------------------------------------------------------
@@ -406,6 +564,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Mail skills..");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);	
 		
 		aTest = new Intent(appRef, GPSActivity.class);
@@ -414,6 +573,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
 		aTest.putExtra(STATUS, "Testing GPS skills..");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FileOperationActivity.class); 
@@ -424,6 +584,7 @@ public class Library extends Activity {
 				+ rawResourceNames[fileIndexes.BIG_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing File skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, FileOperationNativeActivity.class); 
@@ -434,6 +595,7 @@ public class Library extends Activity {
 				+ rawResourceNames[fileIndexes.BIG_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing Native File skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		btStartTest.setOnClickListener(new OnClickListener()
@@ -447,9 +609,9 @@ public class Library extends Activity {
 	    });
 		
 		btStartTest.setActivated(true);
-	}
+	}*/
 	
-	/*private void todoListTests(){
+	private void todoListTests(){
 		
 		aTest = new Intent(appRef, WebServiceActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
@@ -457,6 +619,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/readnum=50");
 		aTest.putExtra(STATUS, "Testing WebService skills..");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);
 		
 		
@@ -465,6 +628,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 200);
 		aTest.putExtra(STATUS, "Testing Database skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, LightTestActivity.class);
@@ -472,6 +636,7 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing Screen skills..");
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationActivity.class); 
@@ -480,6 +645,7 @@ public class Library extends Activity {
 		aTest.putExtra(LEVEL_INT, 500);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Memory skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 
@@ -489,6 +655,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 0);
 		aTest.putExtra(STATUS, "Testing Web skills..");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, IntegerOperationActivity.class); 
@@ -497,6 +664,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 100);
 		aTest.putExtra(STATUS, "Testing Integer skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, StringOperationActivity.class); 
@@ -504,6 +672,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(NETWORK_TEST, false);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testTJMreadSequentialAcessFile(
 				WriteNeededFiles.DIRECTORY_NAME + "/"
@@ -518,16 +687,19 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Mail skills..");
+		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);	
 		
 		aTest = new Intent(appRef, FileOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
+		aTest.putExtra(LEVEL_INT, 1);
+		aTest.putExtra(FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
 				+ rawResourceNames[fileIndexes.SMALL_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing File skills..");
+		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
 		
 		btStartTest.setOnClickListener(new OnClickListener()
@@ -544,7 +716,7 @@ public class Library extends Activity {
 		
 		
 		
-	}*/
+	}
 	
 	/*private void allTests(){	
 		
@@ -970,6 +1142,7 @@ public class Library extends Activity {
 		}
 		
 		if (requestCode == 1 && !results.getBoolean(THELASTTEST)) {
+				
 			executeTest(testsToDo.get(++countIntent));
 		}
 		else{
@@ -1036,8 +1209,12 @@ public class Library extends Activity {
 	
 	void executeTest(Intent test){
 		//Close Internet connection before execute tests.
-		InternetController.setWifiAvailability(false, appRef);
 		
+		if(test.getExtras().getBoolean(NETWORK_TEST)){
+			InternetController.setWifiAvailability(true, appRef);
+		}
+		else
+			InternetController.setWifiAvailability(false, appRef);
 		startActivityForResult(test, 1);
 	}
 

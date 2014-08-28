@@ -162,7 +162,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 			return;
 
 		Bundle results = data.getExtras();
-System.out.println(!results.getBoolean(ISTHELASTPAGE));
+
 		if (!results.getBoolean(ISTHELASTPAGE) && requestCode == 1
 				&& resultCode == Activity.RESULT_OK) {
 			testingPages(getPagesToAccess().get(++countIntent));

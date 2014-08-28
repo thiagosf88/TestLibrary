@@ -71,7 +71,7 @@ InternetController.setWifiAvailability(true, (GPSActivity)mContext);
 					+ "\nLong: " + contLon / i);
 		}
 		
-		InternetController.setWifiAvailability(false, (GPSActivity)mContext);
+		
 		Bundle extras = new Bundle();			
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
 		((GPSActivity)mContext).finishTest(extras);

@@ -15,6 +15,8 @@ import edu.performance.test.PerformanceTestActivity;
  */
 class FloatOperationNative extends PerformanceTest<Double> {
 	
+	private final double MAX_DIM_Linpack = 1000;
+	
 	public FloatOperationNative(PerformanceTestActivity activity, double level) {
 		super(level, activity);
 
@@ -24,12 +26,18 @@ class FloatOperationNative extends PerformanceTest<Double> {
 	@Override
 	public void execute() {
 
-		testNFloatOperationLinpack(this.getLevel());
+		testNFloatOperationLinpack(this.getLevel() > MAX_DIM_Linpack? MAX_DIM_Linpack : this.getLevel()); 
+
 		testNFloatOperationMonteCarlo(this.getLevel());
+
 		testNFloatOperationSqrt(this.getLevel());
+
 		testNFloatOperationSine(this.getLevel());
+
 		testNFloatOperationCubic(this.getLevel());
+
 		testNFloatOperationdeg2rad(this.getLevel());
+
 		testNFloatOperationrad2deg(this.getLevel());
 		
 		Bundle extras = new Bundle();			
@@ -74,7 +82,7 @@ class FloatOperationNative extends PerformanceTest<Double> {
 	 * function.
 	 * 
 	 * @param level
-	 *            Define the dimension of linear equation system. Max.: 5000
+	 *            Define the dimension of linear equation system. Max.: 1000
 	 */
 	private native void testNFloatOperationLinpack(double level);
 

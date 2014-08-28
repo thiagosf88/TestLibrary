@@ -28,8 +28,8 @@ import edu.performance.test.StorageTests;
  */
 public class FileOperation extends StorageTests {
 
-	public FileOperation(PerformanceTestActivity activity, String filePath, String stretch) {
-		super(activity);
+	public FileOperation(PerformanceTestActivity activity, String filePath, String stretch, int level) {
+		super(activity, level);
 		this.setFilePath(filePath);
 		this.setStretch(stretch);
 		if(activity != null)
@@ -41,7 +41,7 @@ public class FileOperation extends StorageTests {
 	 * This constructor can not be used to instance objects which will run tests.
 	 */
 	public FileOperation() {
-		super(null);
+		super(null, new Integer(0));
 		
 	}
 
@@ -49,9 +49,9 @@ public class FileOperation extends StorageTests {
 		
 		testTJMwriteSequentialFile(this.getFilePath(),
 				this.getStretch()); // não testado ainda
-		testTJMreadRandomAcessFile(this.getFilePath(), this.getPositions()[0],
-				this.getLevel());
-		testTJMwriteRandowAcessFile(this.getFilePath(), this.getPositions()[0],
+		testTJMreadRandomAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
+				 (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1));
+		testTJMwriteRandowAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
 				this.getStretch());
 		
 		testTJMreadSequentialAcessFile(this.getFilePath());
@@ -129,7 +129,7 @@ public class FileOperation extends StorageTests {
 
 			// Declare a buffer with the same length as the second line
 			randomAccessFile.seek(position);
-			byte[] buffer = new byte[level];
+			byte[] buffer = new byte[level * 1024];
 
 			// Read data from the file
 			randomAccessFile.read(buffer);

@@ -12,8 +12,8 @@ import edu.performance.test.StorageTests;
  */
 public class FileOperationNative extends StorageTests {
 
-	public FileOperationNative(PerformanceTestActivity activity, String filePath, String stretch) {
-		super(activity);
+	public FileOperationNative(PerformanceTestActivity activity, String filePath, String stretch, int level) {
+		super(activity, level);
 		this.setFilePath(filePath);
 		this.setStretch(stretch);
 		activity.executeTest();
@@ -21,12 +21,12 @@ public class FileOperationNative extends StorageTests {
 
 	public void execute() {
 		// System.out.println("rsaf");
-		testNreadSequentialAcessFile(this.getFilePath(), this.getLevel());
+		testNreadSequentialAcessFile(this.getFilePath(), (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1));
 		// System.out.println("rraf");
-		testNreadRandomAcessFile(this.getFilePath(), this.getPositions()[0],
-				this.getLevel());
+		testNreadRandomAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
+				this.getLevel() * 1024);
 		// System.out.println("wraf");
-		testNwriteRandomAcessFile(this.getFilePath(), this.getPositions()[0],
+		testNwriteRandomAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
 				this.getStretch());
 		
 		Bundle extras = new Bundle();			

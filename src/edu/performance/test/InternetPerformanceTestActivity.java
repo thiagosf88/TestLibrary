@@ -7,16 +7,11 @@ public abstract class InternetPerformanceTestActivity extends PerformanceTestAct
 	
 	
 	
-	protected void onPause() {
-		super.onPause();
-		InternetController.setWifiAvailability(false, this);
-		
-	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-		InternetController.setWifiAvailability(true, this);
+		//InternetController.setWifiAvailability(true, this); mudando para controle anterior para dar mais tempo para conexão
 	
 	}
 	//TODO verificar se não é possível mudar isso tudo para dentro do onCreate.
