@@ -32,7 +32,7 @@ public aspect MetricsByAspects {
 	private long startActivity = 0;
 	double nanoSegRate = 1000000.0;
 	BufferedWriter out = null;
-	private final String dataFileName = "testAppAppToDOList.xml";
+	private final String dataFileName = "testAppSheets.xml";
 	//Variables to get FPS rate
 	protected long startTime;
 	protected long fpsStartTime;
@@ -45,7 +45,7 @@ public aspect MetricsByAspects {
 			out = new BufferedWriter(new FileWriter((new File(
 					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/" + dataFileName))));
 			out.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "\n");
-			out.write("<performanceData>");
+			out.write("<performanceData \n\t\t\t xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n\t\t\t xsi:noNamespaceSchemaLocation=\"model.xsd\">\n");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return;
@@ -188,8 +188,8 @@ public aspect MetricsByAspects {
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
-					+ "\t\t<elapsedTime>"	+ elapsedTime + "(ms)</elapsedTime>\n"
-					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "(ms)</elapsedTime2>\n"
+					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
+					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t</method>\n");
 
 		} catch (IOException e) {
@@ -213,16 +213,28 @@ public aspect MetricsByAspects {
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		long nativeheapSize = Debug.getNativeHeapSize();
 		long nativeallocated = Debug.getNativeHeapAllocatedSize();
+		int allocCountG = Debug.getGlobalAllocCount();
+		int allocSizeG = Debug.getGlobalAllocSize();
+		int gcInvocationG = Debug.getGlobalGcInvocationCount();
+		int gcInvocationT = Debug.getThreadGcInvocationCount();
+		int allocCountT = Debug.getThreadAllocCount();
+		int allocSizeT = Debug.getThreadAllocSize();
 		try {
 			out.write("\t<method>\n"
 					+ "\t\t<name>" + joinPoint.getSignature().getName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
-					+ "\t\t<elapsedTime>"	+ elapsedTime + "(ms)</elapsedTime>\n"
+					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
 					+ "\t\t<heapSize>" + nativeheapSize + "</heapSize>\n" 
 					+ "\t\t<allocatedHeap>" + nativeallocated + "</allocatedHeap>\n"
-					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "(ms)</elapsedTime2>\n"
+					+ "\t\t<allocCountG>" + allocCountG + "</allocCountG>\n" 
+					+ "\t\t<allocSizeG>" + allocSizeG + "</allocSizeG>\n"
+					+ "\t\t<gcInvocationG>" + gcInvocationG + "</gcInvocationG>\n"
+					+ "\t\t<allocCountT>" + allocCountT + "</allocCountT>\n"
+					+ "\t\t<allocSizeT>" + allocSizeT + "</allocSizeT>\n"
+					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
+					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t</method>\n");
 
 		} catch (IOException e) {
@@ -259,14 +271,14 @@ public aspect MetricsByAspects {
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
-					+ "\t\t<elapsedTime>"	+ elapsedTime + "(ms)</elapsedTime>\n"
+					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
 					+ "\t\t<allocCountG>" + allocCountG + "</allocCountG>\n" 
 					+ "\t\t<allocSizeG>" + allocSizeG + "</allocSizeG>\n"
 					+ "\t\t<gcInvocationG>" + gcInvocationG + "</gcInvocationG>\n"
 					+ "\t\t<allocCountT>" + allocCountT + "</allocCountT>\n"
 					+ "\t\t<allocSizeT>" + allocSizeT + "</allocSizeT>\n"
 					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
-					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "(ms)</elapsedTime2>\n"
+					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t</method>\n");
 
 		} catch (IOException e) {
@@ -303,14 +315,14 @@ public aspect MetricsByAspects {
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
-					+ "\t\t<elapsedTime>"	+ elapsedTime + "(ms)</elapsedTime>\n"
+					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
 					+ "\t\t<allocCountG>" + allocCountG + "</allocCountG>\n" 
 					+ "\t\t<allocSizeG>" + allocSizeG + "</allocSizeG>\n"
 					+ "\t\t<gcInvocationG>" + gcInvocationG + "</gcInvocationG>\n"
 					+ "\t\t<allocCountT>" + allocCountT + "</allocCountT>\n"
 					+ "\t\t<allocSizeT>" + allocSizeT + "</allocSizeT>\n"
 					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
-					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "(ms)</elapsedTime2>\n"
+					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t\t<throughput>"	+ myToInteger(joinPoint.getArgs()[0]) /(elapsedTime/1000f) + "</throughput>\n"
 					+ "\t</method>\n");
 
@@ -364,7 +376,7 @@ public aspect MetricsByAspects {
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
-					+ "\t\t<elapsedTime>"	+ elapsedTime + "(ms)</elapsedTime>\n"
+					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
 					+ "\t\t<allocCountG>" + allocCountG + "</allocCountG>\n" 
 					+ "\t\t<allocSizeG>" + allocSizeG + "</allocSizeG>\n"
 					+ "\t\t<gcInvocationG>" + gcInvocationG + "</gcInvocationG>\n"
@@ -402,7 +414,7 @@ public aspect MetricsByAspects {
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
-					+ "\t\t<elapsedTime>"	+ elapsedTime + "(ms)</elapsedTime>\n"
+					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
 					+ "\t\t<allocCountG>" + allocCountG + "</allocCountG>\n" 
 					+ "\t\t<allocSizeG>" + allocSizeG + "</allocSizeG>\n"
 					+ "\t\t<gcInvocationG>" + gcInvocationG + "</gcInvocationG>\n"
