@@ -20,6 +20,8 @@ public class DatabaseOperationActivity extends PerformanceTestActivity {
 				Bundle extras = new Bundle();
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
+				setResult(RESULT_CANCELED);
+				finish();
 			}
 		}
 		

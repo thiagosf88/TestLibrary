@@ -40,6 +40,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		setContentView(R.layout.performance_test);
 		 
 		 status = (TextView)findViewById(R.id.status);
+		 
 		
 		if(getIntent().getExtras() != null){
 			

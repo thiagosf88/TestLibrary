@@ -65,6 +65,7 @@ public class WebServiceOperation extends PerformanceTest<String>{
 		try{
 		testTJMWebService(this.getLevel());
 		} catch (Exception e) {
+			if(e != null && e.getMessage() != null)
 			System.out.println(e.getMessage());
 			Bundle extras = new Bundle();			
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);

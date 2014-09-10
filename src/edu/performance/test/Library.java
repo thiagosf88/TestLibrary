@@ -2,7 +2,6 @@ package edu.performance.test;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,20 +24,36 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import edu.performance.test.batterytest.BatteryOperation;
 import edu.performance.test.database.DatabaseOperationActivity;
+import edu.performance.test.downloadoperation.DownloadOperationActivity;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.fileoperation.FileOperationActivity;
 import edu.performance.test.floatoperation.FloatOperationActivity;
+import edu.performance.test.gpsoperation.GPSActivity;
+import edu.performance.test.graphicoperation.CubeActivity;
+import edu.performance.test.graphicoperation.LessonThreeActivity;
+import edu.performance.test.graphicoperation.draws.ArcActivity;
+import edu.performance.test.graphicoperation.draws.CircleActivity;
+import edu.performance.test.graphicoperation.draws.ImageActivity;
+import edu.performance.test.graphicoperation.draws.RectangleActivity;
+import edu.performance.test.graphicoperation.draws.TextActivity;
 import edu.performance.test.graphoperation.GraphOperationActivity;
 import edu.performance.test.integeroperation.IntegerOperationActivity;
 import edu.performance.test.mailoperation.MailOperationActivity;
+import edu.performance.test.memoryoperation.MemoryOperationActivity;
 import edu.performance.test.nativo.fileoperation.FileOperationNativeActivity;
 import edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity;
 import edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity;
+import edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity;
 import edu.performance.test.nativo.stringoperation.StringOperationNativeActivity;
+import edu.performance.test.screen.HardTestActivity;
+import edu.performance.test.screen.LightTestActivity;
 import edu.performance.test.screen.MediumTestActivity;
+import edu.performance.test.screen.ScreenActivity;
+import edu.performance.test.streamingoperation.StreamingActivity;
 import edu.performance.test.stringoperation.StringOperationActivity;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
+import edu.performance.test.weboperation.WebOperationActivity;
 import edu.performance.test.weboperation.WebServiceActivity;
 
 
@@ -128,7 +143,7 @@ public class Library extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		try {
+		
 
 			// Sets the initial layout and binds the start button
 			 setContentView(R.layout.initial);
@@ -158,12 +173,14 @@ public class Library extends Activity {
 			// WriteNeededFiles.putFilesOnStorage(this, rawResourceIds,
 			// rawResourceNames, dirNames.get("PDI") );
 			
-			// It is responsible to change logcat file 
-			Process process = Runtime.getRuntime().exec(
-					"adb logcat > " + WriteNeededFiles.REPORT_DIRECTORY_NAME
-							+ "/logcat.txt &");
+			// It is responsible to change logcat file (only works in emulator)
+			/*Process process = Runtime.getRuntime().exec(
+					"adb logcat > " + dirNames.get("PDE") 
+							+ "/logcat.txt");
 			bufferedReader = new BufferedReader(
-					new InputStreamReader(process.getInputStream()));
+					new InputStreamReader(process.getInputStream()));*/
+			
+			
 
 			// It is necessary to prevent device sleeping!--------------------------------
 			powerManager = (PowerManager) this
@@ -180,37 +197,16 @@ public class Library extends Activity {
 			appRef = this;
 			
 			//allTests();
-			//todoListTests();
+			todoListTests();
 			//browserTest();
-			sheetsTest();
+			//sheetsTest();
 			
-		} catch (Exception e) {
-			FileOperation rw = new FileOperation();
-			String message = (e.getMessage() != null)
-					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
-					: "Exception without message!!!";
-			rw.testTJMwriteSequentialFile(
-					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/Errors.xml",
-					message);
-			System.err.println(message);
-			//wakeLock.release();T
-			//unregisterReceiver(mBatInfoReceiver);
-			//Shows error file if a exception is throw
-			File textFile2Read = new File(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/Errors.xml");
-			if(textFile2Read.canRead()){
-				Intent i2 = new Intent();
-				i2.setAction(android.content.Intent.ACTION_VIEW);
-				i2.setDataAndType(Uri.fromFile(textFile2Read), "text/xml");
-				startActivity(i2);
-			}
-			
-			finish();
-
-		}
+		
 
 		//
 		// finish();
 	}
+
 	
 	private void sheetsTest(){
 		
@@ -371,7 +367,7 @@ public class Library extends Activity {
 		
 		
 	}
-	/*
+	
 	private void browserTest(){
 		
 		aTest = new Intent(appRef, BatteryOperation.class);
@@ -637,11 +633,10 @@ public class Library extends Activity {
 	    });
 		
 		btStartTest.setActivated(true);
-	}*/
-	
-	/*private void todoListTests(){
+	}
+	private void todoListTests(){
 		
-		aTest = new Intent(appRef, BatteryOperation.class);
+		/*aTest = new Intent(appRef, BatteryOperation.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, true);
@@ -649,7 +644,7 @@ public class Library extends Activity {
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing battery skills...");
 		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
+		testsToDo.add(aTest);*/
 		
 		aTest = new Intent(appRef, WebServiceActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
@@ -675,12 +670,13 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(Library.LEVEL_INT, 0);
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MemoryOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 500);
+		aTest.putExtra(LEVEL_INT, 200);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(STATUS, "Testing Memory skills..");
 		aTest.putExtra(NETWORK_TEST, false);
@@ -756,9 +752,9 @@ public class Library extends Activity {
 		
 		
 		
-	}*/
+	}
 	
-	/*private void allTests(){	
+	private void allTests(){	
 		
 		//____________________ em ordem		
 		
@@ -1157,7 +1153,7 @@ public class Library extends Activity {
 		
 	}
 		
-	*/
+	
 	
 	private void doTests(){
 		setContentView(R.layout.performance_test);
@@ -1256,7 +1252,31 @@ public class Library extends Activity {
 		}
 		else
 			InternetController.setWifiAvailability(false, appRef);
+		try{
 		startActivityForResult(test, 1);
+		} catch (Exception e) {
+			FileOperation rw = new FileOperation();
+			String message = (e.getMessage() != null)
+					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
+					: "Exception without message!!!";
+			rw.testTJMwriteSequentialFile(
+					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/ErrorsMainActivity.txt",
+					message);
+			System.err.println(message);
+			//wakeLock.release();T
+			//unregisterReceiver(mBatInfoReceiver);
+			//Shows error file if a exception is throw
+			File textFile2Read = new File(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/ErrorsMainActivity.txt");
+			if(textFile2Read.canRead()){
+				Intent i2 = new Intent();
+				i2.setAction(android.content.Intent.ACTION_VIEW);
+				i2.setDataAndType(Uri.fromFile(textFile2Read), "text/xml");
+				startActivity(i2);
+			}
+			
+			finish();
+
+		}
 	}
 
 }

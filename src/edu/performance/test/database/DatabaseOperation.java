@@ -42,7 +42,7 @@ public class DatabaseOperation extends PerformanceTest<Integer>  implements Perf
 	 * which will be executed.
 	 */
 	public void execute() {
-
+		mDbHelper.open();
 		testTpJMaddLists(this.getLevel());
 		testTpJMaddTasks(this.getLevel());
 		Cursor tasks = testTpJMgetTasks(String.valueOf(this.getLevel()));

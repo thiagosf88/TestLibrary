@@ -15,7 +15,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import android.database.Cursor;
 import android.os.Debug;
 import android.os.SystemClock;
-import android.util.Log;
 import edu.performance.test.util.WriteNeededFiles;
 
 /**
@@ -32,7 +31,7 @@ public aspect MetricsByAspects {
 	private long startActivity = 0;
 	double nanoSegRate = 1000000.0;
 	BufferedWriter out = null;
-	private final String dataFileName = "testAppSheets.xml";
+	private final String dataFileName = "testLembrarApp.xml";
 	//Variables to get FPS rate
 	protected long startTime;
 	protected long fpsStartTime;
@@ -46,6 +45,7 @@ public aspect MetricsByAspects {
 					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/" + dataFileName))));
 			out.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "\n");
 			out.write("<performanceData \n\t\t\t xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n\t\t\t xsi:noNamespaceSchemaLocation=\"model.xsd\">\n");
+			out.flush();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return;
@@ -169,9 +169,11 @@ public aspect MetricsByAspects {
 	@Before("TestMethodsExecutionTime() || TestMethodsExecutionTimeJava()"
 			+ " && !NTestMethodsExecutionTimeJava()")
 	public void logBefore(JoinPoint joinPoint) {
-
+		Debug.resetAllCounts();
 		start = System.nanoTime();
 		start2 = SystemClock.uptimeMillis();
+		
+		Debug.startAllocCounting();
 		// System.out.println("Start counting " +
 		// joinPoint.getSignature().getName() + start);
 	}
@@ -179,18 +181,34 @@ public aspect MetricsByAspects {
 	@After("TestMethodsExecutionTime() || TestMethodsExecutionTimeJava()"
 			+ " && !NTestMethodsExecutionTimeJava()")
 	public void logAfter(JoinPoint joinPoint) {
+		Debug.stopAllocCounting();
 		double elapsedTime = (System.nanoTime() - start) / nanoSegRate;
 		double elapsedTime2 = (SystemClock.uptimeMillis() - start2);
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
+		int allocCountG = Debug.getGlobalAllocCount();
+		int allocSizeG = Debug.getGlobalAllocSize();
+		int gcInvocationG = Debug.getGlobalGcInvocationCount();
+		int gcInvocationT = Debug.getThreadGcInvocationCount();
+		int allocCountT = Debug.getThreadAllocCount();
+		int allocSizeT = Debug.getThreadAllocSize();
+		Debug.resetAllCounts();
+		
 		try {
-			out.write("\t<method> \n"
+			out.append("\t<method> \n"
 					+ "\t\t<name>" + joinPoint.getSignature().getName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
 					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
+					+ "\t\t<allocCountG>" + allocCountG + "</allocCountG>\n" 
+					+ "\t\t<allocSizeG>" + allocSizeG + "</allocSizeG>\n"
+					+ "\t\t<gcInvocationG>" + gcInvocationG + "</gcInvocationG>\n"
+					+ "\t\t<allocCountT>" + allocCountT + "</allocCountT>\n"
+					+ "\t\t<allocSizeT>" + allocSizeT + "</allocSizeT>\n"
+					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
 					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t</method>\n");
+			out.flush();
 
 		} catch (IOException e) {
 
@@ -201,13 +219,18 @@ public aspect MetricsByAspects {
 
 	@Before("TestMethodsExecutionTimeNative() || TestMethodsTimeAndMemoryNative()")
 	public void logBeforeNative(JoinPoint joinPoint) {
-
+		Debug.resetAllCounts();
 		start = System.nanoTime();
 		start2 = SystemClock.uptimeMillis();
+		
+		Debug.startAllocCounting();
+		Debug.startNativeTracing();
 	}
 
 	@After("TestMethodsExecutionTimeNative() || TestMethodsTimeAndMemoryNative()")
 	public void logAfterNative(JoinPoint joinPoint) {
+		Debug.stopAllocCounting();
+		Debug.stopNativeTracing();
 		double elapsedTime = (System.nanoTime() - start) / nanoSegRate;
 		double elapsedTime2 = (SystemClock.uptimeMillis() - start2);
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
@@ -219,8 +242,11 @@ public aspect MetricsByAspects {
 		int gcInvocationT = Debug.getThreadGcInvocationCount();
 		int allocCountT = Debug.getThreadAllocCount();
 		int allocSizeT = Debug.getThreadAllocSize();
+		Debug.resetAllCounts();
+		
+		
 		try {
-			out.write("\t<method>\n"
+			out.append("\t<method>\n"
 					+ "\t\t<name>" + joinPoint.getSignature().getName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
@@ -236,6 +262,7 @@ public aspect MetricsByAspects {
 					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
 					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t</method>\n");
+			out.flush();
 
 		} catch (IOException e) {
 
@@ -246,8 +273,10 @@ public aspect MetricsByAspects {
 
 	@Before(" (TestMethodsTimeAndMemoryJava() ||  TestMethodsTimeAndMemoryInterfaceCreated()) && !InClassesNotMonitored()")
 	public void logBeforeTM(JoinPoint joinPoint) {
+		Debug.resetAllCounts();
 		start = System.nanoTime();
 		start2 = SystemClock.uptimeMillis();
+		
 		Debug.startAllocCounting();
 	}
 
@@ -263,10 +292,11 @@ public aspect MetricsByAspects {
 		int gcInvocationT = Debug.getThreadGcInvocationCount();
 		int allocCountT = Debug.getThreadAllocCount();
 		int allocSizeT = Debug.getThreadAllocSize();
-
+		Debug.resetAllCounts();
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
+
 		try {
-			out.write("\t<method>\n"
+			out.append("\t<method>\n"
 					+ "\t\t<name>" + joinPoint.getSignature().toShortString() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
@@ -280,6 +310,7 @@ public aspect MetricsByAspects {
 					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
 					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t</method>\n");
+			out.flush();
 
 		} catch (IOException e) {
 
@@ -291,8 +322,10 @@ public aspect MetricsByAspects {
 	
 	@Before("TestMethodsThroughputAndMemoryJava()")
 	public void logBeforeTpJM(JoinPoint joinPoint) {
+		Debug.resetAllCounts();
 		start = System.nanoTime();
 		start2 = SystemClock.uptimeMillis();
+		
 		Debug.startAllocCounting();
 	}
 
@@ -307,10 +340,10 @@ public aspect MetricsByAspects {
 		int gcInvocationT = Debug.getThreadGcInvocationCount();
 		int allocCountT = Debug.getThreadAllocCount();
 		int allocSizeT = Debug.getThreadAllocSize();
-
+		Debug.resetAllCounts();
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
-			out.write("\t<method>\n"
+			out.append("\t<method>\n"
 					+ "\t\t<name>" + joinPoint.getSignature().toShortString() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
@@ -325,7 +358,7 @@ public aspect MetricsByAspects {
 					+ "\t\t<elapsedTime2>"	+ elapsedTime2 + "</elapsedTime2>\n"
 					+ "\t\t<throughput>"	+ myToInteger(joinPoint.getArgs()[0]) /(elapsedTime/1000f) + "</throughput>\n"
 					+ "\t</method>\n");
-
+			out.flush();
 		} catch (IOException e) {
 
 			System.err.println("No possible to write in file. logAfterTpJM");
@@ -335,7 +368,7 @@ public aspect MetricsByAspects {
 	@Before("TestMethodsTimeAndMemorySurfaceCreated() || TestMethodsTimeAndMemorySurfaceCreated2()"
 			+ " || TestMethodsTimeAndMemorySurfaceCreated3() ")
 	public void logBeforeActivity(JoinPoint joinPoint) {
-		
+		Debug.resetAllCounts();
 		Debug.startAllocCounting();
 		startActivity = SystemClock.uptimeMillis();
 		startTime = SystemClock.uptimeMillis();
@@ -354,8 +387,8 @@ public aspect MetricsByAspects {
 		String fpsString = "";		
 		//if (fpsElapsed > 5 * 1000) { // every 5 seconds
 			float fps = (numFrames * 1000.0F) / fpsElapsed;
-			Log.d("Library", "Frames per second: " + fps + " (" + numFrames
-					+ " frames in " + fpsElapsed + " ms)");
+			//Log.d("Library", "Frames per second: " + fps + " (" + numFrames
+					//+ " frames in " + fpsElapsed + " ms)");
 			fpsString = fpsString.concat("\t\t<fps>" + fps + "</fps>\n");
 			
 			fpsStartTime = SystemClock.uptimeMillis();
@@ -369,14 +402,15 @@ public aspect MetricsByAspects {
 		int gcInvocationT = Debug.getThreadGcInvocationCount();
 		int allocCountT = Debug.getThreadAllocCount();
 		int allocSizeT = Debug.getThreadAllocSize();
+		Debug.resetAllCounts();
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
-			out.write("\t<method>\n"
+			out.append("\t<method>\n"
 					+ "\t\t<name>" + joinPoint.getTarget().getClass().getSimpleName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
 					+ "\t\t<cpuTime>" + tempoCpu + "</cpuTime>\n" 
-					+ "\t\t<elapsedTime>"	+ elapsedTime + "</elapsedTime>\n"
+					+ "\t\t<elapsedTime>"	+ fpsElapsed + "</elapsedTime>\n"
 					+ "\t\t<allocCountG>" + allocCountG + "</allocCountG>\n" 
 					+ "\t\t<allocSizeG>" + allocSizeG + "</allocSizeG>\n"
 					+ "\t\t<gcInvocationG>" + gcInvocationG + "</gcInvocationG>\n"
@@ -385,7 +419,11 @@ public aspect MetricsByAspects {
 					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
 					+ (!fpsString.trim().isEmpty() ? fpsString : "")
 					+ "\t</method>\n");
+			out.flush();
 				fpsString = "";
+				if(elapsedTime < 15000) //TODO Se é a ultima execução da operação gráfica
+					Debug.startAllocCounting();
+				
 		} catch (IOException e) {
 
 			System.err.println("No possible to write in file. logAfterActivity");
@@ -407,9 +445,10 @@ public aspect MetricsByAspects {
 		int gcInvocationT = Debug.getThreadGcInvocationCount();
 		int allocCountT = Debug.getThreadAllocCount();
 		int allocSizeT = Debug.getThreadAllocSize();
+		Debug.resetAllCounts();
 		long tempoCpu = android.os.Process.getElapsedCpuTime();
 		try {
-			out.write("\t<method>\n"
+			out.append("\t<method>\n"
 					+ "\t\t<name>" + joinPoint.getTarget().getClass().getSimpleName() + "</name>\n"
 					+ "\t\t<methodParameters>" + print(((MethodSignature)joinPoint.getSignature()).getParameterNames()) + "</methodParameters>\n"
 					+ "\t\t<methodArguments>" + print(joinPoint.getArgs()) + "</methodArguments>\n"	
@@ -422,7 +461,7 @@ public aspect MetricsByAspects {
 					+ "\t\t<allocSizeT>" + allocSizeT + "</allocSizeT>\n"
 					+ "\t\t<gcInvocationT>" + gcInvocationT + "</gcInvocationT>\n"
 					+ "\t</method>\n");
-			
+			out.flush();
 		} catch (IOException e) {
 
 			System.err.println("No possible to write in file. logAfterActivity4");
@@ -437,6 +476,7 @@ public aspect MetricsByAspects {
 		System.out.println(joinPoint.getSourceLocation().getFileName());
 		try {
 			out.write("</performanceData>");
+			out.flush();
 			out.close();
 			System.out.println("Closing" + dataFileName + " file at MetricsByAspect!!");
 		} catch (IOException e) {

@@ -119,9 +119,9 @@ public class TarefasDbAdapter {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 
-			db.execSQL(DATABASE_CREATE_TB_TAREFAS);
-			db.execSQL(DATABASE_CREATE_TB_LISTAS);
-			db.execSQL(DATABASE_CREATE_TB_TAGS);
+			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_TB_TAREFAS);
+			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_TB_LISTAS);
+			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_TB_TAGS);
 
 		}
 
