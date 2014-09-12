@@ -20,6 +20,7 @@ public class WriteNeededFiles {
 
 	public static String REPORT_DIRECTORY_NAME = Environment
 			.getExternalStorageDirectory() + "/" + "performanceTestReports";
+	public static String REPORT_DIRECTORY_NAME_INT = "/data/data/edu.performance.test/app_performanceDir/";
 
 	public static boolean putFilesOnStorage(Library appRef,
 			int[] rawResourceIds, String[] rawResourceNames, String dirName) {
@@ -75,6 +76,7 @@ public class WriteNeededFiles {
 		if (performanceDirectoryInternal.exists()) {
 			dirs.put("PDI", performanceDirectoryInternal.getAbsolutePath());
 			System.err.println("nome: " + dirs.get("PDI"));
+			DIRECTORY_NAME_INT = dirs.get("PDI");
 		} else
 			System.err.println("Não criou");
 
@@ -84,16 +86,21 @@ public class WriteNeededFiles {
 	public static boolean deleteFiles(Library appRef, String[] rawResourceNames) {
 
 		File performanceDirectory = new File(DIRECTORY_NAME);
+		File performanceDirectoryInt = new File(DIRECTORY_NAME_INT);
 
-		File file = null;
-		boolean result = true;
+		File file = null, file2 = null;
+		boolean result = true, result2 = true;
 
 		for (String files : rawResourceNames) {
 			file = new File(performanceDirectory.getAbsolutePath() + "/"
 					+ files);
+			file2 = new File("/data/data/edu.performance.test/app_performanceDir/"
+					+ files);
 			result &= file.delete();
+			result2 &= file2.delete();
 			System.err
-					.println(file.getAbsolutePath() + " : deleted? " + result);
+					.println(file.getAbsolutePath() + " : deleted? " + result + "\n" +
+							file2.getAbsolutePath() + " : deleted? " + result2);
 		}
 		// Tosco way
 		file = new File(performanceDirectory.getAbsolutePath()

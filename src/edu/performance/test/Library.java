@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -90,7 +90,7 @@ public class Library extends Activity {
 					+ "\"I have nothing to do to-day. My practice is never very absorbing.\""
 					+ ""
 					+ "\"Then put on your hat and come. I am going through the City first, and we can have some lunch on the way. I observe that there is a good deal of German music on the programme, which is rather more to my taste than Italian or French. It is introspective, and I want to introspect. Come along!\"" };
-
+	private String fileLocation = "";
 	public static class fileIndexes {
 		public static final int BIG_TXT = 0, MEDIUM_TXT = BIG_TXT + 1,LISTAS_XML = MEDIUM_TXT + 1,
 				TAREFAS_XML = LISTAS_XML + 1, SMALL_TXT = TAREFAS_XML + 1,
@@ -123,6 +123,7 @@ public class Library extends Activity {
 	public static final String STATUS = "STATUS";
 	public static final String FILEPATH = "FILEPATH";
 	public static final String FILENAME = "FILENAME";
+	public static final String FILELOCATION = "FILELOCATION";
 	public static final String STRETCH = "STRETCH";
 	public static final String SEARCHABLE = "SEARCHABLE";
 	public static final String SNIPPETS = "SNIPPETS";
@@ -148,7 +149,10 @@ public class Library extends Activity {
 			// Sets the initial layout and binds the start button
 			 setContentView(R.layout.initial);
 			 btStartTest = (Button) findViewById(R.id.bt_start_test);
-			 btStartTest.setActivated(false);
+			 //TODO Esse método foi comentado quando mudei a versão do android para 2.3
+			 // btStartTest.setActivated(false);
+			 // E esse método foi adicionado
+			 btStartTest.setVisibility(View.INVISIBLE);
 			 
 			 // Initializes the list of tests which will be performed. 
 			 testsToDo = new ArrayList<Intent>();
@@ -160,12 +164,20 @@ public class Library extends Activity {
 			dirNames = WriteNeededFiles.makeDirectories(this);
 			if (dirNames == null || dirNames.isEmpty())
 				return;
+			
+			if(dirNames.get("PDE") != null && !dirNames.get("PDE").trim().isEmpty())
+				fileLocation = dirNames.get("PDE");
+			else if (dirNames.get("PDI") != null && !dirNames.get("PDI").trim().isEmpty())
+				fileLocation = dirNames.get("PDI");
+			else
+				finish();
 
 			for (int i = 0; i < rawResourceIds.length; i++) {
-
+				if(dirNames.get("PDI") != null && !dirNames.get("PDI").trim().isEmpty())
 				FileOperation.testTJMWriteFile(this, rawResourceIds[i],
 						rawResourceNames[i], dirNames.get("PDI"));
 				
+				if(dirNames.get("PDE") != null && !dirNames.get("PDE").trim().isEmpty())
 				FileOperation.testTJMWriteFile(this, rawResourceIds[i],
 						rawResourceNames[i], dirNames.get("PDE"));
 			}
@@ -210,17 +222,19 @@ public class Library extends Activity {
 	
 	private void sheetsTest(){
 		
-		aTest = new Intent(appRef, BatteryOperation.class);
+		/*aTest = new Intent(appRef, BatteryOperation.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(FILELOCATION, fileLocation);
 		aTest.putExtra(BATTERYTEST, true);
 		aTest.putExtra(STRING_ARRAY, rawResourceNames);
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing battery skills...");
 		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
+		testsToDo.add(aTest);*/
 		
 		aTest = new Intent(appRef, DatabaseOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 300000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 1000);
@@ -267,7 +281,7 @@ public class Library extends Activity {
 				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 				aTest.putExtra(THELASTTEST, false);
 				aTest.putExtra(BATTERYTEST, false);
-				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
+				aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
 				aTest.putExtra(STATUS, "Testing Graph skills...");
 				aTest.putExtra(NETWORK_TEST, false);
 				testsToDo.add(aTest);
@@ -279,7 +293,7 @@ public class Library extends Activity {
 				aTest.putExtra(LEVEL_INT, 10);
 				aTest.putExtra(SEARCHABLE, new FileOperation()
 				.testTJMreadSequentialAcessFile(
-						WriteNeededFiles.DIRECTORY_NAME + "/"
+						fileLocation + "/"
 								+ rawResourceNames[fileIndexes.MEDIUM_TXT]));
 				aTest.putExtra(SNIPPETS, snippets);	
 				aTest.putExtra(STATUS, "Testing String skills..");
@@ -293,7 +307,7 @@ public class Library extends Activity {
 				aTest.putExtra(LEVEL_INT, 10);
 				aTest.putExtra(SEARCHABLE, new FileOperation()
 				.testTJMreadSequentialAcessFile(
-						WriteNeededFiles.DIRECTORY_NAME + "/"
+						fileLocation + "/"
 								+ rawResourceNames[fileIndexes.MEDIUM_TXT]));
 				aTest.putExtra(SNIPPETS, snippets);	
 				aTest.putExtra(STATUS, "Testing String skills..");
@@ -315,7 +329,7 @@ public class Library extends Activity {
 				aTest.putExtra(THELASTTEST, false);
 				aTest.putExtra(BATTERYTEST, false);
 				aTest.putExtra(LEVEL_INT, 3);
-				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+				aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
 						+ rawResourceNames[fileIndexes.MEDIUM_TXT]);
 				aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 				aTest.putExtra(STATUS, "Testing File skills..");
@@ -327,7 +341,7 @@ public class Library extends Activity {
 				aTest.putExtra(THELASTTEST, false);
 				aTest.putExtra(BATTERYTEST, false);
 				aTest.putExtra(LEVEL_INT, 3);
-				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+				aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
 						+ rawResourceNames[fileIndexes.MEDIUM_TXT]);
 				aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 				aTest.putExtra(STATUS, "Testing Native File skills..");
@@ -338,7 +352,7 @@ public class Library extends Activity {
 				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 				aTest.putExtra(THELASTTEST, false);
 				aTest.putExtra(BATTERYTEST, false);
-				aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
+				aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
 				aTest.putExtra(STATUS, "Testing Mail skills..");
 				aTest.putExtra(NETWORK_TEST, true);
 				testsToDo.add(aTest);
@@ -363,7 +377,10 @@ public class Library extends Activity {
 
 			    });
 				
-				btStartTest.setActivated(true);
+				//TODO Esse método foi comentado quando mudei a versão do android para 2.3
+				 // btStartTest.setActivated(true);
+				 // E esse método foi adicionado
+				 btStartTest.setVisibility(View.VISIBLE);
 		
 		
 	}
@@ -374,6 +391,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, true);
+		aTest.putExtra(FILELOCATION, fileLocation);
 		aTest.putExtra(STRING_ARRAY, rawResourceNames);
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing battery skills...");
@@ -483,7 +501,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -495,7 +513,7 @@ public class Library extends Activity {
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testTJMreadSequentialAcessFile(
-				WriteNeededFiles.DIRECTORY_NAME + "/"
+				fileLocation + "/"
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
@@ -509,7 +527,7 @@ public class Library extends Activity {
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testTJMreadSequentialAcessFile(
-				WriteNeededFiles.DIRECTORY_NAME + "/"
+				fileLocation + "/"
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
@@ -584,7 +602,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Mail skills..");
 		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);	
@@ -603,7 +621,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
 				+ rawResourceNames[fileIndexes.BIG_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing File skills..");
@@ -615,7 +633,7 @@ public class Library extends Activity {
 		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
 				+ rawResourceNames[fileIndexes.BIG_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing Native File skills..");
@@ -632,20 +650,25 @@ public class Library extends Activity {
 
 	    });
 		
-		btStartTest.setActivated(true);
+		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
+		 // btStartTest.setActivated(true);
+		 // E esse método foi adicionado
+		 btStartTest.setVisibility(View.VISIBLE);
 	}
 	private void todoListTests(){
 		
-		/*aTest = new Intent(appRef, BatteryOperation.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
+		aTest = new Intent(appRef, BatteryOperation.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000000);
+		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(BATTERYTEST, true);
 		aTest.putExtra(STRING_ARRAY, rawResourceNames);
+		aTest.putExtra(FILELOCATION, fileLocation);
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing battery skills...");
 		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);*/
+		testsToDo.add(aTest);
 		
+		/*
 		aTest = new Intent(appRef, WebServiceActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
@@ -657,14 +680,15 @@ public class Library extends Activity {
 		
 		
 		aTest = new Intent(appRef, DatabaseOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 200000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 200);
 		aTest.putExtra(STATUS, "Testing Database skills..");
 		aTest.putExtra(NETWORK_TEST, false);
 		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, LightTestActivity.class);
+		/*
+		aTest = new Intent(appRef, HardTestActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(STATUS, "Testing Screen skills..");
 		aTest.putExtra(THELASTTEST, false);
@@ -691,7 +715,7 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing Web skills..");
 		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);
-		
+		/*
 		aTest = new Intent(appRef, IntegerOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
@@ -709,32 +733,32 @@ public class Library extends Activity {
 		aTest.putExtra(NETWORK_TEST, false);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testTJMreadSequentialAcessFile(
-				WriteNeededFiles.DIRECTORY_NAME + "/"
+				fileLocation + "/"
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, MailOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 100000);
+		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Mail skills..");
 		aTest.putExtra(NETWORK_TEST, true);
 		testsToDo.add(aTest);	
-		
+		/*
 		aTest = new Intent(appRef, FileOperationActivity.class); 
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, true);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 1);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
 				+ rawResourceNames[fileIndexes.SMALL_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing File skills..");
 		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
+		testsToDo.add(aTest);*/
 		
 
 		
@@ -748,7 +772,10 @@ public class Library extends Activity {
 
 	    });
 		
-		btStartTest.setActivated(true);
+		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
+		 // btStartTest.setActivated(true);
+		 // E esse método foi adicionado
+		 btStartTest.setVisibility(View.VISIBLE);
 		
 		
 		
@@ -761,11 +788,13 @@ public class Library extends Activity {
 		aTest = new Intent(appRef, BatteryOperation.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(FILELOCATION, fileLocation);
 		aTest.putExtra(BATTERYTEST, true);
 		aTest.putExtra(STATUS, "Testing battery skills...");
 		testsToDo.add(aTest);
 		
 		aTest = new Intent(appRef, DatabaseOperationActivity.class); //verificar se está realmente fazendo algo
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
 		aTest.putExtra(LEVEL_INT, 100);
@@ -784,7 +813,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILEPATH, WriteNeededFiles.DIRECTORY_NAME + "/"
+		aTest.putExtra(FILEPATH, fileLocation + "/"
 				+ rawResourceNames[fileIndexes.BIG_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing File skills..");
@@ -965,7 +994,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);		
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.TINY_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.TINY_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
@@ -973,7 +1002,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
@@ -981,7 +1010,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest);
 		
@@ -989,7 +1018,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Graph skills...");
 		testsToDo.add(aTest); 
 		
@@ -1007,7 +1036,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/" +rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
 		aTest.putExtra(STATUS, "Testing Mail skills..");
 		testsToDo.add(aTest);
 		
@@ -1023,7 +1052,7 @@ public class Library extends Activity {
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, WriteNeededFiles.DIRECTORY_NAME + "/"
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
 				+ rawResourceNames[fileIndexes.BIG_TXT]);
 		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
 		aTest.putExtra(STATUS, "Testing Native File skills..");
@@ -1059,7 +1088,7 @@ public class Library extends Activity {
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testTJMreadSequentialAcessFile(
-				WriteNeededFiles.DIRECTORY_NAME + "/"
+				fileLocation + "/"
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
@@ -1112,7 +1141,7 @@ public class Library extends Activity {
 		aTest.putExtra(LEVEL_INT, 10);
 		aTest.putExtra(SEARCHABLE, new FileOperation()
 		.testTJMreadSequentialAcessFile(
-				WriteNeededFiles.DIRECTORY_NAME + "/"
+				fileLocation + "/"
 						+ rawResourceNames[fileIndexes.SMALL_TXT]));
 		aTest.putExtra(SNIPPETS, snippets);	
 		aTest.putExtra(STATUS, "Testing String skills..");
@@ -1148,7 +1177,10 @@ public class Library extends Activity {
 
 	    });
 		
-		btStartTest.setActivated(true);
+		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
+		 // btStartTest.setActivated(true);
+		 // E esse método foi adicionado
+		 btStartTest.setVisibility(View.VISIBLE);
 		
 		
 	}
@@ -1207,7 +1239,7 @@ public class Library extends Activity {
 
 	}
 	
-	@SuppressLint("HandlerLeak")
+	//@SuppressLint("HandlerLeak")
 	Handler myHandler = new Handler() {
 
 		@Override

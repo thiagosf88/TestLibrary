@@ -112,8 +112,9 @@ public class MailOperation extends PerformanceTest<String> {
 			}
 
 			catch (MessagingException e) {
+				//System.out.println(e.getMessage());
 				throw new RuntimeException(e);
-				// System.out.println(e.getMessage());
+				 
 			}
 
 		} else {

@@ -37,6 +37,7 @@ public aspect MetricsByAspects {
 	protected long fpsStartTime;
 	protected long numFrames;
 
+
 	public MetricsByAspects() {
 		
 		try {

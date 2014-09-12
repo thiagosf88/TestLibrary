@@ -118,17 +118,17 @@ public class TarefasDbAdapter {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-
-			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_TB_TAREFAS);
-			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_TB_LISTAS);
-			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_TB_TAGS);
+			
+			db.execSQL(DATABASE_CREATE_TB_TAREFAS);
+			db.execSQL(DATABASE_CREATE_TB_LISTAS);
+			db.execSQL(DATABASE_CREATE_TB_TAGS);
 
 		}
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-			Log.w(TAG, "Atualizando banco de dados da vers�o: " + oldVersion
+			Log.w(TAG, "Atualizando banco de dados da version: " + oldVersion
 					+ " para: " + newVersion
 					+ ", isso destruir� todos os dados anteriores");
 
@@ -251,9 +251,9 @@ public class TarefasDbAdapter {
 	 * @return true if deleted, false otherwise
 	 */
 	public boolean deletaTarefa(Long Id, Long idSeries) {
-
-		return mDb.delete(DATABASE_TB_TAREFAS, CHAVE_ID + "=" + Id + " AND "
-				+ CHAVE_IDSERIES + "=" + idSeries, null) > 0;
+		String [] args= {Id.toString(), idSeries.toString()};
+		return mDb.delete(DATABASE_TB_TAREFAS, CHAVE_ID + "= ? AND "
+				+ CHAVE_IDSERIES + "=?" , args) > 0;
 	}
 
 	public boolean deletaLista(Long Id) {

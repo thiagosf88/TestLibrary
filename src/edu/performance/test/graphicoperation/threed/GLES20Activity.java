@@ -39,7 +39,8 @@ public class GLES20Activity extends ThreeDActivity {
         if (hasGLES20()) {
             mGLView = new GLSurfaceView(this);
             mGLView.setEGLContextClientVersion(2);
-            mGLView.setPreserveEGLContextOnPause(true);
+            //TODO Esse método foi comentado quando mudei a versão do android para 2.3
+            //mGLView.setPreserveEGLContextOnPause(true);
             mGLView.setRenderer(new GLES20Renderer(this));
         } else {
         	System.err.println("Não worked");

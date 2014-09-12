@@ -94,7 +94,8 @@ public class RectangleOperation extends Operation {
 	}
 
 	private void drawAll(Canvas canvas) {
-		canvas.isHardwareAccelerated();
+		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
+		//canvas.isHardwareAccelerated();
 		for (ColoredRect cr : rectengleList) {
 			Paint p = new Paint();
 			p.setAntiAlias(false);
