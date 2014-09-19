@@ -9,6 +9,7 @@ public class DownloadOperationActivity extends InternetPerformanceTestActivity {
 
 	DownloadOperation operation;
 	protected int level = 2;
+	private String downloadLocation;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -16,6 +17,7 @@ public class DownloadOperationActivity extends InternetPerformanceTestActivity {
 		if (getIntent().getExtras() != null) {
 			if (getIntent().hasExtra(Library.LEVEL_INT)) {
 				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+				downloadLocation = getIntent().getExtras().getString(Library.FILELOCATION);
 			}
 
 			else {
@@ -41,5 +43,11 @@ public class DownloadOperationActivity extends InternetPerformanceTestActivity {
 		operation.execute();
 
 	}
+
+	protected String getDownloadLocation() {
+		return downloadLocation;
+	}
+	
+	
 
 }

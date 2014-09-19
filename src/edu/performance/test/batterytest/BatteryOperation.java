@@ -49,7 +49,7 @@ public class BatteryOperation extends Activity {
 	private double MIN_LEVEL_TO_EXIT = 100;
 	private double batteryPreviousLevel = 100;
 	private double firstVoltage = 0;
-	private int VARIATION = 1;
+	private int VARIATION = 3;
 
 	int times = 0;
 	Intent batteryIntent = null;
@@ -80,7 +80,8 @@ public class BatteryOperation extends Activity {
 		if (getIntent().getExtras() != null) {
 			if (getIntent().hasExtra(Library.STRING_ARRAY)
 					&& getIntent().hasExtra(Library.THELASTTEST)
-					&& getIntent().hasExtra(Library.SNIPPETS)) {
+					&& getIntent().hasExtra(Library.SNIPPETS)
+					&& getIntent().hasExtra(Library.FILELOCATION)) {
 
 				isTheLast = getIntent().getExtras().getBoolean(
 						Library.THELASTTEST);
@@ -89,6 +90,7 @@ public class BatteryOperation extends Activity {
 				snippets = getIntent().getExtras().getStringArray(
 						Library.SNIPPETS);
 				fileLocation = getIntent().getExtras().getString(Library.FILELOCATION);
+				
 			}
 
 			else {
@@ -156,8 +158,10 @@ public class BatteryOperation extends Activity {
 
 			// Initializes the list of tests which will be performed.
 			testsToDo = new ArrayList<Intent>();
-			//testBrowser();
-			testToDo();
+			testBrowser();
+			//testToDo();
+			//testToDoIntenso();
+			//testBrowser3G();
 
 			executeTest(testsToDo.get(countIntent));
 		}
@@ -165,6 +169,55 @@ public class BatteryOperation extends Activity {
 	}
 
 	private void testToDo() {
+	
+
+		aTest = new Intent(appRef, WebServiceActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_WEBSITE,
+				"http://mcupdate.tumblr.com/api/read?num=50");
+		aTest.putExtra(Library.STATUS, "Testing WebService skills..");
+		aTest.putExtra(Library.NETWORK_TEST, true);
+		testsToDo.add(aTest);
+
+		aTest = new Intent(appRef, DatabaseOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 400000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_INT, 200);
+		aTest.putExtra(Library.STATUS, "Testing Database skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		testsToDo.add(aTest);
+
+		
+		aTest = new Intent(appRef, WebOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 500000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_INT, 0);
+		aTest.putExtra(Library.STATUS, "Testing Web skills..");
+		aTest.putExtra(Library.NETWORK_TEST, true);
+		testsToDo.add(aTest);
+
+		/*aTest = new Intent(appRef, IntegerOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_INT, 100);
+		aTest.putExtra(Library.STATUS, "Testing Integer skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		testsToDo.add(aTest);*/
+
+		aTest = new Intent(appRef, MailOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(Library.THELASTTEST, true);
+		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
+				+ "/" + rawResourceNames[fileIndexes.TINY_G_TXT]);
+		aTest.putExtra(Library.STATUS, "Testing Mail skills..");
+		aTest.putExtra(Library.NETWORK_TEST, true);
+		testsToDo.add(aTest);
+
+		
+	}
+	
+private void testToDoIntenso() {
 		
 		/*aTest = new Intent(appRef, HardTestActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
@@ -185,7 +238,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, DatabaseOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 200000);
 		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 200);
+		aTest.putExtra(Library.LEVEL_INT, 1000);
 		aTest.putExtra(Library.STATUS, "Testing Database skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -195,7 +248,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, MemoryOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 200);
+		aTest.putExtra(Library.LEVEL_INT, 1000);
 		aTest.putExtra(Library.STATUS, "Testing Memory skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -203,7 +256,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, WebOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 0);
+		aTest.putExtra(Library.LEVEL_INT, 3);
 		aTest.putExtra(Library.STATUS, "Testing Web skills..");
 		aTest.putExtra(Library.NETWORK_TEST, true);
 		testsToDo.add(aTest);
@@ -219,20 +272,20 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, StringOperationActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 10);
+		aTest.putExtra(Library.LEVEL_INT, 2);
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		aTest.putExtra(Library.SEARCHABLE, new FileOperation()
 				.testTJMreadSequentialAcessFile(fileLocation
-						+ "/" + rawResourceNames[fileIndexes.SMALL_TXT]));
+						+ "/" + rawResourceNames[fileIndexes.BIG_TXT]));
 		aTest.putExtra(Library.SNIPPETS, snippets);
 		aTest.putExtra(Library.STATUS, "Testing String skills..");
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, MailOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 200000);
 		aTest.putExtra(Library.THELASTTEST, true);
 		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
-				+ "/" + rawResourceNames[fileIndexes.TINY_G_TXT]);
+				+ "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(Library.STATUS, "Testing Mail skills..");
 		aTest.putExtra(Library.NETWORK_TEST, true);
 		testsToDo.add(aTest);
@@ -251,82 +304,129 @@ public class BatteryOperation extends Activity {
 	}
 
 	private void testBrowser() {
-		aTest = new Intent(appRef, DownloadOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 240000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 2);
-		aTest.putExtra(Library.STATUS,
-				"Testing Download skills..\n Max time (4 min)");
-		aTest.putExtra(Library.NETWORK_TEST, true);
-		testsToDo.add(aTest);
+		
 
 		aTest = new Intent(appRef, WebServiceActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_WEBSITE,
 				"http://mcupdate.tumblr.com/api/read");
 		aTest.putExtra(Library.STATUS, "Testing WebService skills..");
 		aTest.putExtra(Library.NETWORK_TEST, true);
 		testsToDo.add(aTest);
 
-		aTest = new Intent(appRef, DatabaseOperationActivity.class);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 50);
-		aTest.putExtra(Library.STATUS, "Testing Database skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
+		
 
 		aTest = new Intent(appRef, WebOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
 		aTest.putExtra(Library.THELASTTEST, false);
 		aTest.putExtra(Library.LEVEL_INT, 3);
 		aTest.putExtra(Library.STATUS, "Testing Web skills..");
 		aTest.putExtra(Library.NETWORK_TEST, true);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, DownloadOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
+		aTest.putExtra(Library.THELASTTEST, true);
+		aTest.putExtra(Library.LEVEL_INT, 1);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		aTest.putExtra(Library.FILELOCATION, fileLocation);
+		aTest.putExtra(Library.STATUS,
+				"Testing Download skills..\n ");
+		aTest.putExtra(Library.NETWORK_TEST, true);
+		testsToDo.add(aTest);
+		
+		
+	}
+	
+	private void testBrowser3G() {
+		aTest = new Intent(appRef, DownloadOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 4800000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_INT, 0);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		aTest.putExtra(Library.STATUS,
+				"Testing Download skills..\n Max time (80 min)");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		testsToDo.add(aTest);
+
+		aTest = new Intent(appRef, WebServiceActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_WEBSITE,
+				"http://mcupdate.tumblr.com/api/read");
+		aTest.putExtra(Library.STATUS, "Testing WebService skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		testsToDo.add(aTest);
+
+		aTest = new Intent(appRef, DatabaseOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 240000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_INT, 50);
+		aTest.putExtra(Library.STATUS, "Testing Database skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		testsToDo.add(aTest);
+
+		aTest = new Intent(appRef, WebOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.LEVEL_INT, 3);
+		aTest.putExtra(Library.STATUS, "Testing Web skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, MemoryOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
 		aTest.putExtra(Library.LEVEL_INT, 1500);
 		aTest.putExtra(Library.STATUS, "Testing Memory skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, MemoryOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
 		aTest.putExtra(Library.LEVEL_INT, 1500);
 		aTest.putExtra(Library.STATUS, "Testing Native Memory skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
 
-		aTest = new Intent(appRef, MediumTestActivity.class);
+		/*aTest = new Intent(appRef, MediumTestActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.STATUS, "Testing Screen skills..");
 		aTest.putExtra(Library.THELASTTEST, false);
 		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		testsToDo.add(aTest);*/
 
 		// ------------------------CPU------------------------------------
 		aTest = new Intent(appRef, IntegerOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
 		aTest.putExtra(Library.LEVEL_INT, 555);
 		aTest.putExtra(Library.STATUS, "Testing Integer skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, IntegerOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
 		aTest.putExtra(Library.LEVEL_INT, 555);
 		aTest.putExtra(Library.STATUS, "Testing Integer Native skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, FloatOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 240000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_DOUBLE, 9979);
 		aTest.putExtra(Library.STATUS, "Testing Float skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
@@ -334,14 +434,17 @@ public class BatteryOperation extends Activity {
 
 		aTest = new Intent(appRef, FloatOperationNativeActivity.class);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 240000);
 		aTest.putExtra(Library.STATUS, "Testing Native Float skills..");
 		aTest.putExtra(Library.LEVEL_DOUBLE, 9979);
 		aTest.putExtra(Library.NETWORK_TEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, GraphOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
 				+ "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
 		aTest.putExtra(Library.STATUS, "Testing Graph skills...");
@@ -349,8 +452,9 @@ public class BatteryOperation extends Activity {
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, StringOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 10);
 		aTest.putExtra(Library.SEARCHABLE, new FileOperation()
 				.testTJMreadSequentialAcessFile(fileLocation
@@ -361,8 +465,9 @@ public class BatteryOperation extends Activity {
 		testsToDo.add(aTest);
 
 		aTest = new Intent(appRef, StringOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 10);
 		aTest.putExtra(Library.SEARCHABLE, new FileOperation()
 				.testTJMreadSequentialAcessFile(fileLocation
@@ -378,6 +483,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, CubeActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 10);
 		aTest.putExtra(Library.STATUS, "Testing 3D skills..");
 		aTest.putExtra(Library.NETWORK_TEST, false);
@@ -386,6 +492,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, LessonThreeActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 0);
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -393,6 +500,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, ArcActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 1);
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -400,6 +508,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, CircleActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 10);
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -407,6 +516,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, ImageActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 3);
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -414,6 +524,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, RectangleActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 10);
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -421,6 +532,7 @@ public class BatteryOperation extends Activity {
 		aTest = new Intent(appRef, TextActivity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_INT, 10);
 		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
@@ -428,171 +540,52 @@ public class BatteryOperation extends Activity {
 		// --------------------------------------------------------------------------------------------------------------
 
 		aTest = new Intent(appRef, MailOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 200000);
 		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
-				+ "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
-		aTest.putExtra(Library.STATUS, "Testing Mail skills..");
-		aTest.putExtra(Library.NETWORK_TEST, true);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, GPSActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 3);
-		aTest.putExtra(Library.STATUS, "Testing GPS skills..");
-		aTest.putExtra(Library.NETWORK_TEST, true);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, FileOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 3);
-		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
-				+ "/" + rawResourceNames[fileIndexes.BIG_TXT]);
-		aTest.putExtra(Library.STRETCH,
-				appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(Library.STATUS, "Testing File skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, FileOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, true);
-		aTest.putExtra(Library.LEVEL_INT, 3);
-		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
-				+ "/" + rawResourceNames[fileIndexes.BIG_TXT]);
-		aTest.putExtra(Library.STRETCH,
-				appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(Library.STATUS, "Testing Native File skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-	}
-
-	private void testSheets() {
-		aTest = new Intent(appRef, DatabaseOperationActivity.class);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 1000);
-		aTest.putExtra(Library.STATUS, "Testing Database skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		// ------------------------CPU------------------------------------
-		aTest = new Intent(appRef, IntegerOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 555);
-		aTest.putExtra(Library.STATUS, "Testing Integer skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, IntegerOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 555);
-		aTest.putExtra(Library.STATUS, "Testing Integer Native skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, FloatOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_DOUBLE, 9979);
-		aTest.putExtra(Library.STATUS, "Testing Float skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, FloatOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.STATUS, "Testing Native Float skills..");
-		aTest.putExtra(Library.LEVEL_DOUBLE, 9979);
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, GraphOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
-				+ "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
-		aTest.putExtra(Library.STATUS, "Testing Graph skills...");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, StringOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 10);
-		aTest.putExtra(Library.SEARCHABLE, new FileOperation()
-				.testTJMreadSequentialAcessFile(fileLocation
-						+ "/" + rawResourceNames[fileIndexes.MEDIUM_TXT]));
-		aTest.putExtra(Library.SNIPPETS, snippets);
-		aTest.putExtra(Library.STATUS, "Testing String skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, StringOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 10);
-		aTest.putExtra(Library.SEARCHABLE, new FileOperation()
-				.testTJMreadSequentialAcessFile(fileLocation
-						+ "/" + rawResourceNames[fileIndexes.MEDIUM_TXT]));
-		aTest.putExtra(Library.SNIPPETS, snippets);
-		aTest.putExtra(Library.STATUS, "Testing String skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		// -----------------------------------------------------------------------------------------------------------------------
-
-		aTest = new Intent(appRef, MediumTestActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.STATUS, "Testing Screen skills..");
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, FileOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 3);
-		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
-				+ "/" + rawResourceNames[fileIndexes.MEDIUM_TXT]);
-		aTest.putExtra(Library.STRETCH,
-				appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(Library.STATUS, "Testing File skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, FileOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 3);
-		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
-				+ "/" + rawResourceNames[fileIndexes.MEDIUM_TXT]);
-		aTest.putExtra(Library.STRETCH,
-				appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(Library.STATUS, "Testing Native File skills..");
-		aTest.putExtra(Library.NETWORK_TEST, false);
-		testsToDo.add(aTest);
-
-		aTest = new Intent(appRef, MailOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
 		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
 				+ "/" + rawResourceNames[fileIndexes.TINY_G_TXT]);
 		aTest.putExtra(Library.STATUS, "Testing Mail skills..");
-		aTest.putExtra(Library.NETWORK_TEST, true);
+		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
 
-		aTest = new Intent(appRef, WebServiceActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest = new Intent(appRef, GPSActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		aTest.putExtra(Library.LEVEL_INT, 3);
+		aTest.putExtra(Library.STATUS, "Testing GPS skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		testsToDo.add(aTest);
+
+		aTest = new Intent(appRef, FileOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(Library.THELASTTEST, false);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		aTest.putExtra(Library.LEVEL_INT, 3);
+		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
+				+ "/" + rawResourceNames[fileIndexes.BIG_TXT]);
+		aTest.putExtra(Library.STRETCH,
+				appRef.getResources().getString(R.string.stretch));
+		aTest.putExtra(Library.STATUS, "Testing File skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
+		testsToDo.add(aTest);
+
+		aTest = new Intent(appRef, FileOperationNativeActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
 		aTest.putExtra(Library.THELASTTEST, true);
-		aTest.putExtra(Library.LEVEL_WEBSITE,
-				"http://mcupdate.tumblr.com/api/read?num=10");
-		aTest.putExtra(Library.STATUS, "Testing WebService skills..");
-		aTest.putExtra(Library.NETWORK_TEST, true);
+		aTest.putExtra(Library.BATTERYTEST, true);
+		aTest.putExtra(Library.LEVEL_INT, 3);
+		aTest.putExtra(Library.LEVEL_FILENAME, fileLocation
+				+ "/" + rawResourceNames[fileIndexes.BIG_TXT]);
+		aTest.putExtra(Library.STRETCH,
+				appRef.getResources().getString(R.string.stretch));
+		aTest.putExtra(Library.STATUS, "Testing Native File skills..");
+		aTest.putExtra(Library.NETWORK_TEST, false);
 		testsToDo.add(aTest);
 	}
+
+	
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -621,8 +614,6 @@ public class BatteryOperation extends Activity {
 			} else if (requestCode == 1
 					&& !results.getBoolean(Library.THELASTTEST)) {
 
-				System.out.println(batteryPreviousLevel + " < "
-						+ MIN_LEVEL_TO_EXIT);
 
 				batteryIntent = this.registerReceiver(this.mBatInfoReceiver,
 						new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -631,7 +622,8 @@ public class BatteryOperation extends Activity {
 						batteryIntent,
 						((testsToDo.get(countIntent).getStringExtra(
 								Library.STATUS).substring(7)).replace(
-								" skills..", "")).trim());
+								" skills..", "")).trim() + "test");
+				
 				MIN_LEVEL_TO_EXIT = batteryPreviousLevel - VARIATION;
 				times = 0;
 				executeTest(testsToDo.get(++countIntent));

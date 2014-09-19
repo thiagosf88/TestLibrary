@@ -9,9 +9,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import android.os.Bundle;
+import edu.performance.test.Library;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.util.WriteNeededFiles;
 
 /**
  * This class extends AsyncTask and it executes downloading files from oi
@@ -59,7 +59,7 @@ class DownloadOperation extends PerformanceTest<Integer>{
 
 			// Output stream to write file
 			OutputStream output = new FileOutputStream(
-					WriteNeededFiles.DIRECTORY_NAME + "/downloadedfile.zip");
+					((DownloadOperationActivity)activity).getDownloadLocation() + "/downloadedfile.zip");
 
 			byte data[] = new byte[1024];
 
@@ -89,9 +89,10 @@ class DownloadOperation extends PerformanceTest<Integer>{
 			
 			Bundle extras = new Bundle();
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
-			
+			if(ioe != null && ioe.getMessage() != null)
+				extras.putString(Library.ERROR_MESSAGE, ioe.getMessage());
 			activity.finishTest(extras);
-			System.err.println("Error in download operation: " + ioe.getMessage());
+			
 		}
 	}
 
