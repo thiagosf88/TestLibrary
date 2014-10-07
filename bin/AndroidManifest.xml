@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="14"
         android:targetSdkVersion="20" />
 
     
@@ -182,9 +182,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="edu.performance.test.streamingoperation.StreamingTextureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="edu.performance.test.weboperation.WebServiceActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <service android:name=".util.MonitoringService"></service>
         
     </application>
 

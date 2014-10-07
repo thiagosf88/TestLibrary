@@ -6,7 +6,7 @@
     android:background="#000000"
      >
  
-    <SurfaceView
+    <edu.performance.test.streamingoperation.MySurfaceView
         android:id="@+id/surfView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

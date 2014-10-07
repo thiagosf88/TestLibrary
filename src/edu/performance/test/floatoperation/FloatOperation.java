@@ -54,7 +54,7 @@ public class FloatOperation extends PerformanceTest<Double> implements Performan
 	 *            Is the degree whose sine will be calculated.
 	 */
 	public void testAFloatOperationSine(double level) {
-		// System.out.println(Math.sin(level));
+		 System.out.println(Math.sin(level));
 	}
 
 	/**

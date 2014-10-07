@@ -15,7 +15,8 @@ public class DownloadOperationActivity extends InternetPerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 
 		if (getIntent().getExtras() != null) {
-			if (getIntent().hasExtra(Library.LEVEL_INT)) {
+			if (getIntent().hasExtra(Library.LEVEL_INT)
+					&& getIntent().hasExtra(Library.FILELOCATION)) {
 				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
 				downloadLocation = getIntent().getExtras().getString(Library.FILELOCATION);
 			}

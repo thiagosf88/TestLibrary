@@ -31,7 +31,7 @@ public aspect MetricsByAspects {
 	private long startActivity = 0;
 	double nanoSegRate = 1000000.0;
 	BufferedWriter out = null;
-	private final String dataFileName = "testBrowserApp.xml";
+	private final String dataFileName = "ToDoApp_BatteryTest.xml";
 	//Variables to get FPS rate
 	protected long startTime;
 	protected long fpsStartTime;
@@ -149,9 +149,13 @@ public aspect MetricsByAspects {
 	public void TestMethodsTimeAndMemoryActivityOnFinish3() {
 
 	}
+	@Pointcut("execution(* edu.performance.test.streamingoperation.*.onSurfaceTextureAvailable(..))")
+	public void TestMethodsFPSStart() {
+
+	}
 	
-	@Pointcut("call(* edu.performance.test.streamingoperation.*.finishTest(..))")
-	public void TestMethodsTimeAndMemoryActivityOnFinish4() {
+	@Pointcut("execution(* edu.performance.test.streamingoperation.*.onSurfaceTextureUpdated(..))")
+	public void TestMethodsFPSEnd() {
 
 	}
 	
@@ -367,7 +371,7 @@ public aspect MetricsByAspects {
 
 	}
 	@Before("TestMethodsTimeAndMemorySurfaceCreated() || TestMethodsTimeAndMemorySurfaceCreated2()"
-			+ " || TestMethodsTimeAndMemorySurfaceCreated3() ")
+			+ " || TestMethodsTimeAndMemorySurfaceCreated3() || TestMethodsFPSStart() ")
 	public void logBeforeActivity(JoinPoint joinPoint) {
 		Debug.resetAllCounts();
 		Debug.startAllocCounting();
@@ -378,7 +382,7 @@ public aspect MetricsByAspects {
 	}
 	
 	@After("TestMethodsTimeAndMemoryActivityOnFinish() || TestMethodsTimeAndMemoryActivityOnFinish2()"
-			+ " || TestMethodsTimeAndMemoryActivityOnFinish3()")
+			+ " || TestMethodsTimeAndMemoryActivityOnFinish3() || TestMethodsFPSEnd()")
 	public void logAfterActivity(JoinPoint joinPoint) {
 		long fpsElapsed = SystemClock.uptimeMillis() - fpsStartTime;
 		numFrames++;
@@ -433,7 +437,7 @@ public aspect MetricsByAspects {
 
 	}
 	
-	@After("TestMethodsTimeAndMemoryActivityOnFinish4()")
+	/*@After("TestMethodsFPSEnd()") Antiga métrica Streaming
 	public void logAfterActivity4(JoinPoint joinPoint) {
 		
 		numFrames++;
@@ -469,7 +473,7 @@ public aspect MetricsByAspects {
 		}
 		
 
-	}
+	}*/
 	
 
 	@Before("TestMethodsFinish()")

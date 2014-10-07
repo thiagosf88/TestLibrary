@@ -5,7 +5,7 @@ edu.performance.test.database.util
 edu.performance.test.downloadoperation
 edu.performance.test.fileoperation
 edu.performance.test.floatoperation
-edu.performance.test.gpsOperation
+edu.performance.test.gpsoperation
 edu.performance.test.integeroperation
 edu.performance.test.mailoperation
 edu.performance.test.memorymanipulation

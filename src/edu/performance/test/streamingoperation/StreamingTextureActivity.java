@@ -1,50 +1,36 @@
 package edu.performance.test.streamingoperation;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.SurfaceTexture;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.media.MediaPlayer.OnInfoListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.view.Surface;
+import android.view.TextureView;
 import edu.performance.test.InternetPerformanceTestActivity;
 import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
 import edu.performance.test.util.ActivityThread;
 
-public class StreamingActivity extends InternetPerformanceTestActivity implements
-		SurfaceHolder.Callback, OnPreparedListener, OnBufferingUpdateListener,
-		OnCompletionListener, OnInfoListener, PerformanceTestInterface {
+public class StreamingTextureActivity extends InternetPerformanceTestActivity implements
+		TextureView.SurfaceTextureListener, OnPreparedListener, OnBufferingUpdateListener,
+		OnCompletionListener {
 
 	private MediaPlayer mediaPlayer;
-	private SurfaceHolder vidHolder;
-	private MySurfaceView vidSurface;
+	private Surface surf;
+	private TextureView vidSurface;
+	int count = 0;
 	ActivityThread mythread;
 	public static final String STREAMSIZE = "STREAMSIZE";
 	boolean isTheLast = true;
 	String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
 
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
 
-		execute();
-	}
-
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-
-	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-
-	}
 
 	@Override
 	public void onPrepared(MediaPlayer mp) {
@@ -55,7 +41,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.streaming);
+		setContentView(R.layout.streaming2);
 		
 		if (getIntent().getExtras() != null) {
 			if (getIntent().hasExtra(Library.LEVEL_URL)
@@ -90,14 +76,13 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 			return;
 		}
 		
-		vidSurface = ((MySurfaceView) findViewById(R.id.surfView));
-		vidHolder = vidSurface.getHolder();
-		vidHolder.addCallback(this);
+		vidSurface = ((TextureView) findViewById(R.id.textureView));
+		vidSurface.setSurfaceTextureListener(this);
 	}
 
 	@Override
 	public void onBufferingUpdate(MediaPlayer mp, int percent) {
-		System.out.println(percent);
+		//System.out.println(percent);
 		/*if (percent == 100) { // Finishing when the video is completing buffered
 					
 			 
@@ -133,14 +118,15 @@ super.execute();
 		try {
 			
 			mediaPlayer = new MediaPlayer();
-			mediaPlayer.setDisplay(vidHolder);
-			mediaPlayer.setDataSource(vidAddress);
+			mediaPlayer.setSurface(surf);
+			AssetFileDescriptor afd = getAssets().openFd("big_buck_bunny.mp4");
+			mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			mediaPlayer.prepare();
 			mediaPlayer.setOnPreparedListener(this);
 			mediaPlayer.setOnBufferingUpdateListener(this);
 			mediaPlayer.setOnCompletionListener(this);
 			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mediaPlayer.setOnInfoListener(this);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,14 +147,36 @@ super.execute();
 		super.onDestroy();
 	}
 
-	@Override
-	public boolean onInfo(MediaPlayer arg0, int arg1, int arg2) {
-		System.out.println("What: " + arg1 + " extra: " + arg2);
-		return false;
-	}
 
 	public boolean isTheLast() {
 		return isTheLast;
+	}
+
+	@Override
+	public void onSurfaceTextureAvailable(SurfaceTexture surface, int width,
+			int height) {
+		surf = new Surface(surface);
+		execute();
+		
+	}
+
+	@Override
+	public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width,
+			int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+		//System.out.println("vezes: " + surface.getTimestamp());
+		
 	}
 
 }
