@@ -16,13 +16,13 @@ import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
 import edu.performance.test.util.ActivityThread;
 
-public class StreamingActivity extends InternetPerformanceTestActivity implements
+public class StreamingVideoActivity extends InternetPerformanceTestActivity implements
 		SurfaceHolder.Callback, OnPreparedListener, OnBufferingUpdateListener,
 		OnCompletionListener, OnInfoListener, PerformanceTestInterface {
 
 	private MediaPlayer mediaPlayer;
 	private SurfaceHolder vidHolder;
-	private MySurfaceView vidSurface;
+	private MyVideoView vidSurface;
 	ActivityThread mythread;
 	public static final String STREAMSIZE = "STREAMSIZE";
 	boolean isTheLast = true;
@@ -54,7 +54,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.streaming);
+		setContentView(R.layout.streaming_video);
 		
 		if (getIntent().getExtras() != null) {
 			if (getIntent().hasExtra(Library.LEVEL_URL)
@@ -89,7 +89,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 			return;
 		}
 		
-		vidSurface = ((MySurfaceView) findViewById(R.id.surfView));
+		vidSurface = ((MyVideoView) findViewById(R.id.videoView));
 		vidHolder = vidSurface.getHolder();
 		vidHolder.addCallback(this);
 	}

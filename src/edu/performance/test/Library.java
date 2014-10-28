@@ -11,25 +11,20 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import edu.performance.test.batterytest.BatteryOperation;
 import edu.performance.test.database.DatabaseOperationActivity;
 import edu.performance.test.downloadoperation.DownloadOperationActivity;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.fileoperation.FileOperationActivity;
 import edu.performance.test.floatoperation.FloatOperationActivity;
-import edu.performance.test.gpsoperation.GPSActivity;
 import edu.performance.test.graphicoperation.CubeActivity;
 import edu.performance.test.graphicoperation.LessonThreeActivity;
 import edu.performance.test.graphicoperation.draws.ArcActivity;
@@ -39,6 +34,7 @@ import edu.performance.test.graphicoperation.draws.RectangleActivity;
 import edu.performance.test.graphicoperation.draws.TextActivity;
 import edu.performance.test.graphoperation.GraphOperationActivity;
 import edu.performance.test.integeroperation.IntegerOperationActivity;
+import edu.performance.test.locationoperation.GPSActivity;
 import edu.performance.test.mailoperation.MailOperationActivity;
 import edu.performance.test.memoryoperation.MemoryOperationActivity;
 import edu.performance.test.nativo.fileoperation.FileOperationNativeActivity;
@@ -51,7 +47,6 @@ import edu.performance.test.screen.LightTestActivity;
 import edu.performance.test.screen.MediumTestActivity;
 import edu.performance.test.screen.ScreenActivity;
 import edu.performance.test.streamingoperation.StreamingActivity;
-import edu.performance.test.streamingoperation.StreamingTextureActivity;
 import edu.performance.test.stringoperation.StringOperationActivity;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
@@ -109,12 +104,11 @@ public class Library extends Activity {
 			"small.txt", "tiny_g.txt", "medium_g.txt", "medium2_g.txt", "medium3_g.txt" };
 	HashMap<String, String> dirNames = null;
 	Library appRef = null;
-	//BatteryTest bt = null;
-	//Intent batteryIntent = null;
+	public final static String DATA_FILE_NAME = WriteNeededFiles.REPORT_DIRECTORY_NAME + "/data_" + System.currentTimeMillis() + "_" + Build.MODEL + ".xml";
 
 	Intent aTest;
 	Button btStartTest;
-	private LinearLayout rl;
+	
 	TextView status;
 	//Needed to change logcat file
 	@SuppressWarnings("unused")
@@ -219,634 +213,27 @@ public class Library extends Activity {
 
 			
 			appRef = this;
+				
 			
-			streamingTest();
-			 //todoListTests();
-			//allTests();
-			//todoListTests();
-			//browserTest();
-			//browserTest3G();
-			//sheetsTest();
-			//todoListTestsIntenso();
+			testsToDo = TestsManager.getTestList(this);
+			System.out.println(testsToDo.size());
+			btStartTest.setOnClickListener(new OnClickListener()
+		    {
 
-	}
+		        public void onClick(View v)
+		        {   
+		             doTests();
+		        } 
 
-	private void streamingTest(){
-		
-		aTest = new Intent(appRef, StreamingTextureActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_URL, "https://www.dropbox.com/s/sts9st372ksyqfy/big_buck_bunny.mp4");//"https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4");	
-		aTest.putExtra(STATUS, "Testing Streaming skills...");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);
-		
-		btStartTest.setOnClickListener(new OnClickListener()
-	    {
-
-	        public void onClick(View v)
-	        {   
-	             doTests();
-	        } 
-
-	    });
-		
-		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
-		 // btStartTest.setActivated(true);
-		 // E esse método foi adicionado
-		 btStartTest.setVisibility(View.VISIBLE);
-	}
-	private void browserTest(){
-
-		
-		aTest = new Intent(appRef, BatteryOperation.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, true);
-		aTest.putExtra(FILELOCATION, fileLocation);
-		aTest.putExtra(STRING_ARRAY, rawResourceNames);
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing battery skills...");
-		aTest.putExtra(NETWORK_TEST, true);
-		aTest.putExtra(FILELOCATION, fileLocation);
-		testsToDo.add(aTest);
-		
-		
-		/*
-		aTest = new Intent(appRef, WebServiceActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read");
-		aTest.putExtra(STATUS, "Testing WebService skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);
+		    });
 			
-		aTest = new Intent(appRef, WebOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(STATUS, "Testing Web skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, DownloadOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(FILELOCATION, fileLocation);
-		aTest.putExtra(LEVEL_INT, 1);
-		aTest.putExtra(STATUS, "Testing Download skills..\n Max time (8 min)");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);*/
-		
-		
-		
-		btStartTest.setOnClickListener(new OnClickListener()
-	    {
+			btStartTest.setVisibility(View.VISIBLE);
 
-	        public void onClick(View v)
-	        {   
-	             doTests();
-	        } 
-
-	    });
-		
-		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
-		 // btStartTest.setActivated(true);
-		 // E esse método foi adicionado
-		 btStartTest.setVisibility(View.VISIBLE);
 	}
-	
-	private void browserTest3G(){
-		//String s = this.getResources().getResourceName(R.string.app_name);
-		//s = s + 
-		/*
-		aTest = new Intent(appRef, BatteryOperation.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, true);
-		aTest.putExtra(FILELOCATION, fileLocation);
-		aTest.putExtra(STRING_ARRAY, rawResourceNames);
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing battery skills...");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);*/
-		
-		aTest = new Intent(appRef, DownloadOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 0);
-		aTest.putExtra(STATUS, "Testing Download skills..\n Max time (8 min)");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, WebServiceActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read");
-		aTest.putExtra(STATUS, "Testing WebService skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, DatabaseOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 50);
-		aTest.putExtra(STATUS, "Testing Database skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, WebOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 800000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(STATUS, "Testing Web skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, MemoryOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 1500);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Memory skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, MemoryOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 1500);
-		aTest.putExtra(STATUS, "Testing Native Memory skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-			
-		/*aTest = new Intent(appRef, MediumTestActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(STATUS, "Testing Screen skills..");
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest); 		
-		
-		
-		//------------------------CPU------------------------------------
-		aTest = new Intent(appRef, IntegerOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 555);
-		aTest.putExtra(STATUS, "Testing Integer skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, IntegerOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 555);
-		aTest.putExtra(STATUS, "Testing Integer Native skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, FloatOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 240000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_DOUBLE, 9979);
-		aTest.putExtra(STATUS, "Testing Float skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, FloatOperationNativeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 240000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Native Float skills..");
-		aTest.putExtra(LEVEL_DOUBLE, 9979);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, GraphOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
-		aTest.putExtra(STATUS, "Testing Graph skills...");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, StringOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(SEARCHABLE, new FileOperation()
-		.testTJMreadSequentialAcessFile(
-				fileLocation + "/"
-						+ rawResourceNames[fileIndexes.SMALL_TXT]));
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing String skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, StringOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(SEARCHABLE, new FileOperation()
-		.testTJMreadSequentialAcessFile(
-				fileLocation + "/"
-						+ rawResourceNames[fileIndexes.SMALL_TXT]));
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing String skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		//-----------------------------------------------------------------------------------------------------------------------
-		//-------------------------GPU-------------------------------------------------------------------------------------------
-		
-		aTest = new Intent(appRef, CubeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(STATUS, "Testing 3D skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, LessonThreeActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 0);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);		
 
-		aTest = new Intent(appRef, ArcActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 1);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, CircleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, ImageActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, RectangleActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, TextActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		//--------------------------------------------------------------------------------------------------------------
-		*/
-		
-		
-		aTest = new Intent(appRef, MailOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
-		aTest.putExtra(STATUS, "Testing Mail skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);	
-		
-		aTest = new Intent(appRef, GPSActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(STATUS, "Testing GPS skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, FileOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
-				+ rawResourceNames[fileIndexes.SMALL_TXT]);
-		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(STATUS, "Testing File skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, FileOperationNativeActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
-				+ rawResourceNames[fileIndexes.SMALL_TXT]);
-		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(STATUS, "Testing Native File skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		btStartTest.setOnClickListener(new OnClickListener()
-	    {
 
-	        public void onClick(View v)
-	        {   
-	             doTests();
-	        } 
 
-	    });
-		
-		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
-		 // btStartTest.setActivated(true);
-		 // E esse método foi adicionado
-		 btStartTest.setVisibility(View.VISIBLE);
-	}
-	
-	private void todoListTests(){
-		
-		aTest = new Intent(appRef, BatteryOperation.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, true);
-		aTest.putExtra(STRING_ARRAY, rawResourceNames);
-		aTest.putExtra(FILELOCATION, fileLocation);
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing battery skills...");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-		/*
-		aTest = new Intent(appRef, WebServiceActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read?num=50");
-		aTest.putExtra(STATUS, "Testing WebService skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);
-		
-		
-		aTest = new Intent(appRef, DatabaseOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 400000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 200);
-		aTest.putExtra(STATUS, "Testing Database skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		/*
-		aTest = new Intent(appRef, HardTestActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(STATUS, "Testing Screen skills..");
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 0);
-		testsToDo.add(aTest); -
-		
-		aTest = new Intent(appRef, MemoryOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 200);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Memory skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-
-		aTest = new Intent(appRef, WebOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 500000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 0);
-		aTest.putExtra(STATUS, "Testing Web skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);
-		/*
-		aTest = new Intent(appRef, IntegerOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 100);
-		aTest.putExtra(STATUS, "Testing Integer skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);-
-		
-		aTest = new Intent(appRef, StringOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 10);
-		aTest.putExtra(NETWORK_TEST, false);
-		aTest.putExtra(SEARCHABLE, new FileOperation()
-		.testTJMreadSequentialAcessFile(
-				fileLocation + "/"
-						+ rawResourceNames[fileIndexes.SMALL_TXT]));
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing String skills..");
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, MailOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 100000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.TINY_G_TXT]);
-		aTest.putExtra(STATUS, "Testing Mail skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);	
-		/*
-		aTest = new Intent(appRef, FileOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 1);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
-				+ rawResourceNames[fileIndexes.SMALL_TXT]);
-		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(STATUS, "Testing File skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);*/
-		
-
-		
-		btStartTest.setOnClickListener(new OnClickListener()
-	    {
-
-	        public void onClick(View v)
-	        {   
-	             doTests();
-	        } 
-
-	    });
-		
-		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
-		 // btStartTest.setActivated(true);
-		 // E esse método foi adicionado
-		 btStartTest.setVisibility(View.VISIBLE);
-		
-		
-		
-	}
-	
-	private void todoListTestsIntenso(){
-		
-	/*
-		aTest = new Intent(appRef, BatteryOperation.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, true);
-		aTest.putExtra(STRING_ARRAY, rawResourceNames);
-		aTest.putExtra(FILELOCATION, fileLocation);
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing battery skills...");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);*/
-		
-		
-		aTest = new Intent(appRef, WebServiceActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 6000000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read?num=50");
-		aTest.putExtra(STATUS, "Testing WebService skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);
-		
-		
-		aTest = new Intent(appRef, DatabaseOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 6000000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 1000);
-		aTest.putExtra(STATUS, "Testing Database skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		/*
-		aTest = new Intent(appRef, HardTestActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(STATUS, "Testing Screen skills..");
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(NETWORK_TEST, false);
-		aTest.putExtra(Library.LEVEL_INT, 0);
-		testsToDo.add(aTest); */
-		
-		aTest = new Intent(appRef, MemoryOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 6000000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(LEVEL_INT, 1000);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(STATUS, "Testing Memory skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);
-		
-
-		aTest = new Intent(appRef, WebOperationActivity.class);
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 6000000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 3);
-		aTest.putExtra(STATUS, "Testing Web skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);
-		/*
-		aTest = new Intent(appRef, IntegerOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 100);
-		aTest.putExtra(STATUS, "Testing Integer skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest); */
-		
-		aTest = new Intent(appRef, StringOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 6000000);
-		aTest.putExtra(THELASTTEST, false);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 2);
-		aTest.putExtra(NETWORK_TEST, false);
-		aTest.putExtra(SEARCHABLE, new FileOperation()
-		.testTJMreadSequentialAcessFile(
-				fileLocation + "/"
-						+ rawResourceNames[fileIndexes.MEDIUM_TXT]));
-		aTest.putExtra(SNIPPETS, snippets);	
-		aTest.putExtra(STATUS, "Testing String skills..");
-		testsToDo.add(aTest);
-		
-		aTest = new Intent(appRef, MailOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
-		aTest.putExtra(STATUS, "Testing Mail skills..");
-		aTest.putExtra(NETWORK_TEST, true);
-		testsToDo.add(aTest);	
-		/*
-		aTest = new Intent(appRef, FileOperationActivity.class); 
-		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
-		aTest.putExtra(THELASTTEST, true);
-		aTest.putExtra(BATTERYTEST, false);
-		aTest.putExtra(LEVEL_INT, 1);
-		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
-				+ rawResourceNames[fileIndexes.SMALL_TXT]);
-		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
-		aTest.putExtra(STATUS, "Testing File skills..");
-		aTest.putExtra(NETWORK_TEST, false);
-		testsToDo.add(aTest);*/
-		
-
-		
-		btStartTest.setOnClickListener(new OnClickListener()
-	    {
-
-	        public void onClick(View v)
-	        {   
-	             doTests();
-	        } 
-
-	    });
-		
-		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
-		 // btStartTest.setActivated(true);
-		 // E esse método foi adicionado
-		 btStartTest.setVisibility(View.VISIBLE);
-		
-		
-		
-	}
-	
+	@SuppressWarnings("unused")
 	private void allTests(){	
 		
 		//____________________ em ordem		
@@ -1312,8 +699,7 @@ public class Library extends Activity {
 		executeTest(testsToDo.get(countIntent));
 		//tdo.execute();
 
-
-		rl = (LinearLayout) findViewById(R.id.backgroundLayout);
+		
 		
 	}
 
@@ -1324,8 +710,11 @@ public class Library extends Activity {
 		Bundle results = data.getExtras();
 		if(resultCode == RESULT_OK)
 			System.out.println(testsToDo.get(countIntent).getStringExtra(STATUS) + " executou corretamente!");
+		else if (results.containsKey(ERROR_MESSAGE))
+			System.out.println(results.getString(ERROR_MESSAGE));
 		else
 			System.out.println(testsToDo.get(countIntent).getStringExtra(STATUS) + " falhou!");
+		
 		if(resultCode == RESULT_CANCELED){
 			//TODO This need a specific treatment when some test fails. To create list with error messages of each test for example.
 			//System.out.println(testsToDo.get(countIntent).getStringExtra(STATUS) + " failed!!!! :(");
@@ -1338,9 +727,22 @@ public class Library extends Activity {
 		}
 		else{
 			
-			myHandler.sendEmptyMessage(3);
-			//rl.setBackgroundColor(Color.BLACK);
-			//ct.execute(null, null, null);
+			
+			File textFile2Read = new File(DATA_FILE_NAME);
+			
+			if(textFile2Read.canRead()){
+				try{
+					Intent i2 = new Intent();
+					i2.setAction(android.content.Intent.ACTION_VIEW);
+					i2.setDataAndType(Uri.fromFile(textFile2Read), "text/xml");
+					startActivity(i2);
+				}
+				catch(Exception e){
+					e.getStackTrace();
+				}
+			}
+			
+			appRef.finish();
 		}
 		
 		
@@ -1361,41 +763,7 @@ public class Library extends Activity {
 
 	}
 	
-	//@SuppressLint("HandlerLeak")
-	Handler myHandler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case 0:
-				rl.setBackgroundColor(Color.BLACK);
-				
-				break;
-
-			case 3:
-				//WriteNeededFiles.deleteFiles(appRef, rawResourceNames);
-				//TODO make a better solution to back previous network status
-				InternetController.setWifiAvailability(true, appRef);
-				appRef.finish();
-				File textFile2Read = new File(WriteNeededFiles.REPORT_DIRECTORY_NAME + "/data.xml");
-				
-				if(textFile2Read.canRead()){
-					try{
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromFile(textFile2Read));
-					intent.addCategory(Intent.CATEGORY_BROWSABLE);
-					startActivity(intent);
-					}
-					catch(Exception e){
-						e.getStackTrace();
-					}
-				}
-				
-				
-			default:
-				break;
-			}
-		}
-	};
+	
 	
 	
 	void executeTest(Intent test){

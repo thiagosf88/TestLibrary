@@ -18,5 +18,10 @@ public class MySurfaceView extends SurfaceView {
 	        super.onDraw(canvas);
 	        System.out.println( "On Draw Called");
 	    }
-
+	 
+	 
+	 public void draw(Canvas c){
+		 super.draw(c);
+		 System.out.println( "----------------------------Draw Called");
+	 }
 }

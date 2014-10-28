@@ -15,7 +15,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import android.database.Cursor;
 import android.os.Debug;
 import android.os.SystemClock;
-import edu.performance.test.util.WriteNeededFiles;
 
 /**
  * This class is responsible to get metric information about the tests.
@@ -31,7 +30,6 @@ public aspect MetricsByAspects {
 	private long startActivity = 0;
 	double nanoSegRate = 1000000.0;
 	BufferedWriter out = null;
-	private final String dataFileName = "ToDoApp_BatteryTest.xml";
 	//Variables to get FPS rate
 	protected long startTime;
 	protected long fpsStartTime;
@@ -43,7 +41,7 @@ public aspect MetricsByAspects {
 		try {
 			
 			out = new BufferedWriter(new FileWriter((new File(
-					WriteNeededFiles.REPORT_DIRECTORY_NAME + "/" + dataFileName))));
+					Library.DATA_FILE_NAME))));
 			out.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "\n");
 			out.write("<performanceData \n\t\t\t xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n\t\t\t xsi:noNamespaceSchemaLocation=\"model.xsd\">\n");
 			out.flush();
@@ -483,7 +481,7 @@ public aspect MetricsByAspects {
 			out.write("</performanceData>");
 			out.flush();
 			out.close();
-			System.out.println("Closing" + dataFileName + " file at MetricsByAspect!!");
+			System.out.println("Closing " + Library.DATA_FILE_NAME + " file at MetricsByAspect!!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

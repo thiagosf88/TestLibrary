@@ -1,5 +1,8 @@
 package edu.performance.test.streamingoperation;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -7,6 +10,8 @@ import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnInfoListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.opengl.GLSurfaceView;
+import android.opengl.GLSurfaceView.Renderer;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import edu.performance.test.InternetPerformanceTestActivity;
@@ -16,34 +21,17 @@ import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
 import edu.performance.test.util.ActivityThread;
 
-public class StreamingActivity extends InternetPerformanceTestActivity implements
-		SurfaceHolder.Callback, OnPreparedListener, OnBufferingUpdateListener,
-		OnCompletionListener, OnInfoListener, PerformanceTestInterface {
+public class StreamingGLSurfaceActivity extends InternetPerformanceTestActivity implements
+		OnPreparedListener, OnBufferingUpdateListener,
+		OnCompletionListener, OnInfoListener, PerformanceTestInterface, SurfaceHolder.Callback {
 
 	private MediaPlayer mediaPlayer;
 	private SurfaceHolder vidHolder;
-	private MySurfaceView vidSurface;
+	private GLSurfaceView vidSurface;
 	ActivityThread mythread;
 	public static final String STREAMSIZE = "STREAMSIZE";
 	boolean isTheLast = true;
 	String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-
-		execute();
-	}
-
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-
-	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-
-	}
 
 	@Override
 	public void onPrepared(MediaPlayer mp) {
@@ -54,7 +42,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.streaming);
+		setContentView(R.layout.streaming_glsurface);
 		
 		if (getIntent().getExtras() != null) {
 			if (getIntent().hasExtra(Library.LEVEL_URL)
@@ -89,9 +77,33 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 			return;
 		}
 		
-		vidSurface = ((MySurfaceView) findViewById(R.id.surfView));
+		vidSurface = ((GLSurfaceView) findViewById(R.id.glsurfaceview));
+		
+		vidSurface.setRenderer(new Renderer() {
+
+            @Override
+            public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+            	System.out.println("surfacecreated");
+            	
+
+            }
+
+            @Override
+            public void onSurfaceChanged(GL10 gl, int width, int height) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onDrawFrame(GL10 gl) {
+                System.out.println("onDrawFrame");
+
+            }
+        });
+		
 		vidHolder = vidSurface.getHolder();
 		vidHolder.addCallback(this);
+		
 	}
 
 	@Override
@@ -168,6 +180,25 @@ super.execute();
 
 	public boolean isTheLast() {
 		return isTheLast;
+	}
+
+	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		execute();
+		
+	}
+
+	@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+			int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

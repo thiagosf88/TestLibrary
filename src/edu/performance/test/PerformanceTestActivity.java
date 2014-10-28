@@ -58,6 +58,13 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 			
 			
 		}
+		else{
+			Bundle extras = new Bundle();
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			extras.putString(Library.ERROR_MESSAGE, "Não foi possível obter os parâmetros mínimos necessários. O método getExtras retornou null!");
+			finishTest(extras);
+			finish();
+		}
 		
 		powerManager = (PowerManager) this
 				.getSystemService(Context.POWER_SERVICE);

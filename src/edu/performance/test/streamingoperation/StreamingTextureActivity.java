@@ -41,7 +41,7 @@ public class StreamingTextureActivity extends InternetPerformanceTestActivity im
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.streaming2);
+		setContentView(R.layout.streaming_texture);
 		
 		if (getIntent().getExtras() != null) {
 			if (getIntent().hasExtra(Library.LEVEL_URL)

@@ -13,10 +13,11 @@ public class FloatOperationActivity extends PerformanceTestActivity {
 		
 		if(getIntent().getExtras() != null){
 			if(getIntent().hasExtra(Library.LEVEL_DOUBLE)){
-				level = getIntent().getExtras().getInt(Library.LEVEL_DOUBLE);
+				level = getIntent().getExtras().getDouble(Library.LEVEL_DOUBLE);
 			}
 			else{
 				Bundle extras = new Bundle();
+				extras.putString(Library.ERROR_MESSAGE, "O nível não foi fornecido!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				return;
@@ -25,6 +26,7 @@ public class FloatOperationActivity extends PerformanceTestActivity {
 	else{
 		Bundle extras = new Bundle();
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+		extras.putString(Library.ERROR_MESSAGE, "Não foi possível obter os parâmetros necessários. O método getExtras retornou null!");
 		finishTest(extras);
 		finish();
 	}
