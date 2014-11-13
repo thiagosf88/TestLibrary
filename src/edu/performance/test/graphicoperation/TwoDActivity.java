@@ -11,7 +11,7 @@ import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.util.ActivityThread;
 import edu.performance.test.util.TestThread;
 
-public abstract class DrawActivity extends PerformanceTestActivity{
+public abstract class TwoDActivity extends PerformanceTestActivity{
 	
 	TestThread mythreadT;
 	boolean isTheLast;

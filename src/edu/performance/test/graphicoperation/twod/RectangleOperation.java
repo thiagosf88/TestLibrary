@@ -1,4 +1,4 @@
-package edu.performance.test.graphicoperation.draws;
+package edu.performance.test.graphicoperation.twod;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
-import edu.performance.test.graphicoperation.DrawActivity;
+import edu.performance.test.graphicoperation.TwoDActivity;
 import edu.performance.test.graphicoperation.Operation;
 
 public class RectangleOperation extends Operation {
@@ -39,7 +39,7 @@ public class RectangleOperation extends Operation {
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		//generateNewRect(1000);
-		((DrawActivity) context).executeTest(holder, this);
+		((TwoDActivity) context).executeTest(holder, this);
 
 	}
 
@@ -52,7 +52,7 @@ public class RectangleOperation extends Operation {
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		((DrawActivity) context).finishTest();
+		((TwoDActivity) context).finishTest();
 
 	}
 
@@ -62,8 +62,8 @@ public class RectangleOperation extends Operation {
 		generateNewRect();
 		drawAll(canvas);
 
-		if (((DrawActivity) context).isItTimeToFinish())
-			((DrawActivity) context).finishTest();
+		if (((TwoDActivity) context).isItTimeToFinish())
+			((TwoDActivity) context).finishTest();
 
 	}
 	/**

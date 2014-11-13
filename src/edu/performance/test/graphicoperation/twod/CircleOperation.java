@@ -1,4 +1,4 @@
-package edu.performance.test.graphicoperation.draws;
+package edu.performance.test.graphicoperation.twod;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
-import edu.performance.test.graphicoperation.DrawActivity;
+import edu.performance.test.graphicoperation.TwoDActivity;
 import edu.performance.test.graphicoperation.Operation;
 
 public class CircleOperation extends Operation {
@@ -31,7 +31,7 @@ public class CircleOperation extends Operation {
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 
-		((DrawActivity)context).executeTest(holder, this);
+		((TwoDActivity)context).executeTest(holder, this);
 		
 
 	}
@@ -52,8 +52,8 @@ public class CircleOperation extends Operation {
 	{
 		drawCircle(canvas);
 		
-		if(((DrawActivity)context).isItTimeToFinish())			
-		((DrawActivity)context).finishTest();
+		if(((TwoDActivity)context).isItTimeToFinish())			
+		((TwoDActivity)context).finishTest();
 
 	}
 

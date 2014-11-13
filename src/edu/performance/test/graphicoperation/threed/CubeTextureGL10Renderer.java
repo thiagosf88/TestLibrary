@@ -1,4 +1,4 @@
-package edu.performance.test.graphicoperation;
+package edu.performance.test.graphicoperation.threed;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -10,8 +10,9 @@ import android.opengl.GLU;
 import android.util.Log;
 import edu.performance.test.Library;
 import edu.performance.test.R;
+import edu.performance.test.graphicoperation.ThreeDActivity;
 
-public class CubeRenderer implements Renderer {
+public class CubeTextureGL10Renderer implements Renderer {
 		private static final String TAG = "GLRenderer";
 		private final Context context;
 		//private int level = 100; //1000 já é lento no s3
@@ -20,7 +21,7 @@ public class CubeRenderer implements Renderer {
 		private long fpsStartTime;
 		private long numFrames;
 		
-		public CubeRenderer(Context context) {
+		public CubeTextureGL10Renderer(Context context) {
 			//super(context);
 			this.context = context;
 		}
@@ -33,13 +34,13 @@ public class CubeRenderer implements Renderer {
 	            @Override
 	            public void run() {
 	                try {
-	                    Thread.sleep(((CubeActivity)context).getMAX_TIME_MS());
+	                    Thread.sleep(((CubeTextureGL10Activity)context).getMAX_TIME_MS());
 	                } catch (InterruptedException e) {
 	                    e.printStackTrace();
 	                }
 	                
 	                Intent mIntent = new Intent();
-					mIntent.putExtra(Library.THELASTTEST, false);
+					mIntent.putExtra(Library.THELASTTEST, ((CubeTextureGL10Activity)context).isTheLast());
 					((ThreeDActivity)context).setResult(ThreeDActivity.RESULT_OK, mIntent);
 					System.out.println("saindo. Is it the last? " + false );
 					((ThreeDActivity)context).finish();

@@ -1,4 +1,4 @@
-package edu.performance.test.graphicoperation;
+package edu.performance.test.graphicoperation.threed;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

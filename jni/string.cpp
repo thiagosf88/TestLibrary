@@ -15,7 +15,7 @@ void Java_edu_performance_test_nativo_stringoperation_StringOperationNative_test
 
 	LOGE("%i",searchable.find(stretch));
 
-
+//TODO verificar se está funcionando string nativo
 	//env->ReleaseStringUTFChars(jsearchable, searchable);
 	//env->ReleaseStringUTFChars(jstretch, stretch);
 }

@@ -1,4 +1,4 @@
-package edu.performance.test.graphicoperation.draws;
+package edu.performance.test.graphicoperation.twod;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
-import edu.performance.test.graphicoperation.DrawActivity;
+import edu.performance.test.graphicoperation.TwoDActivity;
 import edu.performance.test.graphicoperation.Operation;
 
 public class TextOperation extends Operation {
@@ -45,7 +45,7 @@ public class TextOperation extends Operation {
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		((DrawActivity)context).executeTest(holder, this);
+		((TwoDActivity)context).executeTest(holder, this);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class TextOperation extends Operation {
 
 		generateNewText(canvas);
 
-		if(((DrawActivity)context).isItTimeToFinish())			
-		((DrawActivity)context).finishTest();
+		if(((TwoDActivity)context).isItTimeToFinish())			
+		((TwoDActivity)context).finishTest();
 
 	}
 

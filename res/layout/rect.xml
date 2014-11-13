@@ -8,7 +8,7 @@
 
  
 
-<edu.performance.test.graphicoperation.draws.RectangleOperation
+<edu.performance.test.graphicoperation.twod.RectangleOperation
 
 android:layout_width="fill_parent"
 

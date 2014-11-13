@@ -1,4 +1,4 @@
-package edu.performance.test.graphicoperation;
+package edu.performance.test.graphicoperation.threed;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -8,12 +8,13 @@ import android.os.Bundle;
 import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
-public class LessonThreeActivity extends PerformanceTestActivity 
+public class CubeTextureGLES2Activity extends PerformanceTestActivity 
 {
 	/** Hold a reference to our GLSurfaceView */
 	private GLSurfaceView mGLSurfaceView;
 	
 	protected int level;
+	protected int idTextureResource;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -21,7 +22,17 @@ public class LessonThreeActivity extends PerformanceTestActivity
 		super.onCreate(savedInstanceState);
 		if(getIntent().getExtras() != null){
 			
-			level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			if(getIntent().hasExtra(Library.LEVEL_INT)){
+				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			}
+			else{
+				Bundle extras = new Bundle();
+				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level ou idTextureResource!");
+				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+				finishTest(extras);
+				setResult(RESULT_CANCELED);
+				finish();
+			}
 		}
 
 		mGLSurfaceView = new GLSurfaceView(this);
@@ -37,7 +48,7 @@ public class LessonThreeActivity extends PerformanceTestActivity
 			mGLSurfaceView.setEGLContextClientVersion(2);
 
 			// Set the renderer to our demo renderer, defined below.
-			mGLSurfaceView.setRenderer(new LessonThreeRenderer(this));
+			mGLSurfaceView.setRenderer(new CubeTextureGLES2Renderer(this));
 		} 
 		else 
 		{
@@ -82,5 +93,9 @@ public class LessonThreeActivity extends PerformanceTestActivity
 	public boolean isTheLast() {
 		return super.isTheLast();
 		
+	}
+
+	public int getIdTextureResource() {
+		return idTextureResource;
 	}	
 }

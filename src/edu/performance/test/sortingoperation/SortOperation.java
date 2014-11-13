@@ -1,38 +1,30 @@
-package edu.performance.test.memoryoperation;
+package edu.performance.test.sortingoperation;
 
+import java.util.GregorianCalendar;
+import java.util.Random;
+
+import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
-/**
- * This class has code of sort algorithms. Some of them are hard coded and other
- * use JAVA API sorting methods. Merge, Quick (Princeton).
- * @author Thiago
- *
- */
-@SuppressWarnings("rawtypes")
-public class OrderOperation extends PerformanceTest<Comparable[]>{
+import edu.performance.test.PerformanceTestInterface;
+import edu.performance.test.locationoperation.GPSActivity;
 
-	public OrderOperation(Comparable[] level, PerformanceTestActivity activity) {
+public class SortOperation extends PerformanceTest<Integer> implements PerformanceTestInterface{
+	
+	public SortOperation(Integer level, PerformanceTestActivity activity) {
 		super(level, activity);
-		activity.executeTest();
+		
+		if(activity != null)
+			activity.executeTest();
 	}
 
-	@Override
-	public void execute() {
-		//TODO testar essas operações
-		testTJMmergesort(this.getLevel());
-		testTJMquicksort(this.getLevel());
-		
-	}
-	
-// Merge Sort Princeton --------------------------------------------------------------------------------
-	
 	public void testTJMmergesort(Comparable[] a) {
         mergeSort(a, 0, a.length);
     } 
 
     // Sort a[lo, hi). 
     @SuppressWarnings("unchecked")
-	public static void mergeSort(Comparable[] a, int lo, int hi) {
+	public void mergeSort(Comparable[] a, int lo, int hi) {
         int N = hi - lo;        // number of elements to sort
 
         // 0- or 1-element file, so we're done
@@ -60,14 +52,14 @@ public class OrderOperation extends PerformanceTest<Comparable[]>{
     }
     
     //Quick Sort ---------------------------------------------------------------
-    public static void testTJMquicksort(Comparable[] a) {
+    public void testTJMquicksort(Comparable[] a) {
         //StdRandom.shuffle(a);
         quickSort(a, 0, a.length - 1);
         //assert isSorted(a);
     }
 
     // quicksort the subarray from a[lo] to a[hi]
-    private static void quickSort(Comparable[] a, int lo, int hi) { 
+    private void quickSort(Comparable[] a, int lo, int hi) { 
         if (hi <= lo) return;
         int j = partition(a, lo, hi);
         quickSort(a, lo, j-1);
@@ -77,7 +69,7 @@ public class OrderOperation extends PerformanceTest<Comparable[]>{
 
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
-    private static int partition(Comparable[] a, int lo, int hi) {
+    private int partition(Comparable[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
         Comparable v = a[lo];
@@ -105,15 +97,44 @@ public class OrderOperation extends PerformanceTest<Comparable[]>{
     }
     
     @SuppressWarnings("unchecked")
-	private static boolean less(Comparable v, Comparable w) {
+	private boolean less(Comparable v, Comparable w) {
         return (v.compareTo(w) < 0);
     }
         
     // exchange a[i] and a[j]
-    private static void exch(Object[] a, int i, int j) {
+    private void exch(Object[] a, int i, int j) {
         Object swap = a[i];
         a[i] = a[j];
         a[j] = swap;
     }
+    
+
+
+@Override
+public void execute() {
+	People [] p = new People().createPeople(this.getLevel());
+	//System.out.println(" antes do merge : \n " + print(p));
+	testTJMmergesort(p);
+	//System.out.println(" depois do merge : \n " + print(p));
+	p = new People().createPeople(this.getLevel());
+	//System.out.println(" antes do quick : \n " + print(p));
+	testTJMquicksort(p);
+	//System.out.println(" depois do quick : \n " + print(p));
+	
+	Bundle extras = new Bundle();			
+	extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+	activity.finishTest(extras);
+	
+	
+}
+
+String print(People p[]){
+	String result = new String();
+	for(People s : p){
+		result = result.concat(s.toString());
+	}
+	
+	return result;
+}
 
 }

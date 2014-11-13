@@ -94,35 +94,35 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.draws.CircleActivity"
+            android:name="edu.performance.test.graphicoperation.twod.CircleActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.draws.RectangleActivity"
+            android:name="edu.performance.test.graphicoperation.twod.RectangleActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.draws.ImageActivity"
+            android:name="edu.performance.test.graphicoperation.twod.ImageActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.draws.ArcActivity"
+            android:name="edu.performance.test.graphicoperation.twod.ArcActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.draws.TextActivity"
+            android:name="edu.performance.test.graphicoperation.twod.TextActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.CubeActivity"
+            android:name="edu.performance.test.graphicoperation.threed.CubeTextureGL10Activity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.LessonThreeActivity"
+            android:name="edu.performance.test.graphicoperation.threed.CubeColorGLES2Activity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.graphicoperation.TeapotActivity"
+            android:name="edu.performance.test.graphicoperation.threed.TeapotActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -197,7 +197,11 @@
             android:name="edu.performance.test.weboperation.WebServiceActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <service android:name=".util.MonitoringService"></service>
+        
+        <activity android:name="edu.performance.test.sortingoperation.SortingOperationActivity" 
+            android:screenOrientation="portrait" >
+        </activity>
+        
         
     </application>
 

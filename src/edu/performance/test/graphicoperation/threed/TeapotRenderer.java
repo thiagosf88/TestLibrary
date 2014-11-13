@@ -16,7 +16,7 @@
  * Origin: http://code.google.com/p/android-utah-teapot/
  */
 
-package edu.performance.test.graphicoperation;
+package edu.performance.test.graphicoperation.threed;
 
 
 
@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
 import edu.performance.test.Library;
+import edu.performance.test.graphicoperation.ThreeDActivity;
 
 
 public class TeapotRenderer implements Renderer {

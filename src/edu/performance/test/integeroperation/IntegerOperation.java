@@ -91,7 +91,7 @@ public class IntegerOperation extends PerformanceTest<Integer> {
 	 * This method implements the Ackermann-Peter function. This a
 	 * fully-computable whose result increases quickly. Because of that the
 	 * parameter values must be really small. Currently this implementation is
-	 * limiting m in 4 and n in 3. 
+	 * limiting m in 2 and n in 2. 
 	 * 
 	 * @param m
 	 * @param n

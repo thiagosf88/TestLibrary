@@ -1,18 +1,22 @@
 package edu.performance.test.graphicoperation;
 
+import edu.performance.test.graphicoperation.threed.CubeTextureGL10Activity;
+import edu.performance.test.graphicoperation.threed.CubeTextureGL10Renderer;
+import edu.performance.test.graphicoperation.threed.TeapotActivity;
+import edu.performance.test.graphicoperation.threed.TeapotRenderer;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
 public class Operation3d extends GLSurfaceView{
 	
-		private  CubeRenderer renderer;
+		private  CubeTextureGL10Renderer renderer;
 		private TeapotRenderer renderer2;
 		
 		public Operation3d (Context context) {
 			super(context);
 			
-			if(context instanceof CubeActivity){
-			renderer = new CubeRenderer(context);
+			if(context instanceof CubeTextureGL10Activity){
+			renderer = new CubeTextureGL10Renderer(context);
 			setRenderer(renderer);
 			}
 			

@@ -1,10 +1,10 @@
-package edu.performance.test.graphicoperation.draws;
+package edu.performance.test.graphicoperation.twod;
 
 import android.os.Bundle;
 import edu.performance.test.R;
-import edu.performance.test.graphicoperation.DrawActivity;
+import edu.performance.test.graphicoperation.TwoDActivity;
 
-public class CircleActivity extends DrawActivity {
+public class CircleActivity extends TwoDActivity {
 	
 	CircleOperation operation;
 

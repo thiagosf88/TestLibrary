@@ -21,8 +21,8 @@ public abstract class Operation extends SurfaceView implements
 	public Operation(Context context) {
 		super(context);
 		this.context = context;
-		if(context instanceof DrawActivity)
-		this.level = ((DrawActivity) context).getLevel();
+		if(context instanceof TwoDActivity)
+		this.level = ((TwoDActivity) context).getLevel();
 		
 	}
 	

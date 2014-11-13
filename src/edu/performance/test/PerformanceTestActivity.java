@@ -42,7 +42,9 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		 status = (TextView)findViewById(R.id.status);
 		 
 		
-		if(getIntent().getExtras() != null){
+		if(getIntent().getExtras() != null && getIntent().hasExtra(Library.THELASTTEST)
+				&& getIntent().hasExtra(MAXTIME) && getIntent().hasExtra(Library.STATUS)
+				&& getIntent().hasExtra(Library.BATTERYTEST)){
 			
 			if(getIntent().hasExtra(Library.THELASTTEST))
 				setTheLast(getIntent().getExtras().getBoolean(Library.THELASTTEST));

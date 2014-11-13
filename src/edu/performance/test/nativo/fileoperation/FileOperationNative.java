@@ -23,6 +23,7 @@ public class FileOperationNative extends StorageTests {
 		// System.out.println("rsaf");
 		testNreadSequentialAcessFile(this.getFilePath(), (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1));
 		// System.out.println("rraf");
+		//TODO fazer a leitura sequencial em c++
 		testNreadRandomAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
 				this.getLevel() * 1024);
 		// System.out.println("wraf");

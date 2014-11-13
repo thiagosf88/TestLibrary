@@ -36,13 +36,15 @@ public class GraphOperation extends PerformanceTest<String> implements
 		EdgeWeightedDigraph ewd = new EdgeWeightedDigraph(in);
 		
 		
-		Bundle extras = new Bundle();			
-		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
-		activity.finishTest(extras);
+		
 		
         
 		//d = new DijkstraSP(eg);
 		testTJMShorterPathDijstra(ewd, this.getLevel());
+		
+		Bundle extras = new Bundle();			
+		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+		activity.finishTest(extras);
 		
 	}
 	

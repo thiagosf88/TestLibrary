@@ -1,10 +1,10 @@
-package edu.performance.test.graphicoperation.draws;
+package edu.performance.test.graphicoperation.twod;
 
 import android.os.Bundle;
 import edu.performance.test.R;
-import edu.performance.test.graphicoperation.DrawActivity;
+import edu.performance.test.graphicoperation.TwoDActivity;
 
-public class ArcActivity extends DrawActivity {
+public class ArcActivity extends TwoDActivity {
 	
 	ArcOperation operation;
 

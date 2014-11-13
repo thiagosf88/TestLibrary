@@ -8,7 +8,7 @@
 
  
 
-<edu.performance.test.graphicoperation.draws.CircleOperation
+<edu.performance.test.graphicoperation.twod.CircleOperation
 
 android:layout_width="fill_parent"
 

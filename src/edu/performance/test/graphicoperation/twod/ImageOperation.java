@@ -1,4 +1,4 @@
-package edu.performance.test.graphicoperation.draws;
+package edu.performance.test.graphicoperation.twod;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import edu.performance.test.R;
-import edu.performance.test.graphicoperation.DrawActivity;
+import edu.performance.test.graphicoperation.TwoDActivity;
 import edu.performance.test.graphicoperation.Operation;
 
 public class ImageOperation extends Operation {
@@ -51,7 +51,7 @@ public class ImageOperation extends Operation {
 		Drawable myDrawable = getResources().getDrawable(R.drawable.icon);
 		mBitmap = ((BitmapDrawable) myDrawable).getBitmap();
 
-		((DrawActivity)context).executeTest(holder, this);
+		((TwoDActivity)context).executeTest(holder, this);
 
 	}
 
@@ -73,8 +73,8 @@ public class ImageOperation extends Operation {
 
 		drawImage(canvas);
 
-		if(((DrawActivity)context).isItTimeToFinish())			
-		((DrawActivity)context).finishTest();
+		if(((TwoDActivity)context).isItTimeToFinish())			
+		((TwoDActivity)context).finishTest();
 
 
 	}

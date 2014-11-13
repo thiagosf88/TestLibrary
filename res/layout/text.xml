@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" > 
 
-<edu.performance.test.graphicoperation.draws.TextOperation
+<edu.performance.test.graphicoperation.twod.TextOperation
 
 android:layout_width="fill_parent"
 

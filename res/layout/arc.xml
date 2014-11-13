@@ -8,7 +8,7 @@
 
  
 
-<edu.performance.test.graphicoperation.draws.ArcOperation
+<edu.performance.test.graphicoperation.twod.ArcOperation
 
 android:layout_width="fill_parent"
 

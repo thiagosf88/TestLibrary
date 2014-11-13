@@ -25,13 +25,13 @@ import edu.performance.test.downloadoperation.DownloadOperationActivity;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.fileoperation.FileOperationActivity;
 import edu.performance.test.floatoperation.FloatOperationActivity;
-import edu.performance.test.graphicoperation.CubeActivity;
-import edu.performance.test.graphicoperation.LessonThreeActivity;
-import edu.performance.test.graphicoperation.draws.ArcActivity;
-import edu.performance.test.graphicoperation.draws.CircleActivity;
-import edu.performance.test.graphicoperation.draws.ImageActivity;
-import edu.performance.test.graphicoperation.draws.RectangleActivity;
-import edu.performance.test.graphicoperation.draws.TextActivity;
+import edu.performance.test.graphicoperation.threed.CubeTextureGL10Activity;
+import edu.performance.test.graphicoperation.threed.CubeColorGLES2Activity;
+import edu.performance.test.graphicoperation.twod.ArcActivity;
+import edu.performance.test.graphicoperation.twod.CircleActivity;
+import edu.performance.test.graphicoperation.twod.ImageActivity;
+import edu.performance.test.graphicoperation.twod.RectangleActivity;
+import edu.performance.test.graphicoperation.twod.TextActivity;
 import edu.performance.test.graphoperation.GraphOperationActivity;
 import edu.performance.test.integeroperation.IntegerOperationActivity;
 import edu.performance.test.locationoperation.GPSActivity;
@@ -266,7 +266,7 @@ public class Library extends Activity {
 		//Graphic Operation 3D ---------------------------------------------------------------
 		
 			//----------
-		/*aTest = new Intent(appRef, CubeActivity.class);
+		/*aTest = new Intent(appRef, CubeTextureGL10Activity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
@@ -274,7 +274,7 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing 3D skills..");
 		testsToDo.add(aTest);*/
 
-		aTest = new Intent(appRef, CubeActivity.class);
+		aTest = new Intent(appRef, CubeTextureGL10Activity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(NETWORK_TEST, false);
@@ -283,7 +283,7 @@ public class Library extends Activity {
 		aTest.putExtra(STATUS, "Testing 3D skills..");
 		testsToDo.add(aTest);
 		
-		/*aTest = new Intent(appRef, CubeActivity.class);
+		/*aTest = new Intent(appRef, CubeTextureGL10Activity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(BATTERYTEST, false);
@@ -293,14 +293,14 @@ public class Library extends Activity {
 		
 			//--------------
 		
-		/*aTest = new Intent(appRef, LessonThreeActivity.class);
+		/*aTest = new Intent(appRef, CubeColorGLES2Activity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 0);
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);*/
 			
-		aTest = new Intent(appRef, LessonThreeActivity.class);
+		aTest = new Intent(appRef, CubeColorGLES2Activity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(NETWORK_TEST, false);
@@ -308,7 +308,7 @@ public class Library extends Activity {
 		aTest.putExtra(BATTERYTEST, false);
 		testsToDo.add(aTest);
 		
-		/*aTest = new Intent(appRef, LessonThreeActivity.class);
+		/*aTest = new Intent(appRef, CubeColorGLES2Activity.class);
 		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
 		aTest.putExtra(THELASTTEST, false);
 		aTest.putExtra(LEVEL_INT, 100);
