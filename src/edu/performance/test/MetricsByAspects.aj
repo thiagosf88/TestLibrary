@@ -107,12 +107,12 @@ public aspect MetricsByAspects {
 
 	}
 	
-	@Pointcut("execution(* edu.performance.test.screen.*.execute(..))")
+	@Pointcut("execution(* edu.performance.test.screenoperation.*.execute(..))")
 	public void TestMethodsTimeAndMemoryInterfaceCreated() {
 
 	}
 	
-	@Pointcut("call(* edu.performance.test.screen.*.finish(..))")
+	@Pointcut("call(* edu.performance.test.screenoperation.*.finish(..))")
 	public void TestMethodsTimeAndMemoryInterfaceFinished() {
 
 	}

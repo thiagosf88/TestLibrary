@@ -22,8 +22,9 @@ public class CubeTextureGLES2Activity extends PerformanceTestActivity
 		super.onCreate(savedInstanceState);
 		if(getIntent().getExtras() != null){
 			
-			if(getIntent().hasExtra(Library.LEVEL_INT)){
+			if(getIntent().hasExtra(Library.LEVEL_INT) && getIntent().hasExtra(Library.PARAMETERS_INT)){
 				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+				idTextureResource = getIntent().getExtras().getInt(Library.PARAMETERS_INT);
 			}
 			else{
 				Bundle extras = new Bundle();
@@ -34,6 +35,14 @@ public class CubeTextureGLES2Activity extends PerformanceTestActivity
 				finish();
 			}
 		}
+		else{
+			Bundle extras = new Bundle();
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			finishTest(extras);
+			setResult(RESULT_CANCELED);
+			finish();
+		}
+		
 
 		mGLSurfaceView = new GLSurfaceView(this);
 

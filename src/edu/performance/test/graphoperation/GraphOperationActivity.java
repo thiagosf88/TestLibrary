@@ -17,9 +17,17 @@ public class GraphOperationActivity extends PerformanceTestActivity {
 			level = getIntent().getExtras().getString(Library.LEVEL_FILENAME);
 			else{
 				Bundle extras = new Bundle();
+				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: filename!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 			}
+		}
+		else{
+			Bundle extras = new Bundle();			
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			finishTest(extras);
+			setResult(RESULT_CANCELED);
+			finish();
 		}
 		operation = new GraphOperation(this, level);
 		

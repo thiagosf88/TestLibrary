@@ -1,4 +1,4 @@
-package edu.performance.test.screen;
+package edu.performance.test.screenoperation;
 
 import android.os.Bundle;
 import edu.performance.test.R;

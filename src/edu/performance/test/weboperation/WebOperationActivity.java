@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.R;
 
 /**
  * This class extends PerformanceTestActivity but it does not start a new new
@@ -43,9 +42,11 @@ public class WebOperationActivity extends PerformanceTestActivity {
 		status.setText(message);
 
 		if (getIntent().getExtras() != null) {
-			websites = getResources().getStringArray(R.array.webSites);
+			
 			if (getIntent().hasExtra(Library.LEVEL_INT)
-					&& getIntent().hasExtra(Library.THELASTTEST)) {
+					&& getIntent().hasExtra(Library.THELASTTEST)
+					&& getIntent().hasExtra(Library.PARAMETERS_WEB_ARRAY)) {
+				websites = getIntent().getExtras().getStringArray(Library.PARAMETERS_WEB_ARRAY);
 				level = getIntent().getExtras().getInt(Library.LEVEL_INT) <= (websites.length -1) ? 
 				getIntent().getExtras().getInt(Library.LEVEL_INT) : (websites.length -1);
 				
@@ -53,6 +54,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 						Library.THELASTTEST));
 			} else {
 				Bundle extras = new Bundle();
+				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: índice do array de websites, array de websites!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				return;

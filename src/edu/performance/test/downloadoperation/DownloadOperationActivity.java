@@ -23,12 +23,14 @@ public class DownloadOperationActivity extends InternetPerformanceTestActivity {
 
 			else {
 				Bundle extras = new Bundle();
+				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level ou downloadLocation!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				return;
 			}
 		} else {
 			Bundle extras = new Bundle();
+			extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos extras!");
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			finishTest(extras);
 			finish();

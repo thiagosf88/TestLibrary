@@ -23,9 +23,17 @@ public class StringOperationActivity extends PerformanceTestActivity {
 				level = getIntent().getExtras().getInt(Library.LEVEL_INT) < (snippets.length/3) ? getIntent().getExtras().getInt(Library.LEVEL_INT) : 0;
 			} else {
 				Bundle extras = new Bundle();
+				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level, trechos pesquisáveis ou string base!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 			}
+		}
+		else{
+			Bundle extras = new Bundle();			
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			finishTest(extras);
+			setResult(RESULT_CANCELED);
+			finish();
 		}
 		
 		operation = new StringOperation(this, searchable, snippets);

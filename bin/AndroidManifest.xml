@@ -130,19 +130,19 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.screen.ScreenActivity"
+            android:name="edu.performance.test.screenoperation.ScreenActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.screen.LightTestActivity"
+            android:name="edu.performance.test.screenoperation.LightTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.screen.MediumTestActivity"
+            android:name="edu.performance.test.screenoperation.MediumTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.screen.HardTestActivity"
+            android:name="edu.performance.test.screenoperation.HardTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

@@ -26,7 +26,6 @@ public class GPSActivity extends PerformanceTestActivity {
 		} else {
 			Bundle extras = new Bundle();
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
-			extras.putString(Library.ERROR_MESSAGE, "Não foi possível obter os parâmetros necessários. O método getExtras retornou null!");
 			finishTest(extras);
 			finish();
 		}

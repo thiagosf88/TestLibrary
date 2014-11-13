@@ -14,7 +14,7 @@ edu.performance.test.nativo.floatoperation
 edu.performance.test.nativo.integeroperation
 edu.performance.test.nativo.memorymanipulation
 edu.performance.test.nativo.stringoperation
-edu.performance.test.screen
+edu.performance.test.screenoperation
 edu.performance.test.streamingoperation
 edu.performance.test.stringoperation
 edu.performance.test.util

@@ -42,10 +42,10 @@ import edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity;
 import edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity;
 import edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity;
 import edu.performance.test.nativo.stringoperation.StringOperationNativeActivity;
-import edu.performance.test.screen.HardTestActivity;
-import edu.performance.test.screen.LightTestActivity;
-import edu.performance.test.screen.MediumTestActivity;
-import edu.performance.test.screen.ScreenActivity;
+import edu.performance.test.screenoperation.HardTestActivity;
+import edu.performance.test.screenoperation.LightTestActivity;
+import edu.performance.test.screenoperation.MediumTestActivity;
+import edu.performance.test.screenoperation.ScreenActivity;
 import edu.performance.test.streamingoperation.StreamingActivity;
 import edu.performance.test.stringoperation.StringOperationActivity;
 import edu.performance.test.util.InternetController;
@@ -132,7 +132,8 @@ public class Library extends Activity {
 	public static final String NETWORK_TEST = "NETWORKTEST";
 	public static final String STRING_ARRAY = "STRINGARRAY";
 	public static final String ERROR_MESSAGE = "ERRORMESSAGE";
-	
+	public static final String PARAMETERS_INT = "PARAMETERSINT";
+	public static final String PARAMETERS_WEB_ARRAY = "PARAMETERSWEBARRAY";
 	
 	//It is necessary to load native code.
 	static {

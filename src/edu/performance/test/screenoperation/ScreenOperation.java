@@ -1,4 +1,4 @@
-package edu.performance.test.screen;
+package edu.performance.test.screenoperation;
 
 import java.util.Random;
 

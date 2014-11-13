@@ -8,7 +8,7 @@
 
  
 
-<edu.performance.test.screen.ScreenOperation
+<edu.performance.test.screenoperation.ScreenOperation
 
 android:layout_width="fill_parent"
 

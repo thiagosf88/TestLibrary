@@ -18,13 +18,20 @@ public class SortingOperationActivity extends PerformanceTestActivity {
 			}
 			else{
 				Bundle extras = new Bundle();
+				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level"); 
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				setResult(RESULT_CANCELED);
 				finish();
 			}
 		}
-		
+		else{
+			Bundle extras = new Bundle();
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			finishTest(extras);
+			setResult(RESULT_CANCELED);
+			finish();
+		}
 		operation = new SortOperation(level, this);
 		
 	}
