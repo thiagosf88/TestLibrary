@@ -13,4 +13,13 @@
         android:layout_marginTop="171dp"
         android:text="@string/start_button" />
 
+    <ToggleButton
+        android:id="@+id/bt_battery_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/bt_start_test"
+        android:layout_marginTop="79dp"
+        android:text="@string/battery_button" />
+
 </RelativeLayout>

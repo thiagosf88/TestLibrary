@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class CubeTextureGLES2Activity extends PerformanceTestActivity 
@@ -22,13 +21,13 @@ public class CubeTextureGLES2Activity extends PerformanceTestActivity
 		super.onCreate(savedInstanceState);
 		if(getIntent().getExtras() != null){
 			
-			if(getIntent().hasExtra(Library.LEVEL_INT) && getIntent().hasExtra(Library.PARAMETERS_INT)){
-				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
-				idTextureResource = getIntent().getExtras().getInt(Library.PARAMETERS_INT);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT) && getIntent().hasExtra(PerformanceTestActivity.PARAMETERS_INT)){
+				level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT);
+				idTextureResource = getIntent().getExtras().getInt(PerformanceTestActivity.PARAMETERS_INT);
 			}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level ou idTextureResource!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level ou idTextureResource!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				setResult(RESULT_CANCELED);

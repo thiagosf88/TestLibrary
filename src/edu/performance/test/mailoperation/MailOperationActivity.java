@@ -2,7 +2,6 @@ package edu.performance.test.mailoperation;
 
 import android.os.Bundle;
 import edu.performance.test.InternetPerformanceTestActivity;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class MailOperationActivity extends InternetPerformanceTestActivity {
@@ -14,11 +13,11 @@ public class MailOperationActivity extends InternetPerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 		
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(Library.LEVEL_FILENAME))		
-			level = getIntent().getExtras().getString(Library.LEVEL_FILENAME);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME))		
+			level = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME);
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: arquivoAnexo!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: arquivoAnexo!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				finish();

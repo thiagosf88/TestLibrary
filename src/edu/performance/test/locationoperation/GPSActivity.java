@@ -1,7 +1,6 @@
 package edu.performance.test.locationoperation;
 
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class GPSActivity extends PerformanceTestActivity {
@@ -14,12 +13,12 @@ public class GPSActivity extends PerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 
 		if (getIntent().getExtras() != null) {
-			if (getIntent().hasExtra(Library.LEVEL_INT)) {
-				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			if (getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)) {
+				level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT);
 			} else {
 				Bundle extras = new Bundle();
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
-				extras.putString(Library.ERROR_MESSAGE, "O nível não foi fornecido!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "O nível não foi fornecido!");
 				finishTest(extras);
 				return;
 			}

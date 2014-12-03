@@ -1,7 +1,6 @@
 package edu.performance.test.nativo.stringoperation;
 
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class StringOperationNativeActivity extends PerformanceTestActivity {
@@ -14,17 +13,17 @@ public class StringOperationNativeActivity extends PerformanceTestActivity {
 		String searchable = "", snippets[] = { "" };
 
 		if (getIntent().getExtras() != null) {
-			if (getIntent().hasExtra(Library.LEVEL_INT)
-					&& getIntent().hasExtra(Library.SEARCHABLE)
-					&& getIntent().hasExtra(Library.SNIPPETS)) {
+			if (getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)
+					&& getIntent().hasExtra(PerformanceTestActivity.SEARCHABLE)
+					&& getIntent().hasExtra(PerformanceTestActivity.SNIPPETS)) {
 				searchable = getIntent().getExtras().getString(
-						Library.SEARCHABLE);
+						PerformanceTestActivity.SEARCHABLE);
 				snippets = getIntent().getExtras().getStringArray(
-						Library.SNIPPETS);
-				level = getIntent().getExtras().getInt(Library.LEVEL_INT) < (snippets.length/3) ? getIntent().getExtras().getInt(Library.LEVEL_INT) : 0;
+						PerformanceTestActivity.SNIPPETS);
+				level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT) < (snippets.length/3) ? getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT) : 0;
 			} else {
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level, trechos pesquisáveis ou string base");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level, trechos pesquisáveis ou string base");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 			}

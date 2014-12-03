@@ -3,7 +3,6 @@ package edu.performance.test.weboperation;
 import android.os.Bundle;
 import android.webkit.WebView;
 import edu.performance.test.InternetPerformanceTestActivity;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.R;
 
@@ -27,7 +26,7 @@ public class WebViewActivity extends InternetPerformanceTestActivity{
 			}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: website!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: website!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				setResult(RESULT_CANCELED);

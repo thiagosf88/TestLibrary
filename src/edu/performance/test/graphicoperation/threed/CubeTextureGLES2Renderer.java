@@ -19,7 +19,6 @@ import android.opengl.Matrix;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 /**
@@ -373,7 +372,7 @@ public class CubeTextureGLES2Renderer implements GLSurfaceView.Renderer
 		if (textureHandle[0] == 0)
 		{
 			Bundle extras = new Bundle();
-			extras.putString(Library.ERROR_MESSAGE, "Ocorreu algum erro ao carregar a textura!");
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Ocorreu algum erro ao carregar a textura!");
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			((CubeTextureGLES2Activity)context).finishTest(extras);
 			((CubeTextureGLES2Activity)context).setResult(Activity.RESULT_CANCELED);
@@ -398,7 +397,7 @@ public class CubeTextureGLES2Renderer implements GLSurfaceView.Renderer
                 }
                 
                 Intent mIntent = new Intent();
-				mIntent.putExtra(Library.THELASTTEST, ((CubeTextureGLES2Activity)context).isTheLast());
+				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, ((CubeTextureGLES2Activity)context).isTheLast());
 				((CubeTextureGLES2Activity)context).setResult(CubeTextureGLES2Activity.RESULT_OK, mIntent);
 				System.out.println("saindo. Is it the last? " + false );
 				((CubeTextureGLES2Activity)context).finish();

@@ -14,7 +14,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.SystemClock;
 import android.util.Log;
-import edu.performance.test.Library;
+import edu.performance.test.PerformanceTestActivity;
 
 /**
  * This class implements our custom renderer. Note that the GL10 parameter passed in is unused for OpenGL ES 2.0
@@ -301,7 +301,7 @@ public class CubeColorGLES2Renderer implements GLSurfaceView.Renderer
                 }
                 
                 Intent mIntent = new Intent();
-				mIntent.putExtra(Library.THELASTTEST, false);
+				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, false);
 				((CubeColorGLES2Activity)context).setResult(CubeColorGLES2Activity.RESULT_OK, mIntent);
 				System.out.println("saindo. Is it the last? " + false );
 				((CubeColorGLES2Activity)context).finish();

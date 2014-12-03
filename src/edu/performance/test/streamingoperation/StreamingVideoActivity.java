@@ -10,7 +10,6 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import edu.performance.test.InternetPerformanceTestActivity;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
@@ -57,13 +56,13 @@ public class StreamingVideoActivity extends InternetPerformanceTestActivity impl
 		setContentView(R.layout.streaming_video);
 		
 		if (getIntent().getExtras() != null) {
-			if (getIntent().hasExtra(Library.LEVEL_URL)
-					&& getIntent().hasExtra(Library.THELASTTEST)) {
+			if (getIntent().hasExtra(PerformanceTestActivity.LEVEL_URL)
+					&& getIntent().hasExtra(PerformanceTestActivity.THELASTTEST)) {
 
 				isTheLast = getIntent().getExtras().getBoolean(
-						Library.THELASTTEST);
+						PerformanceTestActivity.THELASTTEST);
 				
-				vidAddress = getIntent().getExtras().getString(Library.LEVEL_URL);
+				vidAddress = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_URL);
 
 				
 			}
@@ -72,7 +71,7 @@ public class StreamingVideoActivity extends InternetPerformanceTestActivity impl
 				Bundle extras = new Bundle();
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				Intent mIntent = new Intent();
-				mIntent.putExtra(Library.THELASTTEST, isTheLast());
+				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());
 				mIntent.putExtras(extras);
 				setResult(RESULT_CANCELED, mIntent);
 				finish();
@@ -82,7 +81,7 @@ public class StreamingVideoActivity extends InternetPerformanceTestActivity impl
 			Bundle extras = new Bundle();
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			Intent mIntent = new Intent();
-			mIntent.putExtra(Library.THELASTTEST, isTheLast());
+			mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());
 			mIntent.putExtras(extras);
 			setResult(RESULT_CANCELED, mIntent);
 			finish();

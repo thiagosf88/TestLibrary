@@ -28,7 +28,7 @@ public aspect MetricsByAspects {
 	private long start = 0;
 	private long start2 = 0;
 	private long startActivity = 0;
-	double nanoSegRate = 1000000.0;
+	final double nanoSegRate = 1000000.0;
 	BufferedWriter out = null;
 	//Variables to get FPS rate
 	protected long startTime;
@@ -162,7 +162,7 @@ public aspect MetricsByAspects {
 
 	}
 	
-	@Pointcut("(within(Library) || within(edu.performance.test.batterytest.BatteryOperation))")
+	@Pointcut("(within(Library) || within(edu.performance.test.batterytest.BatteryMetric))")
 	public void InClassesNotMonitored(){
 		
 	}

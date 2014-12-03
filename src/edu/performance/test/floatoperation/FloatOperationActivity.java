@@ -1,7 +1,6 @@
 package edu.performance.test.floatoperation;
 
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class FloatOperationActivity extends PerformanceTestActivity {
@@ -12,12 +11,12 @@ public class FloatOperationActivity extends PerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 		
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(Library.LEVEL_DOUBLE)){
-				level = getIntent().getExtras().getDouble(Library.LEVEL_DOUBLE);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_DOUBLE)){
+				level = getIntent().getExtras().getDouble(PerformanceTestActivity.LEVEL_DOUBLE);
 			}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "O nível não foi fornecido!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "O nível não foi fornecido!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				return;
@@ -26,7 +25,7 @@ public class FloatOperationActivity extends PerformanceTestActivity {
 	else{
 		Bundle extras = new Bundle();
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
-		
+		extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Parâmetros mínimos não fornecidos!");
 		finishTest(extras);
 		finish();
 	}

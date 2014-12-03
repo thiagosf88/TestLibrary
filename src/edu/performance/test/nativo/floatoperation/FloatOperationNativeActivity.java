@@ -1,7 +1,6 @@
 package edu.performance.test.nativo.floatoperation;
 
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class FloatOperationNativeActivity extends PerformanceTestActivity {
@@ -12,11 +11,11 @@ public class FloatOperationNativeActivity extends PerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 		
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(Library.LEVEL_DOUBLE))		
-			level = getIntent().getExtras().getInt(Library.LEVEL_DOUBLE);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_DOUBLE))		
+			level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_DOUBLE);
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				finish();

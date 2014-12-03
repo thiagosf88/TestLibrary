@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.SurfaceHolder;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.util.ActivityThread;
 import edu.performance.test.util.TestThread;
@@ -31,11 +30,11 @@ public abstract class TwoDActivity extends PerformanceTestActivity{
 		super.onCreate(savedInstanceState);
 		
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(Library.LEVEL_INT))		
-			level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT))		
+			level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT);
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				setResult(RESULT_CANCELED);
@@ -115,7 +114,7 @@ mythreadT.setRunning(false);
 
 		}*/
 		Intent mIntent = new Intent();
-		mIntent.putExtra(Library.THELASTTEST, isTheLast);
+		mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast);
 		setResult(RESULT_OK, mIntent);
 		System.out.println("saindo. Is it the last? " + isTheLast );
 		wakeLock.release(); // olhar comentário no onPause()
@@ -155,7 +154,7 @@ mythreadT.setRunning(false);
                 if(!isBatteryTest()){
                 isTimeOver = true;
                 Intent mIntent = new Intent();
-                mIntent.putExtra(Library.THELASTTEST, isTheLast);
+                mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast);
 				setResult(ThreeDActivity.RESULT_OK, mIntent);
 				System.out.println("saindo. Is it the last? " + isTheLast);
 				finish();

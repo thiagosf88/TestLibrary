@@ -42,28 +42,28 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		 status = (TextView)findViewById(R.id.status);
 		 
 		
-		if(getIntent().getExtras() != null && getIntent().hasExtra(Library.THELASTTEST)
-				&& getIntent().hasExtra(MAXTIME) && getIntent().hasExtra(Library.STATUS)
-				&& getIntent().hasExtra(Library.BATTERYTEST)){
+		if(getIntent().getExtras() != null && getIntent().hasExtra(PerformanceTestInterface.THELASTTEST)
+				&& getIntent().hasExtra(MAXTIME) && getIntent().hasExtra(PerformanceTestInterface.STATUS)
+				&& getIntent().hasExtra(PerformanceTestInterface.BATTERYTEST)){
 			
-			if(getIntent().hasExtra(Library.THELASTTEST))
-				setTheLast(getIntent().getExtras().getBoolean(Library.THELASTTEST));
+			if(getIntent().hasExtra(PerformanceTestInterface.THELASTTEST))
+				setTheLast(getIntent().getExtras().getBoolean(PerformanceTestInterface.THELASTTEST));
 			
-			if(getIntent().hasExtra(Library.STATUS))
-				message = getIntent().getExtras().getString(Library.STATUS);
+			if(getIntent().hasExtra(PerformanceTestInterface.STATUS))
+				message = getIntent().getExtras().getString(PerformanceTestInterface.STATUS);
 			
 			if(getIntent().hasExtra(MAXTIME))
 				setMAX_TIME_MS(getIntent().getExtras().getInt(MAXTIME));
 			
-			if(getIntent().hasExtra(Library.BATTERYTEST))
-				isBatteryTest = getIntent().getExtras().getBoolean(Library.BATTERYTEST);
+			if(getIntent().hasExtra(PerformanceTestInterface.BATTERYTEST))
+				isBatteryTest = getIntent().getExtras().getBoolean(PerformanceTestInterface.BATTERYTEST);
 			
 			
 		}
 		else{
 			Bundle extras = new Bundle();
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
-			extras.putString(Library.ERROR_MESSAGE, "Não foi possível obter os parâmetros mínimos necessários. O método getExtras retornou null!");
+			extras.putString(PerformanceTestInterface.ERROR_MESSAGE, "Não foi possível obter os parâmetros mínimos necessários. O método getExtras retornou null!");
 			finishTest(extras);
 			finish();
 		}
@@ -139,13 +139,13 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		if(extras.containsKey(PerformanceTestActivity.RESULT_WAS_OK))
 			if(!extras.getBoolean(PerformanceTestActivity.RESULT_WAS_OK)){
 				setResult(RESULT_CANCELED, mIntent);
-				if(extras.containsKey(Library.ERROR_MESSAGE))
-				mIntent.putExtra(Library.ERROR_MESSAGE, "Não foi possível obter os parâmetros necessários. O método getExtras retornou null!");
+				if(extras.containsKey(PerformanceTestInterface.ERROR_MESSAGE))
+				mIntent.putExtra(PerformanceTestInterface.ERROR_MESSAGE, "Não foi possível obter os parâmetros necessários. O método getExtras retornou null!");
 			}
 		}
 
 		
-		mIntent.putExtra(Library.THELASTTEST, isTheLast);
+		mIntent.putExtra(PerformanceTestInterface.THELASTTEST, isTheLast);
 		 
 		finish();
 
@@ -182,7 +182,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
                 if(!isBatteryTest()){
                 setTimeOver(true);
                 Intent mIntent = new Intent();
-                mIntent.putExtra(Library.THELASTTEST, isTheLast());
+                mIntent.putExtra(PerformanceTestInterface.THELASTTEST, isTheLast());
 				setResult(PerformanceTestActivity.RESULT_CANCELED, mIntent);
 				
 				finish();

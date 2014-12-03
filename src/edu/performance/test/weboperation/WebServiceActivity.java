@@ -2,7 +2,6 @@ package edu.performance.test.weboperation;
 
 import android.os.Bundle;
 import edu.performance.test.InternetPerformanceTestActivity;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class WebServiceActivity extends  InternetPerformanceTestActivity{
@@ -17,16 +16,16 @@ public class WebServiceActivity extends  InternetPerformanceTestActivity{
 
 		if (getIntent().getExtras() != null) {			
 			
-			if(getIntent().hasExtra(Library.LEVEL_WEBSITE) && getIntent().hasExtra(
-					Library.THELASTTEST)){		
-				level = getIntent().getExtras().getString(Library.LEVEL_WEBSITE);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_WEBSITE) && getIntent().hasExtra(
+					PerformanceTestActivity.THELASTTEST)){		
+				level = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_WEBSITE);
 				
 				setTheLast(getIntent().getExtras().getBoolean(
-						Library.THELASTTEST));
+						PerformanceTestActivity.THELASTTEST));
 			}
 				else{
 					Bundle extras = new Bundle();
-					extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: endereço web service!");
+					extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: endereço web service!");
 					extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 					finishTest(extras);
 					setResult(RESULT_CANCELED);

@@ -10,18 +10,18 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
+import edu.performance.test.R;
 import edu.performance.test.TestsManager;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
 
-public class BatteryOperation extends Activity {
+public class BatteryMetric extends Activity {
 
 	private int countIntent = 0, BATTERY_VARIATION = 5, times = 0;
-	private double MIN_LEVEL_TO_EXIT = 100, batteryPreviousLevel = 100, firstVoltage = 0;
+	private double MIN_LEVEL_TO_EXIT = 100, batteryPreviousLevel = 100;
 	Intent batteryIntent = null;
 	boolean isTheLast, isByTime, isTestIncompleted;
 	ArrayList<Intent> testsToDo;
@@ -30,7 +30,7 @@ public class BatteryOperation extends Activity {
 	Intent aTest;
 	String[] rawResourceNames, snippets;
 	String fileLocation = "";
-	private long timeToTest= 0, timeToExit;
+	private long timeToTest= 0, timeToExit, currentTime = 0;
 	
 	
 	public static final String BY_TIME = "BYTIME";
@@ -65,19 +65,19 @@ public class BatteryOperation extends Activity {
 		super.onCreate(savedInstanceState);
 
 		if (getIntent().getExtras() != null) {
-			if (getIntent().hasExtra(Library.STRING_ARRAY)
-					&& getIntent().hasExtra(Library.THELASTTEST)
-					&& getIntent().hasExtra(Library.SNIPPETS)
-					&& getIntent().hasExtra(Library.FILELOCATION)
+			if (getIntent().hasExtra(PerformanceTestInterface.STRING_ARRAY)
+					&& getIntent().hasExtra(PerformanceTestInterface.THELASTTEST)
+					&& getIntent().hasExtra(PerformanceTestInterface.SNIPPETS)
+					&& getIntent().hasExtra(PerformanceTestInterface.FILELOCATION)
 					&& getIntent().hasExtra(BY_TIME)) {
 
 				isTheLast = getIntent().getExtras().getBoolean(
-						Library.THELASTTEST);
+						PerformanceTestInterface.THELASTTEST);
 				rawResourceNames = getIntent().getExtras().getStringArray(
-						Library.STRING_ARRAY);
+						PerformanceTestInterface.STRING_ARRAY);
 				snippets = getIntent().getExtras().getStringArray(
-						Library.SNIPPETS);
-				fileLocation = getIntent().getExtras().getString(Library.FILELOCATION);
+						PerformanceTestInterface.SNIPPETS);
+				fileLocation = getIntent().getExtras().getString(PerformanceTestInterface.FILELOCATION);
 				
 				isByTime = getIntent().getExtras().getBoolean(BY_TIME);
 				if(isByTime){
@@ -115,13 +115,11 @@ public class BatteryOperation extends Activity {
 		if (!isByTime) {
 			int rawlevel = batteryIntent.getIntExtra("level", -1);
 			double scale = batteryIntent.getIntExtra("scale", -1);
-			firstVoltage = batteryIntent.getIntExtra(
-					BatteryManager.EXTRA_VOLTAGE, 0);
+			
 			if (rawlevel >= 0 && scale > 0) {
-				batteryPreviousLevel = rawlevel;// / scale;
+				batteryPreviousLevel = rawlevel;
 				MIN_LEVEL_TO_EXIT = batteryPreviousLevel - BATTERY_VARIATION;
-				// System.out.println(batteryPreviousLevel + " > " +
-				// MIN_LEVEL_TO_EXIT);
+				
 				if(MIN_LEVEL_TO_EXIT < 0)
 					cancelTest("A variação fornecida excede a carga existente na bateria");
 			}
@@ -131,9 +129,7 @@ public class BatteryOperation extends Activity {
 			timeToExit = SystemClock.uptimeMillis() + timeToTest;
 		}
 		
-		createInformationFile(batteryIntent, "initial");
-
-		
+		createInformationFile(batteryIntent, "start_" + appRef.getResources().getString(R.string.batteryFileName));		
 
 			// Initializes the list of tests which will be performed.
 			testsToDo = TestsManager.getTestList(appRef);
@@ -151,7 +147,7 @@ public class BatteryOperation extends Activity {
 		if (data == null) {
 			unregisterReceiver(mBatInfoReceiver);
 			Intent mIntent = new Intent();
-			mIntent.putExtra(Library.THELASTTEST, isTheLast());
+			mIntent.putExtra(PerformanceTestInterface.THELASTTEST, isTheLast());
 			setResult(RESULT_CANCELED, mIntent);
 			finish();
 		} else {
@@ -161,18 +157,19 @@ public class BatteryOperation extends Activity {
 				// TODO This need a specific treatment when some test fails. To
 				// create list with error messages of each test for example.
 				System.out.println(testsToDo.get(countIntent).getStringExtra(
-						Library.STATUS)
+						PerformanceTestInterface.STATUS)
 						+ " failed!!!! :(");
 			}
 			// Se o teste é por tempo verifico se o tempo já foi cumprido, se não verifico se a variação de bateria
 			//esperada já foi cumprida.
 			
-			isTestIncompleted = isByTime ? SystemClock.uptimeMillis() < timeToExit :  batteryPreviousLevel > MIN_LEVEL_TO_EXIT;
+			
+			isTestIncompleted = isByTime ? (currentTime = SystemClock.uptimeMillis()) < timeToExit :  batteryPreviousLevel > MIN_LEVEL_TO_EXIT;
 			
 			if (isTestIncompleted) {
 				//cada activity separadamente
 				//executeTest(testsToDo.get(countIntent));
-				if(results.getBoolean(Library.THELASTTEST)){
+				if(results.getBoolean(PerformanceTestInterface.THELASTTEST)){
 					countIntent = -1;
 					times++;
 				}
@@ -181,7 +178,7 @@ public class BatteryOperation extends Activity {
 			}
 			else{
 				
-				if(!results.getBoolean(Library.THELASTTEST)){
+				if(!results.getBoolean(PerformanceTestInterface.THELASTTEST)){
 					executeTest(testsToDo.get(++countIntent));
 				}
 				else{
@@ -190,14 +187,11 @@ public class BatteryOperation extends Activity {
 						new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
 				createInformationFile(
-						batteryIntent,
-						((testsToDo.get(countIntent).getStringExtra(
-								Library.STATUS).substring(7)).replace(
-								" skills..", "")).trim() + "test");
+						batteryIntent,"end_" + appRef.getResources().getString(R.string.batteryFileName ));
 				
 				unregisterReceiver(mBatInfoReceiver);
 				Intent mIntent = new Intent();
-				mIntent.putExtra(Library.THELASTTEST, isTheLast());
+				mIntent.putExtra(PerformanceTestInterface.THELASTTEST, isTheLast());
 				setResult(RESULT_OK, mIntent);
 				finish();
 				}
@@ -206,7 +200,7 @@ public class BatteryOperation extends Activity {
 				//cada activity separadamente
 				//times++;
 			/*} else if (requestCode == 1
-					&& !results.getBoolean(Library.THELASTTEST)) {
+					&& !results.getBoolean(PerformanceTestInterface.THELASTTEST)) {
 
 
 				batteryIntent = this.registerReceiver(this.mBatInfoReceiver,
@@ -215,18 +209,18 @@ public class BatteryOperation extends Activity {
 				createInformationFile(
 						batteryIntent,
 						((testsToDo.get(countIntent).getStringExtra(
-								Library.STATUS).substring(7)).replace(
+								PerformanceTestInterface.STATUS).substring(7)).replace(
 								" skills..", "")).trim() + "test");
 				
 				MIN_LEVEL_TO_EXIT = batteryPreviousLevel - VARIATION;
 				times = 0;
 				executeTest(testsToDo.get(++countIntent));
 			}
-			if (results.getBoolean(Library.THELASTTEST)) {
+			if (results.getBoolean(PerformanceTestInterface.THELASTTEST)) {
 
 				unregisterReceiver(mBatInfoReceiver);
 				Intent mIntent = new Intent();
-				mIntent.putExtra(Library.THELASTTEST, isTheLast());
+				mIntent.putExtra(PerformanceTestInterface.THELASTTEST, isTheLast());
 				setResult(RESULT_OK, mIntent);
 				finish();
 			}*/
@@ -264,18 +258,28 @@ public class BatteryOperation extends Activity {
 		int voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
 
 		// if(ant > level){
-		batt = "Health: " + health + "\n" + "Icon Small:" + icon_small + "\n"
-				+ "Level: " + level + "\n" + "Plugged: " + plugged + "\n"
-				+ "Present: " + present + "\n" + "Scale: " + scale + "\n"
-				+ "Status: " + status + "\n" + "Technology: " + technology
-				+ "\n" + "Temperature: " + temperature + "\n"
-				+ "Diff Voltage: " + (firstVoltage - voltage) + "\n" + "ant: "
-				+ batteryPreviousLevel + " times: " + times;
+		batt = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "\n"
+				+ "<batteryData \n\t\t\t xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n\t\t\t xsi:noNamespaceSchemaLocation=\"model.xsd\">\n"
+				+ "\t<batteryVariation> \n"
+				+ "\t\t<health>" + health + "</health>\n"
+				+ "\t\t<iconSmall>" + icon_small + "</iconSmall>\n"
+				+ "\t\t<level>" + level + "</level>\n"
+				+ "\t\t<plugged>" + plugged + "</plugged>\n"
+				+ "\t\t<present>" + present + "</present>\n"
+				+ "\t\t<scale>" + scale + "</scale>\n"
+				+ "\t\t<status>" + status + "</status>\n"
+				+ "\t\t<technology>" + technology + "</technology>\n"
+				+ "\t\t<temperature>" + temperature + "</temperature>\n"
+				+ "\t\t<voltage>" + voltage + "</voltage>\n"
+				+ "\t\t<previousLevel>"	+ batteryPreviousLevel + "</previousLevel>\n"
+				+ (isByTime ? "\t\t<deltaTime>" + (currentTime - timeToExit) + "</deltaTime>\n" : "\t\t<executions>" + times + "</executions>\n")
+				+ "\t</batteryVariation> \n"
+				+ "</batteryData> \n";
 
 		FileOperation rw = new FileOperation();
 
 		rw.testTJMwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME
-				+ "/batt_" + activity_name + ".txt", batt);
+				+ "/" + activity_name , batt);
 
 		batteryIntent = this.registerReceiver(this.mBatInfoReceiver,
 				new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -283,14 +287,13 @@ public class BatteryOperation extends Activity {
 		batteryPreviousLevel = batteryIntent.getIntExtra(
 				BatteryManager.EXTRA_LEVEL, 0);// / scale;
 
-		firstVoltage = batteryIntent.getIntExtra(BatteryManager.EXTRA_VOLTAGE,
-				0);
+		
 	}
 
 	void executeTest(Intent test) {
 		// Close Internet connection before execute tests.
 
-		if (test.getExtras().getBoolean(Library.NETWORK_TEST)) {
+		if (test.getExtras().getBoolean(PerformanceTestInterface.NETWORK_TEST)) {
 			InternetController.setWifiAvailability(true, this);
 		} else {
 			InternetController.setWifiAvailability(false, this);
@@ -305,9 +308,9 @@ public class BatteryOperation extends Activity {
 			rw.testTJMwriteSequentialFile(
 					WriteNeededFiles.REPORT_DIRECTORY_NAME
 							+ "/battTest_error_in"
-							+ ((test.getStringExtra(Library.STATUS)
+							+ ((test.getStringExtra(PerformanceTestInterface.STATUS)
 									.substring(7)).replace(" skills..", ""))
-									.trim() + ".txt", message);
+									.trim(), message);
 			System.err.println(message);
 		}
 	}
@@ -315,14 +318,17 @@ public class BatteryOperation extends Activity {
 	private void cancelTest(String errorMessage){
 		Bundle extras = new Bundle();
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+		if(batteryIntent != null)
 		unregisterReceiver(mBatInfoReceiver);
 		Intent mIntent = new Intent();
-		mIntent.putExtra(Library.ERROR_MESSAGE, errorMessage);
-		mIntent.putExtra(Library.THELASTTEST, isTheLast());
+		mIntent.putExtra(PerformanceTestInterface.ERROR_MESSAGE, errorMessage);
+		mIntent.putExtra(PerformanceTestInterface.THELASTTEST, isTheLast());
 		mIntent.putExtras(extras);
 		setResult(RESULT_CANCELED, mIntent);
 		finish();
 		return;
 	}
+
+	
 
 }

@@ -1,8 +1,8 @@
 package edu.performance.test.database;
 
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
+import edu.performance.test.PerformanceTestInterface;
 
 public class DatabaseOperationActivity extends PerformanceTestActivity {
 	
@@ -13,12 +13,12 @@ public class DatabaseOperationActivity extends PerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 		
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(Library.LEVEL_INT)){
-				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)){
+				level = getIntent().getExtras().getInt(PerformanceTestInterface.LEVEL_INT);
 			}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level!");
+				extras.putString(PerformanceTestInterface.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				setResult(RESULT_CANCELED);

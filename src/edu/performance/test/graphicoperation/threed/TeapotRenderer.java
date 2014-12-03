@@ -32,7 +32,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
-import edu.performance.test.Library;
+import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.graphicoperation.ThreeDActivity;
 
 
@@ -1572,7 +1572,7 @@ public class TeapotRenderer implements Renderer {
                 }
                 
                 Intent mIntent = new Intent();
-				mIntent.putExtra(Library.THELASTTEST, false);
+				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, false);
 				((ThreeDActivity)context).setResult(ThreeDActivity.RESULT_OK, mIntent);
 				System.out.println("saindo. Is it the last? " + false );
 				((ThreeDActivity)context).finish();

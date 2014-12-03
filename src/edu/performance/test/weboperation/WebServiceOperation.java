@@ -69,6 +69,7 @@ public class WebServiceOperation extends PerformanceTest<String>{
 			System.out.println(e.getMessage());
 			Bundle extras = new Bundle();			
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, e.getMessage());
 			activity.finishTest(extras);
 		}
 		

@@ -1,7 +1,6 @@
 package edu.performance.test.graphoperation;
 
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class GraphOperationActivity extends PerformanceTestActivity {
@@ -13,11 +12,11 @@ public class GraphOperationActivity extends PerformanceTestActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(Library.LEVEL_FILENAME))		
-			level = getIntent().getExtras().getString(Library.LEVEL_FILENAME);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME))		
+			level = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME);
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: filename!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: filename!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 			}

@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 import android.util.Log;
-import edu.performance.test.Library;
+import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.R;
 import edu.performance.test.graphicoperation.ThreeDActivity;
 
@@ -40,7 +40,7 @@ public class CubeTextureGL10Renderer implements Renderer {
 	                }
 	                
 	                Intent mIntent = new Intent();
-					mIntent.putExtra(Library.THELASTTEST, ((CubeTextureGL10Activity)context).isTheLast());
+					mIntent.putExtra(PerformanceTestActivity.THELASTTEST, ((CubeTextureGL10Activity)context).isTheLast());
 					((ThreeDActivity)context).setResult(ThreeDActivity.RESULT_OK, mIntent);
 					System.out.println("saindo. Is it the last? " + false );
 					((ThreeDActivity)context).finish();

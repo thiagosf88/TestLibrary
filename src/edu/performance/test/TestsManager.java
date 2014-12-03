@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
+import edu.performance.test.fileoperation.FileOperation;
 
 public class TestsManager {
 	
@@ -39,7 +39,7 @@ public class TestsManager {
 
 		Document d = null;
 		try {
-			d = docBuilder.parse(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/listadetestes.xml"));
+			d = docBuilder.parse(new File(Library.getFileLocation() + "/listadetestes.xml"));
 		} catch ( IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,7 +87,10 @@ public class TestsManager {
 							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), testItem.getChildNodes().item(a).getTextContent());
 						if(testItem.getChildNodes().item(a).getNodeName().contains("extraStrArr"))
 							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), testItem.getChildNodes().item(a).getTextContent().split("-;-"));
-						
+						if(testItem.getChildNodes().item(a).getNodeName().contains("extraAStrID"))
+							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), appRef.getResources().getStringArray(Integer.parseInt(testItem.getChildNodes().item(a).getTextContent())));
+						if(testItem.getChildNodes().item(a).getNodeName().contains("extraStrFile"))
+							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), new FileOperation().testTJMreadSequentialAcessFile(testItem.getChildNodes().item(a).getTextContent()));
 						
 						
 						

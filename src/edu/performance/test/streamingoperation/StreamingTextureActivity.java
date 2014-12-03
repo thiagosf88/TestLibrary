@@ -1,5 +1,6 @@
 package edu.performance.test.streamingoperation;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.SurfaceTexture;
@@ -8,15 +9,16 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Surface;
 import android.view.TextureView;
 import edu.performance.test.InternetPerformanceTestActivity;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.R;
 import edu.performance.test.util.ActivityThread;
 
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class StreamingTextureActivity extends InternetPerformanceTestActivity implements
 		TextureView.SurfaceTextureListener, OnPreparedListener, OnBufferingUpdateListener,
 		OnCompletionListener {
@@ -44,13 +46,13 @@ public class StreamingTextureActivity extends InternetPerformanceTestActivity im
 		setContentView(R.layout.streaming_texture);
 		
 		if (getIntent().getExtras() != null) {
-			if (getIntent().hasExtra(Library.LEVEL_URL)
-					&& getIntent().hasExtra(Library.THELASTTEST)) {
+			if (getIntent().hasExtra(PerformanceTestActivity.LEVEL_URL)
+					&& getIntent().hasExtra(PerformanceTestActivity.THELASTTEST)) {
 
 				isTheLast = getIntent().getExtras().getBoolean(
-						Library.THELASTTEST);
+						PerformanceTestActivity.THELASTTEST);
 				
-				vidAddress = getIntent().getExtras().getString(Library.LEVEL_URL);
+				vidAddress = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_URL);
 
 				
 			}
@@ -59,7 +61,7 @@ public class StreamingTextureActivity extends InternetPerformanceTestActivity im
 				Bundle extras = new Bundle();
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				Intent mIntent = new Intent();
-				mIntent.putExtra(Library.THELASTTEST, isTheLast());
+				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());
 				mIntent.putExtras(extras);
 				setResult(RESULT_CANCELED, mIntent);
 				finish();
@@ -69,7 +71,7 @@ public class StreamingTextureActivity extends InternetPerformanceTestActivity im
 			Bundle extras = new Bundle();
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			Intent mIntent = new Intent();
-			mIntent.putExtra(Library.THELASTTEST, isTheLast());
+			mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());
 			mIntent.putExtras(extras);
 			setResult(RESULT_CANCELED, mIntent);
 			finish();

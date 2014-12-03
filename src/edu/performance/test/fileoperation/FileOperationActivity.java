@@ -1,7 +1,6 @@
 package edu.performance.test.fileoperation;
 
 import android.os.Bundle;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class FileOperationActivity extends PerformanceTestActivity {
@@ -13,17 +12,17 @@ public class FileOperationActivity extends PerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 		String filePath = "", stretch = "";
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(Library.LEVEL_FILENAME)
-					&& getIntent().hasExtra(Library.STRETCH)
-					&& getIntent().hasExtra(Library.LEVEL_INT)){
-			filePath = getIntent().getExtras().getString(Library.LEVEL_FILENAME);
-			stretch = getIntent().getExtras().getString(Library.STRETCH);
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME)
+					&& getIntent().hasExtra(PerformanceTestActivity.STRETCH)
+					&& getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)){
+			filePath = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME);
+			stretch = getIntent().getExtras().getString(PerformanceTestActivity.STRETCH);
 			
-			level = getIntent().getExtras().getInt(Library.LEVEL_INT);
+			level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT);
 		}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level, filename ou stretch!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level, filename ou stretch!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				finish();

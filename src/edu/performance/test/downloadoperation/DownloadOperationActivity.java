@@ -2,7 +2,6 @@ package edu.performance.test.downloadoperation;
 
 import android.os.Bundle;
 import edu.performance.test.InternetPerformanceTestActivity;
-import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
 
 public class DownloadOperationActivity extends InternetPerformanceTestActivity {
@@ -15,22 +14,22 @@ public class DownloadOperationActivity extends InternetPerformanceTestActivity {
 		super.onCreate(savedInstanceState);
 
 		if (getIntent().getExtras() != null) {
-			if (getIntent().hasExtra(Library.LEVEL_INT)
-					&& getIntent().hasExtra(Library.FILELOCATION)) {
-				level = getIntent().getExtras().getInt(Library.LEVEL_INT);
-				downloadLocation = getIntent().getExtras().getString(Library.FILELOCATION);
+			if (getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)
+					&& getIntent().hasExtra(PerformanceTestActivity.FILELOCATION)) {
+				level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT);
+				downloadLocation = getIntent().getExtras().getString(PerformanceTestActivity.FILELOCATION);
 			}
 
 			else {
 				Bundle extras = new Bundle();
-				extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level ou downloadLocation!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level ou downloadLocation!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				return;
 			}
 		} else {
 			Bundle extras = new Bundle();
-			extras.putString(Library.ERROR_MESSAGE, "Não foram fornecidos extras!");
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos extras!");
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			finishTest(extras);
 			finish();
