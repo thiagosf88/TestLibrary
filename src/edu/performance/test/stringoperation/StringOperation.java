@@ -17,8 +17,8 @@ public class StringOperation extends PerformanceTest<Integer> {
 	String snippets[];
 
 	public StringOperation(PerformanceTestActivity activity, String searchable,
-			String[] snippets) {
-		super(new Integer(0), activity);
+			String[] snippets, Integer level) {
+		super(level, activity);
 		this.searchable = searchable;
 		this.snippets = snippets;
 		activity.executeTest();

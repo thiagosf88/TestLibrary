@@ -1,5 +1,6 @@
 package edu.performance.test.util;
 
+import android.os.Looper;
 import edu.performance.test.PerformanceTestActivity;
 
 public class ActivityThread extends Thread {
@@ -34,7 +35,7 @@ public class ActivityThread extends Thread {
 		{ 
 
 			super.run();
-
+			Looper.prepare();
 			while (mRun)
 
 			{				

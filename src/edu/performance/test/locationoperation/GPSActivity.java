@@ -24,6 +24,7 @@ public class GPSActivity extends PerformanceTestActivity {
 			}
 		} else {
 			Bundle extras = new Bundle();
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Os extras não foram fornecidos!");
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			finishTest(extras);
 			finish();

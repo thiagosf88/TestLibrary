@@ -6,7 +6,7 @@ import edu.performance.test.PerformanceTestActivity;
 public class StringOperationActivity extends PerformanceTestActivity {
 	
 	StringOperation operation;
-	protected int level;
+	protected int level; //Deve ser 1 2 ou 3
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		String searchable = "",  snippets[] = {""};
@@ -19,7 +19,7 @@ public class StringOperationActivity extends PerformanceTestActivity {
 						PerformanceTestActivity.SEARCHABLE);
 				snippets = getIntent().getExtras().getStringArray(
 						PerformanceTestActivity.SNIPPETS);
-				level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT) < (snippets.length/3) ? getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT) : 0;
+				level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT) < (snippets.length/3) ? getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT) : 2;
 			} else {
 				Bundle extras = new Bundle();
 				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level, trechos pesquisáveis ou string base!");
@@ -35,7 +35,7 @@ public class StringOperationActivity extends PerformanceTestActivity {
 			finish();
 		}
 		
-		operation = new StringOperation(this, searchable, snippets);
+		operation = new StringOperation(this, searchable, snippets, level);
 		
 	}
 	

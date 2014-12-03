@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import edu.performance.test.PerformanceTestActivity;
@@ -89,6 +90,7 @@ InternetController.setWifiAvailability(true, (GPSActivity)mContext);
 				this.canGetLocation = true;
 				// First get location from Network Provider
 				if (isNetworkEnabled) {
+					
 					locationManager.requestLocationUpdates(
 							LocationManager.NETWORK_PROVIDER,
 							MIN_TIME_BW_UPDATES,
