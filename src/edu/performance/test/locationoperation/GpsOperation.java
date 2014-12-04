@@ -55,11 +55,11 @@ class GpsOperation extends Service implements LocationListener {
 		this.mContext = context;
 		this.level = level;
 		
-		((GPSActivity)mContext).executeTest(); 
+		((GpsOperationActivity)mContext).executeTest(); 
 	}
 
 	public void execute() {
-InternetController.setWifiAvailability(true, (GPSActivity)mContext);
+InternetController.setWifiAvailability(true, (GpsOperationActivity)mContext);
 
 		double contLat = 0, contLon = 0;
 		//TODO VErificar se não é possível dosar a precisão o gps e assim mudar o level da carga
@@ -75,7 +75,7 @@ InternetController.setWifiAvailability(true, (GPSActivity)mContext);
 		
 		Bundle extras = new Bundle();			
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
-		((GPSActivity)mContext).finishTest(extras);
+		((GpsOperationActivity)mContext).finishTest(extras);
 		
 	}
 

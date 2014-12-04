@@ -3,7 +3,7 @@ package edu.performance.test.locationoperation;
 import android.os.Bundle;
 import edu.performance.test.PerformanceTestActivity;
 
-public class GPSActivity extends PerformanceTestActivity {
+public class GpsOperationActivity extends PerformanceTestActivity {
 
 	GpsOperation operation;
 

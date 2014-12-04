@@ -33,7 +33,7 @@ public class TestsManager {
 		try {
 			docBuilder = dbf.newDocumentBuilder();
 		} catch (ParserConfigurationException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 
@@ -41,12 +41,12 @@ public class TestsManager {
 		try {
 			d = docBuilder.parse(new File(Library.getFileLocation() + "/listadetestes.xml"));
 		} catch ( IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			return null;
 			
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			return null;
 		}		

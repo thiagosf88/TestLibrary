@@ -79,8 +79,7 @@ irregular projections of bone, at the ends of the long bones, the
 vertebral border of the scapula, and the cristal border of the ilium.
 They exhibit a rough symmetry; they rarely attain any size; and they
 usually cease growing when the skeleton attains maturity--the conversion
-    </string-array>
-    <string-array name="webSites">
+    </string-array>    <string-array name="webSites">
         <item >http://www.google.com.br</item>
         <item >http://www.amazon.com</item>
         <item >http://www.uol.com.br</item>
@@ -113,5 +112,22 @@ usually cease growing when the skeleton attains maturity--the conversion
         <string name="XMLFileName">metricsTestLibrary.xml</string>
         <string name="batteryFileName">batteryFile.xml</string>
         <string name="battery_button">Is battery test?</string>
+        <string name="isnetworktest">Is network Test?</string>
+        <string name="labelTime">Max time (s)</string>
+        <string name="labelTestName">Name of Test</string>
+        <string name="dbOp">Database Operation</string>
+        <string name="dwOp">Download Operation</string>
+        <string name="labelLevel">Level</string>
+        <string name="flOp">File Operation</string>
+        <string name="fpOp">Float point Operation</string>
+        <string name="itOp">Integer Operation</string>
+        <string name="mlOp">Mail Operation</string>
+        <string name="gpOp">GPS Operation</string>
+        <string name="mmOp">Memory Operation</string>
+        <string name="mmnOp">Memory Operation (Native)</string>
+        <string name="flnOp">File Operation (Native)</string>
+        <string name="fpnOp">Float Operation (Native)</string>
+        <string name="itnOp">Integer Operation (Native)</string>
+        <color name="white">#50FFFFFF</color>
 
 </resources>

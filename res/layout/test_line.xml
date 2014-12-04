@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lineOftest"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="0.15"
+    tools:context=".ListOfTestsActivity" >
+
+    <CheckBox
+        android:id="@+id/isnetworktest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/isnetworktest"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/labelTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/isnetworktest"
+        android:text="@string/labelTime"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/maxTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/labelTime"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/labelTime"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:visibility="gone" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/labelLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/maxTime"
+        android:clickable="false"
+        android:text="@string/labelLevel"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/levelInt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/labelLevel"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/labelLevel"
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:visibility="gone" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/labelLevelString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/levelInt"
+        android:clickable="false"
+        android:text="@string/labelLevel"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/levelString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/labelLevelString"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/labelLevelString"
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="gone" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>

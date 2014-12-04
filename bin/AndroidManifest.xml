@@ -35,7 +35,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="edu.performance.test.Library"
+            android:name="edu.performance.test.ExpandableListOfTestsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -162,7 +162,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.locationoperation.GPSActivity"
+            android:name="edu.performance.test.locationoperation.GpsOperationActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

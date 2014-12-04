@@ -29,8 +29,9 @@ import edu.performance.test.PerformanceTestActivity;
  */
 public class MailOperation extends PerformanceTest<String> {
 	
+	private String destination = ""; 
 	
-	public MailOperation(PerformanceTestActivity activity, String level) {
+	public MailOperation(PerformanceTestActivity activity, String level, String destination) {
 		super(level, activity);
 		activity.executeTest();
 	}
@@ -125,7 +126,7 @@ public class MailOperation extends PerformanceTest<String> {
 	public void execute() {
 		
 		try {
-			testAMailOperation(this.getLevel(), "thiago.soares@ymail.com");
+			testAMailOperation(this.getLevel(), this.destination);
 		} catch (RuntimeException ae) {
 			Bundle extras = new Bundle();			
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);

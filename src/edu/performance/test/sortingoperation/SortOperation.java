@@ -7,7 +7,7 @@ import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
-import edu.performance.test.locationoperation.GPSActivity;
+import edu.performance.test.locationoperation.GpsOperationActivity;
 
 public class SortOperation extends PerformanceTest<Integer> implements PerformanceTestInterface{
 	

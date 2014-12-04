@@ -7,17 +7,20 @@ import edu.performance.test.PerformanceTestActivity;
 public class MailOperationActivity extends InternetPerformanceTestActivity {
 	
 	MailOperation operation;
-	protected String level;
+	protected String level, destination;
+	public static String DESTINATION = "DESTINATION";
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME))		
+			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME) && getIntent().hasExtra(DESTINATION)){		
 			level = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME);
+			destination = getIntent().getExtras().getString(DESTINATION);
+			}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: arquivoAnexo!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: arquivoAnexo ou destino!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				finish();
@@ -31,7 +34,7 @@ public class MailOperationActivity extends InternetPerformanceTestActivity {
 			finish();
 		}
 		
-		operation = new MailOperation(this, level);
+		operation = new MailOperation(this, level, destination);
 		
 	}
 	

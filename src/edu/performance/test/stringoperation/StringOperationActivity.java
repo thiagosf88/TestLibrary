@@ -9,7 +9,8 @@ public class StringOperationActivity extends PerformanceTestActivity {
 	protected int level; //Deve ser 1 2 ou 3
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String searchable = "",  snippets[] = {""};
+		String searchable = null;
+		String  snippets[] = {""};
 		
 		if (getIntent().getExtras() != null) {
 			if (getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)
