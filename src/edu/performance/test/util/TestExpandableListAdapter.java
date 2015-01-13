@@ -3,14 +3,18 @@ package edu.performance.test.util;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.R;
 import edu.performance.test.domain.Operation;
@@ -83,8 +87,9 @@ public class TestExpandableListAdapter extends BaseExpandableListAdapter {
 		
 		TextView nome = (TextView)view.findViewById(R.id.labelOperation);
 		nome.setText(operation.toString());
-		CheckBox isNetworkTest = (CheckBox) view.findViewById(R.id.check_will_be_tested);
-		isNetworkTest.setChecked(false);
+		CheckBox isTested = (CheckBox) view.findViewById(R.id.check_will_be_tested);
+		isTested.setChecked(operation.isChecked());
+		isTested.setOnCheckedChangeListener(new CheckUpdateListener(operation));
 		return view;
 	}
 
@@ -154,5 +159,24 @@ public class TestExpandableListAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	private final class CheckUpdateListener implements OnCheckedChangeListener
+    {
+        private final Operation parent;
+         
+        private CheckUpdateListener(Operation parent)
+        {
+            this.parent = parent;
+        }
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+        {
+            Log.i("onCheckedChanged", "isChecked: "+isChecked);
+            parent.setChecked(isChecked);
+             
+            //((TestExpandableListAdapter)getExpandableListAdapter()).notifyDataSetChanged();
+             
+          
+        }
+    }
 
 }

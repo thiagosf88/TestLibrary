@@ -8,6 +8,8 @@ import android.app.ExpandableListActivity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 import edu.performance.test.database.DatabaseOperationActivity;
 import edu.performance.test.domain.Operation;
 import edu.performance.test.domain.TestParameter;
@@ -22,6 +24,9 @@ import edu.performance.test.nativo.fileoperation.FileOperationNativeActivity;
 import edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity;
 import edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity;
 import edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity;
+import edu.performance.test.nativo.stringoperation.StringOperationNativeActivity;
+import edu.performance.test.sortingoperation.SortingOperationActivity;
+import edu.performance.test.stringoperation.StringOperationActivity;
 import edu.performance.test.util.TestExpandableListAdapter;
 
 public class ExpandableListOfTestsActivity extends ExpandableListActivity {
@@ -181,7 +186,40 @@ public class ExpandableListOfTestsActivity extends ExpandableListActivity {
 			p.put("ActivityName", new TestParameter("string",MemoryOperationNativeActivity.class.toString(), "ActivityName"));
 			eachTest = new Operation(getApplicationContext().getResources().getString(R.string.mmnOp), false, p);
 			tests.add(eachTest);
-					
+			p = null;
+			
+			//Sorting Operation
+			p = new HashMap<String, TestParameter>();
+			p.put(PerformanceTestActivity.MAXTIME, new TestParameter("extraInt", 17, PerformanceTestActivity.MAXTIME));
+			p.put(PerformanceTestActivity.NETWORK_TEST, new TestParameter("extraBool", false, PerformanceTestActivity.NETWORK_TEST));
+			p.put(PerformanceTestActivity.LEVEL_INT, new TestParameter("extraInt",  1000, PerformanceTestActivity.LEVEL_INT));
+			p.put("ActivityName", new TestParameter("string",SortingOperationActivity.class.toString(), "ActivityName"));
+			eachTest = new Operation(getApplicationContext().getResources().getString(R.string.stOp), false, p);
+			tests.add(eachTest);			
+			p = null;
+
+			//String Operation
+			p = new HashMap<String, TestParameter>();
+			p.put(PerformanceTestActivity.MAXTIME, new TestParameter("extraInt", 17, PerformanceTestActivity.MAXTIME));
+			p.put(PerformanceTestActivity.NETWORK_TEST, new TestParameter("extraBool", false, PerformanceTestActivity.NETWORK_TEST));
+			p.put(PerformanceTestActivity.LEVEL_INT, new TestParameter("extraInt", 0, PerformanceTestActivity.LEVEL_INT));
+			p.put(PerformanceTestActivity.LEVEL_FILENAME, new TestParameter("extraStrFile",  this.getFilesDir().getPath() + "/app_performanceDir/small.txt", PerformanceTestActivity.LEVEL_FILENAME));
+			p.put(PerformanceTestActivity.SNIPPETS, new TestParameter("extraStrID", 2131165184, PerformanceTestActivity.SNIPPETS));
+			p.put("ActivityName", new TestParameter("string",StringOperationActivity.class.toString(), "ActivityName"));
+			eachTest = new Operation(getApplicationContext().getResources().getString(R.string.sgOp), false, p);
+			tests.add(eachTest);
+			p = null;
+
+			//String Operation
+			p = new HashMap<String, TestParameter>();
+			p.put(PerformanceTestActivity.MAXTIME, new TestParameter("extraInt", 17, PerformanceTestActivity.MAXTIME));
+			p.put(PerformanceTestActivity.NETWORK_TEST, new TestParameter("extraBool", false, PerformanceTestActivity.NETWORK_TEST));
+			p.put(PerformanceTestActivity.LEVEL_INT, new TestParameter("extraInt", 0, PerformanceTestActivity.LEVEL_INT));
+			p.put(PerformanceTestActivity.LEVEL_FILENAME, new TestParameter("extraStrFile",  this.getFilesDir().getPath() + "/app_performanceDir/small.txt", PerformanceTestActivity.LEVEL_FILENAME));
+			p.put(PerformanceTestActivity.SNIPPETS, new TestParameter("extraStrID", 2131165184, PerformanceTestActivity.SNIPPETS));
+			p.put("ActivityName", new TestParameter("string",StringOperationNativeActivity.class.toString(), "ActivityName"));
+			eachTest = new Operation(getApplicationContext().getResources().getString(R.string.sgnOp), false, p);
+			tests.add(eachTest);
 			
 			return tests;
 		}
@@ -208,5 +246,16 @@ public class ExpandableListOfTestsActivity extends ExpandableListActivity {
 	            ((TestExpandableListAdapter)getExpandableListAdapter()).notifyDataSetChanged();
 	        }   
 	    }
+	    
+	    
+	    public void onGroupCollapse(int groupPosition){
+	    	Operation eachTest = tests.get(groupPosition);
+	    	System.out.println(eachTest.isChecked());
+	    }
+	    public void onGroupExpand(int groupPosition){
+	    	Operation eachTest = tests.get(groupPosition);
+	    	System.out.println(eachTest.isChecked());
+	    }
+
 
 }

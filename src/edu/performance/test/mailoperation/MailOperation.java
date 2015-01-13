@@ -16,9 +16,16 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import edu.performance.test.Library;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
+import edu.performance.test.R;
 
 /**
  * This class extends AsyncTask and it sends downloading files from oi website.
@@ -28,12 +35,14 @@ import edu.performance.test.PerformanceTestActivity;
  * @author Thiago
  */
 public class MailOperation extends PerformanceTest<String> {
-	
-	private String destination = ""; 
-	
-	public MailOperation(PerformanceTestActivity activity, String level, String destination) {
+	private final int NOT_ID = 7;
+	private String to = "";
+
+	public MailOperation(PerformanceTestActivity activity, String level, String to) {
 		super(level, activity);
+		this.to = to;
 		activity.executeTest();
+
 	}
 
 	/**
@@ -42,13 +51,14 @@ public class MailOperation extends PerformanceTest<String> {
 	 * send.
 	 * 
 	 * @param level
-	 *            Defines the name file will be attached in email which will be send.
+	 *            Defines the name file will be attached in email which will be
+	 *            send.
 	 * @param to
 	 *            Determines the email that will be the test email(s).
 	 */
 
-
 	void testAMailOperation(String level, String to) {
+
 		String host = "smtp.mail.yahoo.com";
 		String port = "587";
 		// boolean auth = true;
@@ -62,7 +72,32 @@ public class MailOperation extends PerformanceTest<String> {
 		final String username = "t.library@yahoo.com.br", password = "Performance1";
 		// props.put("mail.smtp.user", username);
 		// props.put("mail.smtp.password", password);
-		
+
+		if (((MailOperationActivity) activity).isNotify()) {
+			NotificationManager notifMgr = (NotificationManager) activity
+					.getApplicationContext().getSystemService(
+							Context.NOTIFICATION_SERVICE);
+
+			NotificationCompat.Builder builder = new NotificationCompat.Builder(
+					activity.getApplicationContext());
+			builder.setSmallIcon(R.drawable.ic_notify_check_mail);
+			builder.setWhen(System.currentTimeMillis());
+			builder.setOngoing(true);
+
+			builder.setTicker("Sending mail");
+
+			builder.setContentTitle("Sending to: " + to);
+			builder.setContentText("From: " + username);
+
+			TaskStackBuilder stack = TaskStackBuilder.create(activity
+					.getApplicationContext());
+			// account.getInboxFolderName());
+			stack.addParentStack(Library.class);
+			stack.addNextIntent(new Intent(activity.getApplicationContext(),
+					MailOperationActivity.class));
+			builder.setContentIntent(stack.getPendingIntent(0, 0));
+			notifMgr.notify(NOT_ID, builder.build());
+		}
 
 		Session session = null;
 		try {
@@ -74,7 +109,7 @@ public class MailOperation extends PerformanceTest<String> {
 						}
 
 					});
-			session.setDebug(true);
+			session.setDebug(false);
 		}
 
 		catch (Exception e) {
@@ -88,34 +123,39 @@ public class MailOperation extends PerformanceTest<String> {
 				message.setFrom(new InternetAddress("t.library@yahoo.com.br"));
 				message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(to));
-				message.setSubject("Level 1 TestLibrary");
+				message.setSubject("Level TestLibrary");
 				message.setText("This is a email created to test,"
 						+ "\n\n No spam to my email, please!");
-				
+
 				MimeBodyPart messageBodyPart = new MimeBodyPart();
 
-		        Multipart multipart = new MimeMultipart();
+				Multipart multipart = new MimeMultipart();
 
-		        messageBodyPart = new MimeBodyPart();
-		        String file = level ;
-		        String fileName = "attachmentName.txt";
-		        DataSource source = new FileDataSource(file);
-		        messageBodyPart.setDataHandler(new DataHandler(source));
-		        messageBodyPart.setFileName(fileName);
-		        multipart.addBodyPart(messageBodyPart);
+				messageBodyPart = new MimeBodyPart();
+				String file = level;
+				String fileName = "attachmentName.txt";
+				DataSource source = new FileDataSource(file);
+				messageBodyPart.setDataHandler(new DataHandler(source));
+				messageBodyPart.setFileName(fileName);
+				multipart.addBodyPart(messageBodyPart);
 
-		        message.setContent(multipart);
-				
+				message.setContent(multipart);
+
 				Transport.send(message);
 
-				System.out.println("Done");
+				if (((MailOperationActivity) activity).isNotify()) {
+					NotificationManager notifMgr = (NotificationManager) activity
+							.getApplicationContext().getSystemService(
+									Context.NOTIFICATION_SERVICE);
+
+					notifMgr.cancel(NOT_ID);
+				}
 
 			}
 
 			catch (MessagingException e) {
-				//System.out.println(e.getMessage());
 				throw new RuntimeException(e);
-				 
+
 			}
 
 		} else {
@@ -124,16 +164,21 @@ public class MailOperation extends PerformanceTest<String> {
 	}
 
 	public void execute() {
-		
+
 		try {
-			testAMailOperation(this.getLevel(), this.destination);
+			testAMailOperation(this.getLevel(), to);
+			// new
+			// Send(activity.getApplicationContext()).execute(this.getLevel(),
+			// "thiago.soares@ymail.com");
+
 		} catch (RuntimeException ae) {
-			Bundle extras = new Bundle();			
+			Bundle extras = new Bundle();
+			System.out.println(ae.getMessage());
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			activity.finishTest(extras);
 		}
-		
-		Bundle extras = new Bundle();			
+
+		Bundle extras = new Bundle();
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
 		activity.finishTest(extras);
 	}

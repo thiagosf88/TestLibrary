@@ -129,5 +129,8 @@ usually cease growing when the skeleton attains maturity--the conversion
         <string name="fpnOp">Float Operation (Native)</string>
         <string name="itnOp">Integer Operation (Native)</string>
         <color name="white">#50FFFFFF</color>
+        <string name="stOp">Sorting Operation</string>
+        <string name="sgOp">String Operation</string>
+        <string name="sgnOp">String Operation (Native)</string>
 
 </resources>
