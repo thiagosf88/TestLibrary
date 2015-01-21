@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.ExpandableListActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import edu.performance.test.database.DatabaseOperationActivity;
 import edu.performance.test.domain.Operation;
 import edu.performance.test.domain.TestParameter;
@@ -38,12 +41,14 @@ public class ExpandableListOfTestsActivity extends ExpandableListActivity {
 	    private int ParentClickStatus=-1;
 	    private int ChildClickStatus=-1;*/
 	    private List<Operation> tests;
+	    private Button btStart;
 	     
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState)
 	    {
 	        super.onCreate(savedInstanceState);
-	         
+	        
+	        final Context appRef = this; 
 	        Resources res = this.getResources();
 	        Drawable devider = res.getDrawable(R.drawable.line);
 	         
@@ -60,6 +65,17 @@ public class ExpandableListOfTestsActivity extends ExpandableListActivity {
 			tests = createTests();
 			
 			loadOperations(tests);
+			btStart = (Button) findViewById(R.id.bt_start_test2);
+			btStart.setOnClickListener(new OnClickListener()
+		    {
+
+		        public void onClick(View v)
+		        {   
+		             Intent i = new Intent(appRef, Library.class);
+		             startActivity(i);
+		        } 
+
+		    });
 	    }
 	    
 	    private List<Operation> createTests(){

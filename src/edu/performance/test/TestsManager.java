@@ -1,6 +1,7 @@
 package edu.performance.test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -75,7 +76,7 @@ public class TestsManager {
 								e.printStackTrace();
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block
-								e.printStackTrace();
+								System.err.println("A classe defina por: " + testItem.getChildNodes().item(a).getTextContent() + " não foi encontrada na biblioteca");
 							}
 						if(testItem.getChildNodes().item(a).getNodeName().contains("extraBool"))
 							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), Boolean.parseBoolean(testItem.getChildNodes().item(a).getTextContent()));
@@ -89,8 +90,8 @@ public class TestsManager {
 							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), testItem.getChildNodes().item(a).getTextContent().split("-;-"));
 						if(testItem.getChildNodes().item(a).getNodeName().contains("extraAStrID"))
 							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), appRef.getResources().getStringArray(Integer.parseInt(testItem.getChildNodes().item(a).getTextContent())));
-						if(testItem.getChildNodes().item(a).getNodeName().contains("extraStrFile"))
-							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), new FileOperation().testTJMreadSequentialAcessFile(testItem.getChildNodes().item(a).getTextContent()));
+						if(testItem.getChildNodes().item(a).getNodeName().contains("extraStrID"))
+							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), appRef.getResources().getString(Integer.parseInt(testItem.getChildNodes().item(a).getTextContent())));
 						
 						
 						

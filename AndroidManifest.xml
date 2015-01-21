@@ -45,6 +45,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="edu.performance.test.Library"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="edu.performance.test.floatoperation.FloatOperationActivity"
             android:screenOrientation="portrait" >
         </activity>
@@ -119,6 +123,10 @@
         </activity>
         <activity
             android:name="edu.performance.test.graphicoperation.threed.CubeColorGLES2Activity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.graphicoperation.threed.CubeTextureGLES2Activity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

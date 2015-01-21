@@ -25,6 +25,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 	ActivityThread mythread;
 	public static final String STREAMSIZE = "STREAMSIZE";
 	boolean isTheLast = true;
+	//TODO FIXME mudar para parametro level
 	String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
 
 	@Override

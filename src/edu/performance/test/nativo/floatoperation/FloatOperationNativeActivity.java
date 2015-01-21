@@ -12,7 +12,7 @@ public class FloatOperationNativeActivity extends PerformanceTestActivity {
 		
 		if(getIntent().getExtras() != null){
 			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_DOUBLE))		
-			level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_DOUBLE);
+			level = getIntent().getExtras().getDouble(PerformanceTestActivity.LEVEL_DOUBLE);
 			else{
 				Bundle extras = new Bundle();
 				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level");

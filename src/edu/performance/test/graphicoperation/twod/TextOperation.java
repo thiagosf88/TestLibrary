@@ -30,7 +30,7 @@ public class TextOperation extends Operation {
             this.text = text;
         }
     }
-
+//TODO FIXME Passar array de textos a serem desenhados
 	public TextOperation(Context ctx, AttributeSet attrs) {
 		super(ctx);
 		context = ctx;

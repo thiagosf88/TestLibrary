@@ -139,7 +139,7 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		if(extras.containsKey(PerformanceTestActivity.RESULT_WAS_OK))
 			if(!extras.getBoolean(PerformanceTestActivity.RESULT_WAS_OK)){
 				setResult(RESULT_CANCELED, mIntent);
-				if(extras.containsKey(PerformanceTestInterface.ERROR_MESSAGE))
+				if(!extras.containsKey(PerformanceTestInterface.ERROR_MESSAGE))
 				mIntent.putExtra(PerformanceTestInterface.ERROR_MESSAGE, "Não foi possível obter os parâmetros necessários. O método getExtras retornou null!");
 			}
 		}

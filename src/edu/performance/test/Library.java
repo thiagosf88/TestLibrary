@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import edu.performance.test.batterytest.BatteryMetric;
+import edu.performance.test.batteryTest.BatteryMetric;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
@@ -36,30 +37,7 @@ public class Library extends Activity {
 
 	private int countIntent = 0;
 	private List<Intent> testsToDo;
-	/*private String snippets[] = {
-			"Copyright laws are changing all over the world",
-			"Copyright laws are changing all over the world. Be sure to check the"
-					+ "copyright laws for your country before",
-			"Copyright laws are changing all over the world. Be sure to check the"
-					+ "copyright laws for your country before downloading or redistributing"
-					+ "this or any other Project Gutenberg eBook.",
-			"No, my brougham is waiting",
-			"\"No, my brougham is waiting.\"" + ""
-					+ "\"Then that will simplify matters.\"",
-			"\"No, my brougham is waiting.\""
-					+ ""
-					+ "\"Then that will simplify matters.\" We descended and started off once more for Briony Lodge."
-					+ "" + "\"Irene Adler is married,\" remarked Holmes.",
-			"Sarasate plays at the St. James\'s Hall this afternoon",
-			"Sarasate plays at the St. James\'s Hall this afternoon,\" he remarked. \"What do you think, Watson? Could your patients spare you for a few hours?\""
-					+ ""
-					+ "\"I have nothing to do to-day. My practice is never very absorbing.\"",
-			"Sarasate plays at the St. James\'s Hall this afternoon,\" he remarked. \"What do you think, Watson? Could your patients spare you for a few hours?\""
-					+ ""
-					+ "\"I have nothing to do to-day. My practice is never very absorbing.\""
-					+ ""
-					+ "\"Then put on your hat and come. I am going through the City first, and we can have some lunch on the way. I observe that there is a good deal of German music on the programme, which is rather more to my taste than Italian or French. It is introspective, and I want to introspect. Come along!\"" };
-	*/
+	
 	private static String fileLocation = "";
 	public static class fileIndexes {
 		public static final int BIG_TXT = 0, MEDIUM_TXT = BIG_TXT + 1,LISTAS_XML = MEDIUM_TXT + 1,

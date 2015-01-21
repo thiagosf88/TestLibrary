@@ -22,15 +22,17 @@ public class ArcOperation extends Operation {
 		super(ctx);
 		
 		
-		
+		SurfaceHolder Holder = getHolder();
+
+		Holder.addCallback(this);
 		
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-
+		
 		((TwoDActivity)context).executeTest(holder, this);
-
+		
 		
 	}
 
@@ -48,6 +50,7 @@ public class ArcOperation extends Operation {
 	public void doDraw(Canvas canvas)
 
 	{
+		
 
 		drawArc(canvas);
 		if(((TwoDActivity)context).isItTimeToFinish())			
@@ -64,6 +67,7 @@ public class ArcOperation extends Operation {
 	 * @param canvas
 	 */
     private void drawArc(Canvas canvas) {
+    	
         if (angle > 360) angle = 0;
         //Define a quantidade de arcos desenhados e assim afeta os fps
         int jota = 3 * getLevel(), xis = 4 * getLevel(), ypslon = 4 * getLevel();

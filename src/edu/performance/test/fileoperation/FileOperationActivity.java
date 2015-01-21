@@ -26,6 +26,7 @@ public class FileOperationActivity extends PerformanceTestActivity {
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				finish();
+				return;
 			}
 		
 		

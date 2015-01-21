@@ -1,4 +1,4 @@
-package edu.performance.test.batterytest;
+package edu.performance.test.batteryTest;
 
 import java.util.ArrayList;
 

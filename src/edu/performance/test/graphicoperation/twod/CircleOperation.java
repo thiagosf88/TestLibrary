@@ -15,7 +15,7 @@ public class CircleOperation extends Operation {
 	public CircleOperation(Context ctx, AttributeSet attrs) {
 		super(ctx);
 		
-	System.out.println(ctx.getClass().getName());
+
 		// the bitmap we wish to draw
 
 		// mbitmap = BitmapFactory.decodeResource(context.getResources(),

@@ -1,4 +1,4 @@
-package edu.performance.test.fileoperation;
+package com.fsck.k9.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,11 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 
+import android.app.Activity;
 import android.content.res.Resources.NotFoundException;
-import android.os.Bundle;
-import edu.performance.test.Library;
-import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.StorageTests;
+
 
 /**
  * This class extends ReadAndWrite because some new attributes are needed beside
@@ -26,41 +24,9 @@ import edu.performance.test.StorageTests;
  * 
  * @author Thiago
  */
-public class FileOperation extends StorageTests {
+public class FileOperation {
 
-	public FileOperation(PerformanceTestActivity activity, String filePath, String stretch, int level) {
-		super(activity, level);
-		this.setFilePath(filePath);
-		this.setStretch(stretch);
-		if(activity != null)
-			activity.executeTest();
-		else
-			System.err.println("File Activity is null!!!");
-	}
-	/**
-	 * This constructor can not be used to instance objects which will run tests.
-	 */
-	public FileOperation() {
-		super(null, new Integer(0));
-		
-	}
-
-	public void execute() {
-		
-		testTJMwriteSequentialFile(this.getFilePath(),
-				this.getStretch()); // não testado ainda
-		testTJMreadRandomAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
-				 (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1));
-		testTJMwriteRandowAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
-				this.getStretch());
-		
-		testTJMreadSequentialAcessFile(this.getFilePath());
-		
-		Bundle extras = new Bundle();			
-		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
-		activity.finishTest(extras);
-
-	}
+	
 
 
 	/**
@@ -83,9 +49,7 @@ public class FileOperation extends StorageTests {
 					filePath)), 8192);
 		} catch (FileNotFoundException e1) {
 
-			System.out.println("Arquivo não encontrado: " + filePath);
-			
-			return null;
+			e1.printStackTrace();
 		} // 2nd arg is buffer size
 
 		try {
@@ -230,7 +194,7 @@ public class FileOperation extends StorageTests {
  * @param dirName Directory name where the file will be created
  * @return Return true if the file was successfully created.
  */
-	public static boolean testTJMWriteFile(Library appRef, int rawResourceId,
+	public static boolean testTJMWriteFile(Activity appRef, int rawResourceId,
 			String resourceName, String dirName) {
 
 		InputStream in = null;
