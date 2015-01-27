@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testList
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-			 xsi:noNamespaceSchemaLocation="testListxsd.xsd">
-	<!--  		 
+			 xsi:noNamespaceSchemaLocation="testListxsd.xsd">			 
     <test>
 		<activityName>edu.performance.test.database.DatabaseOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">400000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
 		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">10</extraInt>
-		<extraStr name="STATUS">Testing Database skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test>
-	<test>
-		<activityName>edu.performance.test.database.DatabaseOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">200</extraInt>
-		<extraStr name="STATUS">Testing Database skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test>
-	<test>
-		<activityName>edu.performance.test.database.DatabaseOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">1000</extraInt>
+		<extraInt name="LEVEL_INT">50</extraInt>
 		<extraStr name="STATUS">Testing Database skills..</extraStr>
 		<extraBool name="NETWORKTEST">false</extraBool>
 	</test>
@@ -41,37 +22,6 @@
 		<extraBool name="NETWORKTEST">true</extraBool>
 	</test>
 	<test>
-		<activityName>edu.performance.test.downloadoperation.DownloadOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">1</extraInt>
-		<extraStr name="FILELOCATION">/data/data/edu.performance.test/app_performanceDir</extraStr>
-		<extraStr name="STATUS">Testing Download skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>
-	</test>
-	<test>
-		<activityName>edu.performance.test.downloadoperation.DownloadOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">2</extraInt>
-		<extraStr name="FILELOCATION">/data/data/edu.performance.test/app_performanceDir/</extraStr>
-		<extraStr name="STATUS">Testing Download skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>
-	</test> 
-	<test>
-		<activityName>edu.performance.test.fileoperation.FileOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">1</extraInt>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/small.txt</extraStr>
-		<extraStrID name="STRETCH">2131034113</extraStrID>
-		<extraStr name="STATUS">Testing File Operation skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test>
-	<test>
 		<activityName>edu.performance.test.fileoperation.FileOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">400000</extraInt>
 		<extraBool name="THELASTTEST"> false</extraBool>
@@ -82,17 +32,6 @@
 		<extraStr name="STATUS">Testing File Operation skills..</extraStr>
 		<extraBool name="NETWORKTEST">false</extraBool>
 	</test>
-	<test>
-		<activityName>edu.performance.test.fileoperation.FileOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">3</extraInt>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/small.txt</extraStr>
-		<extraStrID name="STRETCH">2131034113</extraStrID>
-		<extraStr name="STATUS">Testing File Operation skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test> 
 	<test> <activityName>edu.performance.test.floatoperation.FloatOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">700000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
@@ -100,25 +39,6 @@
 		<extraBool name="BATTERYTEST">false</extraBool>
 		<extraDec name="LEVEL_DOUBLE">107</extraDec>
 		<extraStr name="STATUS">Testing Float skills..</extraStr>
-		testsToDo.add(aTest);
-	</test>
-	<test> <activityName>edu.performance.test.floatoperation.FloatOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">700000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraDec name="LEVEL_DOUBLE">5009</extraDec>
-		<extraStr name="STATUS">Testing Float skills..</extraStr>
-		testsToDo.add(aTest);
-	</test>
-	<test> <activityName>edu.performance.test.floatoperation.FloatOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">700000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraDec name="LEVEL_DOUBLE"> 999983 </extraDec>
-		<extraStr name="STATUS">Testing Float skills..</extraStr>
-		testsToDo.add(aTest);
 	</test>
 	<test>
 		<activityName>edu.performance.test.locationoperation.GpsOperationActivity</activityName>
@@ -132,7 +52,7 @@
 	
 	<test>
 		<activityName>edu.performance.test.graphicoperation.threed.CubeColorGLES2Activity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
+		<extraInt name="MAXTIMEMS">17000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
 		<extraBool name="NETWORKTEST">false</extraBool>
 		<extraBool name="BATTERYTEST">false</extraBool>
@@ -140,50 +60,14 @@
 		<extraStr name="STATUS">Testing GLES2Color skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.graphicoperation.threed.CubeColorGLES2Activity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing GLES2Color skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.threed.CubeColorGLES2Activity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">150</extraInt>
-		<extraStr name="STATUS">Testing GLES2Color skills..</extraStr>
-	</test>
-	<test>
 		<activityName>edu.performance.test.graphicoperation.threed.CubeTextureGL10Activity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
+		<extraInt name="MAXTIMEMS">17000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
 		<extraBool name="NETWORKTEST">false</extraBool>
 		<extraBool name="BATTERYTEST">false</extraBool>
 		<extraInt name="LEVEL_INT">50</extraInt>
 		<extraStr name="STATUS">Testing GL10Texture skills..</extraStr>
 	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.threed.CubeTextureGL10Activity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing GL10Texture skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.threed.CubeTextureGL10Activity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">150</extraInt>
-		<extraStr name="STATUS">Testing GL10Texture skills..</extraStr>
-	</test> 
 	<test>
 		<activityName>edu.performance.test.graphicoperation.threed.CubeTextureGLES2Activity</activityName>
 		<extraInt name="MAXTIMEMS">17000</extraInt>
@@ -193,35 +77,6 @@
 		<extraInt name="LEVEL_INT">50</extraInt>
 		<extraInt name="PARAMETERSINT">2130837513</extraInt>
 		<extraStr name="STATUS">Testing GLES2Texture skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.threed.CubeTextureGLES2Activity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="PARAMETERSINT">2130837513</extraInt>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing GLES2Texture skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.threed.CubeTextureGLES2Activity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="PARAMETERSINT">2130837513</extraInt>
-		<extraInt name="LEVEL_INT">150</extraInt>
-		<extraStr name="STATUS">Testing GLES2Texture skills..</extraStr>
-	</test> 
-	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.ArcActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">1</extraInt>
-		<extraStr name="STATUS">Testing Arc2D skills..</extraStr>
 	</test>
 	<test>
 		<activityName>edu.performance.test.graphicoperation.twod.ArcActivity</activityName>
@@ -233,15 +88,6 @@
 		<extraStr name="STATUS">Testing Arc2D skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.ArcActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">5</extraInt>
-		<extraStr name="STATUS">Testing Arc2D skills..</extraStr>
-	</test>
-  	<test>
 		<activityName>edu.performance.test.graphicoperation.twod.CircleActivity</activityName>
 		<extraInt name="MAXTIMEMS">17000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
@@ -251,24 +97,6 @@
 		<extraStr name="STATUS">Testing Circle2D skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.CircleActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">50</extraInt>
-		<extraStr name="STATUS">Testing Circle2D skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.CircleActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing Circle2D skills..</extraStr>
-	</test>
-	<test>
 		<activityName>edu.performance.test.graphicoperation.twod.ImageActivity</activityName>
 		<extraInt name="MAXTIMEMS">17000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
@@ -278,48 +106,12 @@
 		<extraStr name="STATUS">Testing Image2D skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.ImageActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">50</extraInt>
-		<extraStr name="STATUS">Testing Image2D skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.ImageActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing Image2D skills..</extraStr>
-	</test>
-	<test>
 		<activityName>edu.performance.test.graphicoperation.twod.RectangleActivity</activityName>
 		<extraInt name="MAXTIMEMS">17000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
 		<extraBool name="NETWORKTEST">false</extraBool>
 		<extraBool name="BATTERYTEST">false</extraBool>
 		<extraInt name="LEVEL_INT">10</extraInt>
-		<extraStr name="STATUS">Testing Rectangle2D skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.RectangleActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing Rectangle2D skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphicoperation.twod.RectangleActivity</activityName>
-		<extraInt name="MAXTIMEMS">17000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">1000</extraInt>
 		<extraStr name="STATUS">Testing Rectangle2D skills..</extraStr>
 	</test>
 	<test>
@@ -341,48 +133,12 @@
 		<extraBool name="NETWORKTEST">false</extraBool>
 	</test>
 	<test>
-		<activityName>edu.performance.test.graphoperation.GraphOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/medium_g.txt</extraStr>
-		<extraStr name="STATUS">Testing Graph Operation skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test>
-	<test>
-		<activityName>edu.performance.test.graphoperation.GraphOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/medium3_g.txt</extraStr>
-		<extraStr name="STATUS">Testing Graph Operation skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test> 
-	<test>
-		<activityName>edu.performance.test.integeroperation.IntegerOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing Integer skills..</extraStr>
-	</test>
-	<test>
 		<activityName>edu.performance.test.integeroperation.IntegerOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">170000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
 		<extraBool name="NETWORKTEST">false</extraBool>
 		<extraBool name="BATTERYTEST">false</extraBool>
 		<extraInt name="LEVEL_INT">1000</extraInt>
-		<extraStr name="STATUS">Testing Integer skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.integeroperation.IntegerOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">10000</extraInt>
 		<extraStr name="STATUS">Testing Integer skills..</extraStr>
 	</test>
 	<test>
@@ -397,37 +153,6 @@
 		<extraStr name="STATUS">Testing Mail skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.mailoperation.MailOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">500000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">true</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraBool name="NOTIFY">true</extraBool>
-		<extraStr name="DESTINATION">thiago.soares@ymail.com</extraStr>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/medium_g.txt</extraStr>
-		<extraStr name="STATUS">Testing Mail skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.mailoperation.MailOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">800000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">true</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraBool name="NOTIFY">true</extraBool>
-		<extraStr name="DESTINATION">thiago.soares@ymail.com</extraStr>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/medium2_g.txt</extraStr>
-		<extraStr name="STATUS">Testing Mail skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.memoryoperation.MemoryOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing Memory skills..</extraStr>
-	</test>
-	<test>
 		<activityName>edu.performance.test.memoryoperation.MemoryOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">170000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
@@ -437,42 +162,11 @@
 		<extraStr name="STATUS">Testing Memory skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.memoryoperation.MemoryOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">10000</extraInt>
-		<extraStr name="STATUS">Testing Memory skills..</extraStr>
-	</test>
-	<test>
 		<activityName>edu.performance.test.nativo.fileoperation.FileOperationNativeActivity</activityName>
 		<extraInt name="MAXTIMEMS">400000</extraInt>
 		<extraBool name="THELASTTEST"> false</extraBool>
 		<extraBool name="BATTERYTEST"> false</extraBool>
 		<extraInt name="LEVEL_INT">1</extraInt>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/small.txt</extraStr>
-		<extraStrID name="STRETCH">2131034113</extraStrID>
-		<extraStr name="STATUS">Testing File Operation skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test>
-	<test>
-		<activityName>edu.performance.test.nativo.fileoperation.FileOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">2</extraInt>
-		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/small.txt</extraStr>
-		<extraStrID name="STRETCH">2131034113</extraStrID>
-		<extraStr name="STATUS">Testing File Operation skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>
-	</test>
-	<test>
-		<activityName>edu.performance.test.nativo.fileoperation.FileOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">400000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">3</extraInt>
 		<extraStr name="LEVEL_FILENAME">/data/data/edu.performance.test/app_performanceDir/small.txt</extraStr>
 		<extraStrID name="STRETCH">2131034113</extraStrID>
 		<extraStr name="STATUS">Testing File Operation skills..</extraStr>
@@ -485,34 +179,6 @@
 		<extraBool name="BATTERYTEST">false</extraBool>
 		<extraDec name="LEVEL_DOUBLE">107</extraDec>
 		<extraStr name="STATUS">Testing Float skills..</extraStr>
-		testsToDo.add(aTest);
-	</test>
-	<test> <activityName>edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">700000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraDec name="LEVEL_DOUBLE">5009</extraDec>
-		<extraStr name="STATUS">Testing Float skills..</extraStr>
-		testsToDo.add(aTest);
-	</test>
-	<test> <activityName>edu.performance.test.nativo.floatoperation.FloatOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">700000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraDec name="LEVEL_DOUBLE"> 999983 </extraDec>
-		<extraStr name="STATUS">Testing Float skills..</extraStr>
-		testsToDo.add(aTest);
-	</test>
-	<test>
-		<activityName>edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing Integer skills..</extraStr>
 	</test>
 	<test>
 		<activityName>edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity</activityName>
@@ -524,24 +190,6 @@
 		<extraStr name="STATUS">Testing Integer skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.nativo.integeroperation.IntegerOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">10000</extraInt>
-		<extraStr name="STATUS">Testing Integer skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">100</extraInt>
-		<extraStr name="STATUS">Testing Memory skills..</extraStr>
-	</test>
-	<test>
 		<activityName>edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity</activityName>
 		<extraInt name="MAXTIMEMS">170000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
@@ -550,16 +198,8 @@
 		<extraInt name="LEVEL_INT">1000</extraInt>
 		<extraStr name="STATUS">Testing Memory skills..</extraStr>
 	</test>
+	
 	<test>
-		<activityName>edu.performance.test.nativo.memoryoperation.MemoryOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">10000</extraInt>
-		<extraStr name="STATUS">Testing Memory skills..</extraStr>
-	</test>
-<test>
 		<activityName>edu.performance.test.nativo.stringoperation.StringOperationNativeActivity</activityName>
 		<extraInt name="MAXTIMEMS">170000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
@@ -570,30 +210,7 @@
 		<extraStr name="SEARCHABLE">/data/data/edu.performance.test/app_performanceDir/small.txt</extraStr>
 		<extraStr name="STATUS">Testing String skills..</extraStr>
 	</test>
-
-	<test>
-		<activityName>edu.performance.test.nativo.stringoperation.StringOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">true</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">1</extraInt>
-		<extraAStrID name="SNIPPETS">2131165184</extraAStrID>
-		<extraStr name="SEARCHABLE">/data/data/edu.performance.test/app_performanceDir/medium.txt</extraStr>
-		<extraStr name="STATUS">Testing String skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.nativo.stringoperation.StringOperationNativeActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">true</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">2</extraInt>
-		<extraAStrID name="SNIPPETS">2131165184</extraAStrID>
-		<extraStr name="SEARCHABLE">/data/data/edu.performance.test/app_performanceDir/medium.txt</extraStr>
-		<extraStr name="STATUS">Testing String skills..</extraStr>
-	</test>
-	<test>
+<test>
 		<activityName>edu.performance.test.screenoperation.LightTestActivity</activityName>
 		<extraInt name="MAXTIMEMS">60000</extraInt>
 		<extraBool name="THELASTTEST"> false</extraBool>
@@ -622,36 +239,9 @@
 		<extraInt name="MAXTIMEMS">60000</extraInt>
 		<extraBool name="THELASTTEST"> false</extraBool>
 		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">300</extraInt>
-		<extraStr name="STATUS">Testing Sorting skills..</extraStr>
-		<extraBool name="NETWORKTEST">false</extraBool>		
-	</test>
-	<test>
-		<activityName>edu.performance.test.sortingoperation.SortingOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">60000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
 		<extraInt name="LEVEL_INT">2000</extraInt>
 		<extraStr name="STATUS">Testing Sorting skills..</extraStr>
 		<extraBool name="NETWORKTEST">false</extraBool>		
-	</test>
-	<test>
-		<activityName>edu.performance.test.sortingoperation.SortingOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">60000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">5000</extraInt>
-		<extraStr name="STATUS">Testing Sorting skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>		
-	</test>
-	<test>
-		<activityName>edu.performance.test.streamingoperation.StreamingActivity</activityName>
-		<extraInt name="MAXTIMEMS">600000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraStr name="LEVEL_URL">https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4</extraStr>
-		<extraStr name="STATUS">Testing Streaming skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>		
 	</test>
 	<test>
 		<activityName>edu.performance.test.streamingoperation.StreamingGLSurfaceActivity</activityName>
@@ -672,15 +262,6 @@
 		<extraBool name="NETWORKTEST">true</extraBool>		
 	</test>
 	<test>
-		<activityName>edu.performance.test.streamingoperation.StreamingVideoActivity</activityName>
-		<extraInt name="MAXTIMEMS">600000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraStr name="LEVEL_URL">https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4</extraStr>
-		<extraStr name="STATUS">Testing Streaming Video skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>		
-	</test>
-	<test>
 		<activityName>edu.performance.test.stringoperation.StringOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">170000</extraInt>
 		<extraBool name="THELASTTEST">false</extraBool>
@@ -692,48 +273,6 @@
 		<extraStr name="STATUS">Testing String skills..</extraStr>
 	</test>
 	<test>
-		<activityName>edu.performance.test.stringoperation.StringOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">1</extraInt>
-		<extraAStrID name="SNIPPETS">2131165184</extraAStrID>
-		<extraStr name="SEARCHABLE">/data/data/edu.performance.test/app_performanceDir/medium.txt</extraStr>
-		<extraStr name="STATUS">Testing String skills..</extraStr>
-	</test> -->
-	<test>
-		<activityName>edu.performance.test.stringoperation.StringOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST">false</extraBool>
-		<extraBool name="NETWORKTEST">false</extraBool>
-		<extraBool name="BATTERYTEST">false</extraBool>
-		<extraInt name="LEVEL_INT">2</extraInt>
-		<extraAStrID name="SNIPPETS">2131165184</extraAStrID>
-		<extraStr name="SEARCHABLE">/data/data/edu.performance.test/app_performanceDir/medium.txt</extraStr>
-		<extraStr name="STATUS">Testing String skills..</extraStr>
-	</test>
-	<test>
-		<activityName>edu.performance.test.weboperation.WebOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">0</extraInt>
-		<extraAStrID name="PARAMETERSWEBARRAY">2131165185</extraAStrID>
-		<extraStr name="STATUS">Testing WebOperation skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>		
-	</test>
-	<test>
-		<activityName>edu.performance.test.weboperation.WebOperationActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraInt name="LEVEL_INT">2</extraInt>
-		<extraAStrID name="PARAMETERSWEBARRAY">2131165185</extraAStrID>
-		<extraStr name="STATUS">Testing WebOperation skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>		
-	</test>
-	<test>
 		<activityName>edu.performance.test.weboperation.WebOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">170000</extraInt>
 		<extraBool name="THELASTTEST"> false</extraBool>
@@ -741,24 +280,6 @@
 		<extraInt name="LEVEL_INT">3</extraInt>
 		<extraAStrID name="PARAMETERSWEBARRAY">2131165185</extraAStrID>
 		<extraStr name="STATUS">Testing WebOperation skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>		
-	</test>
-	<test>
-		<activityName>edu.performance.test.weboperation.WebServiceActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraStr name="LEVEL_WEBSITE">http://mcupdate.tumblr.com/api/read?num=5</extraStr>
-		<extraStr name="STATUS">Testing WebService skills..</extraStr>
-		<extraBool name="NETWORKTEST">true</extraBool>		
-	</test>
-	<test>
-		<activityName>edu.performance.test.weboperation.WebServiceActivity</activityName>
-		<extraInt name="MAXTIMEMS">170000</extraInt>
-		<extraBool name="THELASTTEST"> false</extraBool>
-		<extraBool name="BATTERYTEST"> false</extraBool>
-		<extraStr name="LEVEL_WEBSITE">http://mcupdate.tumblr.com/api/read?num=25</extraStr>
-		<extraStr name="STATUS">Testing WebService skills..</extraStr>
 		<extraBool name="NETWORKTEST">true</extraBool>		
 	</test>
 	<test>
