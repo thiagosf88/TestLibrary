@@ -42,30 +42,41 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 		 status = (TextView)findViewById(R.id.status);
 		 
 		
-		if(getIntent().getExtras() != null && getIntent().hasExtra(PerformanceTestInterface.THELASTTEST)
-				&& getIntent().hasExtra(MAXTIME) && getIntent().hasExtra(PerformanceTestInterface.STATUS)
-				&& getIntent().hasExtra(PerformanceTestInterface.BATTERYTEST)){
+		if(getIntent().getExtras() != null && getIntent().hasExtra(THELASTTEST)
+				&& getIntent().hasExtra(MAXTIME) && getIntent().hasExtra(STATUS)
+				&& getIntent().hasExtra(BATTERYTEST)){
 			
-			if(getIntent().hasExtra(PerformanceTestInterface.THELASTTEST))
+
 				setTheLast(getIntent().getExtras().getBoolean(PerformanceTestInterface.THELASTTEST));
 			
-			if(getIntent().hasExtra(PerformanceTestInterface.STATUS))
+
 				message = getIntent().getExtras().getString(PerformanceTestInterface.STATUS);
 			
-			if(getIntent().hasExtra(MAXTIME))
+
 				setMAX_TIME_MS(getIntent().getExtras().getInt(MAXTIME));
-			
-			if(getIntent().hasExtra(PerformanceTestInterface.BATTERYTEST))
+
 				isBatteryTest = getIntent().getExtras().getBoolean(PerformanceTestInterface.BATTERYTEST);
 			
 			
 		}
 		else{
+			
+			
 			Bundle extras = new Bundle();
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
-			extras.putString(PerformanceTestInterface.ERROR_MESSAGE, "Não foi possível obter os parâmetros mínimos necessários. O método getExtras retornou null!");
+			if(getIntent().getExtras() != null){
+				extras.putString(PerformanceTestInterface.ERROR_MESSAGE, "Não foram fornecidos os seguintes parâmetros: (" + 
+			(!getIntent().hasExtra(THELASTTEST) ? THELASTTEST : " " ) + 
+			(!getIntent().hasExtra(MAXTIME) ? MAXTIME : " ") +
+			(!getIntent().hasExtra(STATUS) ? STATUS : " ") +
+			(!getIntent().hasExtra(BATTERYTEST)? BATTERYTEST: ")"));
+			
+			}else
+				extras.putString(PerformanceTestInterface.ERROR_MESSAGE, "Não foi possível obter os parâmetros mínimos necessários. O método getExtras retornou null!");
+		
 			finishTest(extras);
 			finish();
+			return;
 		}
 		
 		powerManager = (PowerManager) this
@@ -140,7 +151,8 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
 			if(!extras.getBoolean(PerformanceTestActivity.RESULT_WAS_OK)){
 				setResult(RESULT_CANCELED, mIntent);
 				if(!extras.containsKey(PerformanceTestInterface.ERROR_MESSAGE))
-				mIntent.putExtra(PerformanceTestInterface.ERROR_MESSAGE, "Não foi possível obter os parâmetros necessários. O método getExtras retornou null!");
+				mIntent.putExtra(PerformanceTestInterface.ERROR_MESSAGE, "O teste: " + (extras.containsKey(PerformanceTestActivity.STATUS) ? 
+						extras.getString(PerformanceTestActivity.STATUS): "Teste sem nome??") + " foi cancelado e não apresentou mensagem detalhada de erro!");
 			}
 		}
 

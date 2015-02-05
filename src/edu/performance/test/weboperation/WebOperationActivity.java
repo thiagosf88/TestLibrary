@@ -72,6 +72,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 				webSite = new Intent(this, WebLatencyOperation.class);
 				webSite.putExtra(ISTHELASTPAGE, false);
 				webSite.putExtra(PerformanceTestActivity.MAXTIME, MAX_TIME);
+				webSite.putExtra(PerformanceTestActivity.BATTERYTEST, this.isBatteryTest());
 				webSite.putExtra(PerformanceTestActivity.THELASTTEST, false);
 				webSite.putExtra(URL, websites[n]);
 				webSite.putExtra(PerformanceTestActivity.STATUS, websites[n]);
@@ -80,6 +81,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 				webSite = new Intent(this, WebViewActivity.class);
 				webSite.putExtra(ISTHELASTPAGE, false);
 				webSite.putExtra(PerformanceTestActivity.MAXTIME, MAX_TIME);
+				webSite.putExtra(PerformanceTestActivity.BATTERYTEST, this.isBatteryTest());
 				webSite.putExtra(PerformanceTestActivity.THELASTTEST, false);
 				webSite.putExtra(URL, websites[n]);
 				webSite.putExtra(PerformanceTestActivity.STATUS, websites[n]);
@@ -89,6 +91,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 				webSite.putExtra(ISTHELASTPAGE, false);
 				webSite.putExtra(PerformanceTestActivity.MAXTIME, MAX_TIME);
 				webSite.putExtra(PerformanceTestActivity.THELASTTEST, false);
+				webSite.putExtra(PerformanceTestActivity.BATTERYTEST, this.isBatteryTest());
 				webSite.putExtra(URL, websites[n]);
 				webSite.putExtra(PerformanceTestActivity.STATUS, websites[n]);
 				getPagesToAccess().add(webSite);
@@ -97,6 +100,7 @@ public class WebOperationActivity extends PerformanceTestActivity {
 				webSite.putExtra(ISTHELASTPAGE, true);
 				webSite.putExtra(PerformanceTestActivity.MAXTIME, MAX_TIME);
 				webSite.putExtra(PerformanceTestActivity.THELASTTEST, false);
+				webSite.putExtra(PerformanceTestActivity.BATTERYTEST, this.isBatteryTest());
 				webSite.putExtra(URL, websites[n]);
 				webSite.putExtra(PerformanceTestActivity.STATUS, websites[n]);
 				getPagesToAccess().add(webSite);
@@ -164,8 +168,10 @@ public class WebOperationActivity extends PerformanceTestActivity {
 
 		Bundle results = data.getExtras();
 
-		if (!results.getBoolean(ISTHELASTPAGE) && requestCode == 1
-				&& resultCode == Activity.RESULT_OK) {
+		if (!results.getBoolean(ISTHELASTPAGE) && requestCode == 1) {
+			if(resultCode != Activity.RESULT_OK){
+				System.out.println(results.getString(PerformanceTestActivity.ERROR_MESSAGE));
+			}
 			testingPages(getPagesToAccess().get(++countIntent));
 		} else {
 			Intent mIntent = new Intent();

@@ -26,7 +26,7 @@ public class WebViewActivity extends InternetPerformanceTestActivity{
 			}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: website!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: URL!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				setResult(RESULT_CANCELED);
@@ -37,6 +37,7 @@ public class WebViewActivity extends InternetPerformanceTestActivity{
 		
 		else{
 			Bundle extras = new Bundle();
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: O método getIntent().getExtras() é null");
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			finishTest(extras);
 			setResult(RESULT_CANCELED);

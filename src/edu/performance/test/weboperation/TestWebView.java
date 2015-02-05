@@ -1,8 +1,10 @@
 package edu.performance.test.weboperation;
 
+import edu.performance.test.PerformanceTestActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -62,14 +64,21 @@ public class TestWebView extends WebViewClient {
 	private void gettingOut(String message, boolean loaded){
 		
 		Intent mIntent = new Intent();
-		mIntent.putExtra(WebOperationActivity.ISTHELASTPAGE, actRef.isTheLastPage());
-		if(loaded){
-		actRef.setResult(Activity.RESULT_OK, mIntent);
-		System.out.println(message);
+		Bundle extras = new Bundle();
+		extras.putBoolean(WebOperationActivity.ISTHELASTPAGE, actRef.isTheLastPage());
+		if(loaded){			
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
+			mIntent.putExtras(extras);
+			actRef.setResult(Activity.RESULT_OK, mIntent);
+			//System.out.println(message);
 		}
 		else{
+
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "O carregamento da página atingiu o tempo máximo");
+			mIntent.putExtras(extras);
 			actRef.setResult(Activity.RESULT_CANCELED, mIntent);
-			System.err.println(message);
+			//System.err.println(message);
 		}
 		
 		actRef.finishTest(mIntent.getExtras());

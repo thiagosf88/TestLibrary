@@ -28,7 +28,8 @@ public class StringOperation extends PerformanceTest<Integer> {
 	@Override
 	public void execute() {
 
-		// System.out.println(searchable);
+		//TODO FIXME criar operações de manipulacao de strings concat, replace,
+		
 
 		testTJMsearchString(snippets[this.getLevel()]);
 		testTJMsearchString(snippets[this.getLevel() + 3]);
