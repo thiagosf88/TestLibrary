@@ -14,12 +14,12 @@
 #
 LOCAL_PATH := $(call my-dir)
 
-include $(CLEAR_VARS)
+include $(CLEAR_VARS) 
 LOCAL_SHARED_LIBRARIES := libcutils
-LOCAL_LDLIBS := -llog
+LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv1_CM
 
 LOCAL_MODULE    := testLibrary
-LOCAL_SRC_FILES := random.cpp 2d.cpp 3d.cpp file.cpp float.cpp image.cpp integer.cpp matrix.cpp memory.cpp string.cpp video.cpp
+LOCAL_SRC_FILES := random.cpp circle.cpp 2d.cpp 3d.cpp file.cpp float.cpp image.cpp integer.cpp matrix.cpp memory.cpp string.cpp video.cpp
 
 include $(BUILD_SHARED_LIBRARY)
 

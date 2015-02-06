@@ -13,7 +13,29 @@ void Java_edu_performance_test_nativo_stringoperation_StringOperationNative_test
 	std::string searchable (env->GetStringUTFChars(jsearchable, 0));
 	std::string stretch (env->GetStringUTFChars(jstretch, 0));
 
-	LOGE("%i",searchable.find(stretch));
+	searchable.find(stretch);
+
+//TODO verificar se está funcionando string nativo
+	//env->ReleaseStringUTFChars(jsearchable, searchable);
+	//env->ReleaseStringUTFChars(jstretch, stretch);
+}
+void Java_edu_performance_test_nativo_stringoperation_StringOperationNative_testTNMreplaceString
+  (JNIEnv * env, jobject thiz, jstring  jsearchable, jstring jstretch){
+	std::string searchable (env->GetStringUTFChars(jsearchable, 0));
+	std::string stretch (env->GetStringUTFChars(jstretch, 0));
+
+	//searchable;
+
+//TODO verificar se está funcionando string nativo
+	//env->ReleaseStringUTFChars(jsearchable, searchable);
+	//env->ReleaseStringUTFChars(jstretch, stretch);
+}
+void Java_edu_performance_test_nativo_stringoperation_StringOperationNative_testTNMconcatString
+  (JNIEnv * env, jobject thiz, jstring  jsearchable, jstring jstretch){
+	std::string searchable (env->GetStringUTFChars(jsearchable, 0));
+	std::string stretch (env->GetStringUTFChars(jstretch, 0));
+
+	searchable + stretch;
 
 //TODO verificar se está funcionando string nativo
 	//env->ReleaseStringUTFChars(jsearchable, searchable);

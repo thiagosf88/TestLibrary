@@ -21,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import edu.performance.test.batteryTest.BatteryMetric;
+import edu.performance.test.batterytest.BatteryMetric;
 import edu.performance.test.fileoperation.FileOperation;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;

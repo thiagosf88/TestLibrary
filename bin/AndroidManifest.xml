@@ -209,6 +209,9 @@
         <activity android:name="edu.performance.test.sortingoperation.SortingOperationActivity" 
             android:screenOrientation="portrait" >
         </activity>
+        <activity android:name="edu.performance.test.nativo.graphicoperation.twod.CircleOperationNativeActivity" 
+            android:screenOrientation="portrait" >
+        </activity>
         
         
     </application>

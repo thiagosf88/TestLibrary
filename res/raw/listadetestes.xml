@@ -2,7 +2,16 @@
 <testList
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			 xsi:noNamespaceSchemaLocation="testListxsd.xsd">
-	  		 
+	  		CircleOperationNativeActivity 
+    <test>
+		<activityName>edu.performance.test.nativo.graphicoperation.twod.CircleOperationNativeActivity</activityName>
+		<extraInt name="MAXTIMEMS">400000</extraInt>
+		<extraBool name="THELASTTEST">true</extraBool>
+		<extraBool name="BATTERYTEST">false</extraBool>
+		<extraInt name="LEVEL_INT">10</extraInt>
+		<extraStr name="STATUS">Testing teste skills..</extraStr>
+		<extraBool name="NETWORKTEST">false</extraBool>
+	</test>
     <test>
 		<activityName>edu.performance.test.database.DatabaseOperationActivity</activityName>
 		<extraInt name="MAXTIMEMS">400000</extraInt>

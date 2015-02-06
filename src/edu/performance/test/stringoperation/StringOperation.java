@@ -26,31 +26,45 @@ public class StringOperation extends PerformanceTest<Integer> {
 	}
 
 	@Override
-	public void execute() {
-
-		//TODO FIXME criar operações de manipulacao de strings concat, replace,
-		
+	public void execute() {		
 
 		testTJMsearchString(snippets[this.getLevel()]);
 		testTJMsearchString(snippets[this.getLevel() + 3]);
 		testTJMsearchString(snippets[this.getLevel() + 6]);
-
+		testTJMconcatString(searchable, snippets[this.getLevel()]);
+		testTJMconcatString( snippets[this.getLevel()], searchable);
+		testTJMreplaceString(searchable, snippets[this.getLevel()], snippets[this.getLevel() + 6]);
 		Bundle extras = new Bundle();			
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
 		activity.finishTest(extras);
 	}
 
 	/**
-	 * This method searches the substring strecth inside another string.
+	 * This method searches the substring strecth inside another string,
+	 * using String library.
 	 * 
 	 * @param strecth
 	 *            It is the searched substring.
 	 */
 	private void testTJMsearchString(String strecth) {
 
-		System.out.println(searchable.indexOf(strecth) + " " + strecth);
+		searchable.indexOf(strecth);
 
 	}
+	/**
+	 * This method concatenates the second parameter after the first one, using
+	 * String library.
+	 * @param first The begin of concatenated string.
+	 * @param second The end of concatenated string.
+	 */
+	private void testTJMconcatString(String first, String second){
+		first.concat(second);
+	}
+	
+	private void testTJMreplaceString(String base, String replaceable, String replace){
+		base.replace(replaceable, replace);
+	}
+	
 
 	public void setSearchable(String searchable) {
 		this.searchable = searchable;
@@ -59,4 +73,6 @@ public class StringOperation extends PerformanceTest<Integer> {
 	public void setSnippets(String[] snippets) {
 		this.snippets = snippets;
 	}
+	
+	
 }
