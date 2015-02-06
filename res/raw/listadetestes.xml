@@ -4,7 +4,7 @@
 			 xsi:noNamespaceSchemaLocation="testListxsd.xsd">
 	  		CircleOperationNativeActivity 
     <test>
-		<activityName>edu.performance.test.nativo.graphicoperation.twod.CircleOperationNativeActivity</activityName>
+		<activityName>edu.performance.test.nativo.graphicoperation.GraphicNativeActivity</activityName>
 		<extraInt name="MAXTIMEMS">400000</extraInt>
 		<extraBool name="THELASTTEST">true</extraBool>
 		<extraBool name="BATTERYTEST">false</extraBool>
