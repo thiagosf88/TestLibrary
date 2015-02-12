@@ -10,9 +10,9 @@ import android.webkit.WebViewClient;
 
 public class TestWebView extends WebViewClient {
 	
-	WebViewActivity actRef;
+	WebViewOperationActivity actRef;
 	boolean timeout = true;
-	public TestWebView(WebViewActivity wva){
+	public TestWebView(WebViewOperationActivity wva){
 		actRef = wva;
 	}
 
@@ -65,7 +65,7 @@ public class TestWebView extends WebViewClient {
 		
 		Intent mIntent = new Intent();
 		Bundle extras = new Bundle();
-		extras.putBoolean(WebOperationActivity.ISTHELASTPAGE, actRef.isTheLastPage());
+		extras.putBoolean(WebViewActivity.ISTHELASTPAGE, actRef.isTheLastPage());
 		if(loaded){			
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
 			mIntent.putExtras(extras);

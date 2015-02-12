@@ -2,7 +2,7 @@ package edu.performance.test.stringoperation;
 
 import android.os.Bundle;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.fileoperation.FileOperation;
+import edu.performance.test.filesequentialoperation.FileSequentialOperation;
 
 public class StringOperationActivity extends PerformanceTestActivity {
 	
@@ -17,7 +17,7 @@ public class StringOperationActivity extends PerformanceTestActivity {
 			if (getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)
 					&& getIntent().hasExtra(PerformanceTestActivity.SEARCHABLE)
 					&& getIntent().hasExtra(PerformanceTestActivity.SNIPPETS)) {
-				searchable = new FileOperation().testTJMreadSequentialAcessFile(getIntent().getExtras().getString(
+				searchable = new FileSequentialOperation().testTJMreadSequentialAcessFile(getIntent().getExtras().getString(
 						PerformanceTestActivity.SEARCHABLE));
 				snippets = getIntent().getExtras().getStringArray(
 						PerformanceTestActivity.SNIPPETS);

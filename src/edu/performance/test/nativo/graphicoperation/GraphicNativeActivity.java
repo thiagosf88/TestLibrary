@@ -57,10 +57,11 @@ public class GraphicNativeActivity extends PerformanceTestActivity implements Su
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-        nativeSetSurface(holder.getSurface());
+        
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
+    	nativeSetSurface(holder.getSurface());
     }
 
     public void surfaceDestroyed(SurfaceHolder holder) {
@@ -76,7 +77,7 @@ public class GraphicNativeActivity extends PerformanceTestActivity implements Su
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

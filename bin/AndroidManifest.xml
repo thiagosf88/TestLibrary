@@ -85,9 +85,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.fileoperation.FileOperationActivity"
+            android:name="edu.performance.test.filerandomoperation.FileRandomOperationActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="edu.performance.test.filesequentialoperation.FileSequentialOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
         <activity
             android:name="edu.performance.test.nativo.fileoperation.FileOperationNativeActivity"
             android:screenOrientation="portrait" >
@@ -154,15 +159,15 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.weboperation.WebOperationActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="edu.performance.test.weboperation.WebViewActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.weboperation.WebLatencyOperation"
+            android:name="edu.performance.test.weboperation.WebViewOperationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.performance.test.weblatencyoperation.WebLatencyOperation"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -202,7 +207,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.performance.test.weboperation.WebServiceActivity"
+            android:name="edu.performance.test.webserviceoperation.WebServiceActivity"
             android:screenOrientation="portrait" >
         </activity>
         

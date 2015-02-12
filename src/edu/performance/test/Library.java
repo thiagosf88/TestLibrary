@@ -22,7 +22,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import edu.performance.test.batterytest.BatteryMetric;
-import edu.performance.test.fileoperation.FileOperation;
+import edu.performance.test.filerandomoperation.FileRandomOperation;
+import edu.performance.test.filesequentialoperation.FileSequentialOperation;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
 
@@ -105,11 +106,11 @@ public class Library extends Activity {
 
 			for (int i = 0; i < rawResourceIds.length; i++) {
 				if(dirNames.get("PDI") != null && !dirNames.get("PDI").trim().isEmpty())
-				FileOperation.testTJMWriteFile(this, rawResourceIds[i],
+				FileRandomOperation.testTJMWriteFile(this, rawResourceIds[i],
 						rawResourceNames[i], dirNames.get("PDI"));
 				
 				if(dirNames.get("PDE") != null && !dirNames.get("PDE").trim().isEmpty())
-				FileOperation.testTJMWriteFile(this, rawResourceIds[i],
+				FileRandomOperation.testTJMWriteFile(this, rawResourceIds[i],
 						rawResourceNames[i], dirNames.get("PDE"));
 			}
 
@@ -217,7 +218,7 @@ public class Library extends Activity {
 		if(resultCode == RESULT_CANCELED){
 			//TODO This need a specific treatment when some test fails. To create list with error messages of each test for example.
 			//System.out.println(testsToDo.get(countIntent).getStringExtra(STATUS) + " failed!!!! :(");
-			(new FileOperation()).testTJMwriteSequentialFile(fileLocation + "/" + testsToDo.get(countIntent).getStringExtra(PerformanceTestInterface.STATUS)+ ".txt",
+			(new FileSequentialOperation()).testTJMwriteSequentialFile(fileLocation + "/" + testsToDo.get(countIntent).getStringExtra(PerformanceTestInterface.STATUS)+ ".txt",
 					data.getStringExtra(PerformanceTestInterface.ERROR_MESSAGE));
 		}
 		
@@ -277,7 +278,7 @@ public class Library extends Activity {
 		try{
 		startActivityForResult(test, 1);
 		} catch (Exception e) {
-			FileOperation rw = new FileOperation();
+			FileSequentialOperation rw = new FileSequentialOperation();
 			String message = (e.getMessage() != null)
 					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
 					: "Exception without message!!!";

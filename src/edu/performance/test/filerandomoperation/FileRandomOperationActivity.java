@@ -1,11 +1,11 @@
-package edu.performance.test.fileoperation;
+package edu.performance.test.filerandomoperation;
 
 import android.os.Bundle;
 import edu.performance.test.PerformanceTestActivity;
 
-public class FileOperationActivity extends PerformanceTestActivity {
+public class FileRandomOperationActivity extends PerformanceTestActivity {
 	
-	FileOperation operation;
+	FileRandomOperation operation;
 	protected int level;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class FileOperationActivity extends PerformanceTestActivity {
 	}
 		
 			status.setText(message);
-			operation = new FileOperation(this, filePath, stretch, level);
+			operation = new FileRandomOperation(this, filePath, stretch, level);
 		
 		
 		

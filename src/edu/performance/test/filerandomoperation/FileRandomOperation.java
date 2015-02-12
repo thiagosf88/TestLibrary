@@ -1,15 +1,9 @@
-package edu.performance.test.fileoperation;
+package edu.performance.test.filerandomoperation;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 
 import android.content.res.Resources.NotFoundException;
@@ -21,14 +15,13 @@ import edu.performance.test.StorageTests;
 /**
  * This class extends ReadAndWrite because some new attributes are needed beside
  * those inherited from PerformanceTest and it performs file manipulation.
- * Currently the implemented operations are: - Sequentially Access -- read --
- * write - Randomly Access -- read -- write
+ * Currently the implemented operations are: Randomly Access -- read -- write
  * 
  * @author Thiago
  */
-public class FileOperation extends StorageTests {
+public class FileRandomOperation extends StorageTests {
 
-	public FileOperation(PerformanceTestActivity activity, String filePath, String stretch, int level) {
+	public FileRandomOperation(PerformanceTestActivity activity, String filePath, String stretch, int level) {
 		super(activity, level);
 		this.setFilePath(filePath);
 		this.setStretch(stretch);
@@ -40,21 +33,19 @@ public class FileOperation extends StorageTests {
 	/**
 	 * This constructor can not be used to instance objects which will run tests.
 	 */
-	public FileOperation() {
+	public FileRandomOperation() {
 		super(null, new Integer(0));
 		
 	}
 
 	public void execute() {
 		
-		testTJMwriteSequentialFile(this.getFilePath(),
-				this.getStretch()); // não testado ainda
+		
 		testTJMreadRandomAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
 				 (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1));
 		testTJMwriteRandowAcessFile(this.getFilePath(), this.getPositions()[ (this.getLevel() < this.getPositions().length ? this.getLevel() : this.getPositions().length - 1)],
 				this.getStretch());
-		
-		testTJMreadSequentialAcessFile(this.getFilePath());
+
 		
 		Bundle extras = new Bundle();			
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
@@ -62,52 +53,6 @@ public class FileOperation extends StorageTests {
 
 	}
 
-
-	/**
-	 * This method tries to open a existent file determined by path and read it
-	 * sequentially. It is missing to use level parameter.
-	 * 
-	 * @param path
-	 *            Determines the path to the file that will be sequentially
-	 *            read.
-	 * @param level
-	 *            ??
-	 */
-	public String testTJMreadSequentialAcessFile(String filePath) {
-
-		BufferedReader br = null;
-
-		String text = "";
-		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(
-					filePath)), 8192);
-		} catch (FileNotFoundException e1) {
-
-			System.out.println("Arquivo não encontrado: " + filePath);
-			
-			return null;
-		} // 2nd arg is buffer size
-
-		try {
-			String test;
-			while (true) {
-				test = br.readLine();
-				// readLine() returns null if no more lines in the file
-
-				if (test == null)
-					break;
-
-				text = text.concat(test);
-				
-			}
-			
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return text;
-	}
 
 	/**
 	 * This method tries to open a existent file determined by path and read it
@@ -194,34 +139,7 @@ public class FileOperation extends StorageTests {
 
 	}
 
-	/**
-	 * This method creates a directory structure and a file to write inside it a
-	 * part of text determined by strecth.
-	 * 
-	 * @param filename
-	 *            Indicates the name of the file that will be created.
-	 * @param stretch
-	 *            Is the part of the text that will be written inside the file.
-	 */
-	public void testTJMwriteSequentialFile(String filename,
-			String stretch) {
-
-		File file = new File(filename);
-		// if file doesnt exists, then create it
-		try {
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-			// System.err.println(file.getAbsolutePath());
-			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(stretch);
-			bw.close();
-
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+	
 /**
  * This is a auxiliary method to create some files which will be necessary in some tests.
  * @param appRef Activity reference to get raw resources

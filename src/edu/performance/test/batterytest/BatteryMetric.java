@@ -14,7 +14,7 @@ import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
 import edu.performance.test.R;
 import edu.performance.test.TestsManager;
-import edu.performance.test.fileoperation.FileOperation;
+import edu.performance.test.filesequentialoperation.FileSequentialOperation;
 import edu.performance.test.util.InternetController;
 import edu.performance.test.util.WriteNeededFiles;
 
@@ -276,7 +276,7 @@ public class BatteryMetric extends Activity {
 				+ "\t</batteryVariation> \n"
 				+ "</batteryData> \n";
 
-		FileOperation rw = new FileOperation();
+		FileSequentialOperation rw = new FileSequentialOperation();
 
 		rw.testTJMwriteSequentialFile(WriteNeededFiles.REPORT_DIRECTORY_NAME
 				+ "/" + activity_name , batt);
@@ -301,7 +301,7 @@ public class BatteryMetric extends Activity {
 		try {
 			startActivityForResult(test, 1);
 		} catch (Exception e) {
-			FileOperation rw = new FileOperation();
+			FileSequentialOperation rw = new FileSequentialOperation();
 			String message = (e.getMessage() != null)
 					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
 					: "Exception without message!!!";

@@ -17,7 +17,7 @@ import edu.performance.test.database.DatabaseOperationActivity;
 import edu.performance.test.domain.Operation;
 import edu.performance.test.domain.TestParameter;
 import edu.performance.test.downloadoperation.DownloadOperationActivity;
-import edu.performance.test.fileoperation.FileOperationActivity;
+import edu.performance.test.filerandomoperation.FileRandomOperationActivity;
 import edu.performance.test.floatoperation.FloatOperationActivity;
 import edu.performance.test.integeroperation.IntegerOperationActivity;
 import edu.performance.test.locationoperation.GpsOperationActivity;
@@ -108,7 +108,7 @@ public class ExpandableListOfTestsActivity extends ExpandableListActivity {
 			p.put(PerformanceTestActivity.NETWORK_TEST, new TestParameter("extraBool", false, PerformanceTestActivity.NETWORK_TEST));
 			p.put(PerformanceTestActivity.LEVEL_INT, new TestParameter("extraInt", 0, PerformanceTestActivity.LEVEL_INT));
 			p.put(PerformanceTestActivity.LEVEL_FILENAME, new TestParameter("extraStrFile",  this.getFilesDir().getPath() + "/app_performanceDir/small.txt", PerformanceTestActivity.LEVEL_FILENAME));
-			p.put("ActivityName", new TestParameter("string",FileOperationActivity.class.toString(), "ActivityName"));
+			p.put("ActivityName", new TestParameter("string",FileRandomOperationActivity.class.toString(), "ActivityName"));
 			eachTest = new Operation(getApplicationContext().getResources().getString(R.string.flOp), false, p);
 			tests.add(eachTest);
 			p = null;

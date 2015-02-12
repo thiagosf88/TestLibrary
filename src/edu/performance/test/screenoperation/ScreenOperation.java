@@ -18,10 +18,7 @@ public class ScreenOperation extends Operation {
 		super(ctx);
 		context = ctx;
 		execute();
-		// the bitmap we wish to draw
 
-		// mbitmap = BitmapFactory.decodeResource(context.getResources(),
-		// R.drawable.logintab_off);
 
 		
 	}
@@ -35,7 +32,6 @@ public class ScreenOperation extends Operation {
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
-		// TODO Auto-generated method stub
 
 	}
 

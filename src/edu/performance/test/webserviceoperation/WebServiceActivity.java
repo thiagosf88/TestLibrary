@@ -1,4 +1,4 @@
-package edu.performance.test.weboperation;
+package edu.performance.test.webserviceoperation;
 
 import android.os.Bundle;
 import edu.performance.test.InternetPerformanceTestActivity;

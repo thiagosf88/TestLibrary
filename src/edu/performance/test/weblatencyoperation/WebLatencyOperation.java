@@ -1,4 +1,4 @@
-package edu.performance.test.weboperation;
+package edu.performance.test.weblatencyoperation;
 
 import java.io.IOException;
 
@@ -15,8 +15,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 import edu.performance.test.InternetPerformanceTestActivity;
 import edu.performance.test.R;
-import edu.performance.test.fileoperation.FileOperation;
+import edu.performance.test.filesequentialoperation.FileSequentialOperation;
 import edu.performance.test.util.WriteNeededFiles;
+import edu.performance.test.weboperation.WebViewActivity;
 /**
  * This class extends PerformanceTestActivity because the http request must not to be
  * done in main thread. Need more details
@@ -43,8 +44,8 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 		status = (TextView)findViewById(R.id.status);
 		status.setText(message);
 		if(getIntent().getExtras() != null){
-			isTheLastPage = getIntent().getExtras().getBoolean(WebOperationActivity.ISTHELASTPAGE);
-			websites = getIntent().getExtras().getString(WebOperationActivity.URL);			
+			isTheLastPage = getIntent().getExtras().getBoolean(WebViewActivity.ISTHELASTPAGE);
+			websites = getIntent().getExtras().getString(WebViewActivity.URL);			
 		}		 
 		status.setText("Testing latency to reach: " + websites);
 		executeTest();
@@ -70,7 +71,7 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 			}
 			
 			Bundle extras = new Bundle();
-			extras.putBoolean(WebOperationActivity.ISTHELASTPAGE, isTheLastPage());
+			extras.putBoolean(WebViewActivity.ISTHELASTPAGE, isTheLastPage());
 			
 		  finishTest(extras);
 
@@ -94,7 +95,7 @@ public class WebLatencyOperation extends InternetPerformanceTestActivity {
 		} catch (RuntimeException e) {
 			new Exception("From RuntimeException : " + e.getMessage());
 		} catch (Exception e){
-			FileOperation rw = new FileOperation();
+			FileSequentialOperation rw = new FileSequentialOperation();
 			String message = (e.getMessage() != null)
 					&& (!e.getMessage().trim().isEmpty()) ? e.getMessage()
 					: "Exception without message!!!";

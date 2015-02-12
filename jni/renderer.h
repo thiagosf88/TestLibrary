@@ -63,7 +63,7 @@ private:
     void destroy();
 
     void drawFrame();
-
+    void drawCubes(float, float,float);
     // Helper method for starting the thread 
     static void* threadStartCallback(void *myself);
 

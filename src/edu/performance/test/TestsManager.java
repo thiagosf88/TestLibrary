@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.Intent;
-import edu.performance.test.fileoperation.FileOperation;
+import edu.performance.test.filerandomoperation.FileRandomOperation;
 
 public class TestsManager {
 	

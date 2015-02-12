@@ -4,7 +4,7 @@ import android.os.Bundle;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.PerformanceTestInterface;
-import edu.performance.test.fileoperation.FileOperation;
+import edu.performance.test.filerandomoperation.FileRandomOperation;
 import edu.performance.test.graphoperation.legacy.DijkstraSP;
 import edu.performance.test.graphoperation.legacy.DirectedEdge;
 import edu.performance.test.graphoperation.legacy.EdgeWeightedDigraph;

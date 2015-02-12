@@ -1,4 +1,4 @@
-package edu.performance.test.weboperation;
+package edu.performance.test.webserviceoperation;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
