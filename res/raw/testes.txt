@@ -1,0 +1,456 @@
+@SuppressWarnings("unused")
+	private void allTests(){	
+		
+		//____________________ em ordem		
+		
+		/*aTest = new Intent(appRef, BatteryMetric.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(FILELOCATION, fileLocation);
+		aTest.putExtra(BATTERYTEST, true);
+		aTest.putExtra(STATUS, "Testing battery skills...");
+		testsToDo.add(aTest);*/
+		
+		
+		
+		
+		
+		
+				
+				
+		aTest = new Intent(appRef, GPSActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, true);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 3);
+		aTest.putExtra(STATUS, "Testing GPS skills..");
+		testsToDo.add(aTest);
+		
+		
+		//Graphic Operation 3D ---------------------------------------------------------------
+		
+			//----------
+		/*aTest = new Intent(appRef, CubeTextureGL10Activity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(STATUS, "Testing 3D skills..");
+		testsToDo.add(aTest);*/
+
+		aTest = new Intent(appRef, CubeTextureGL10Activity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 500);
+		aTest.putExtra(STATUS, "Testing 3D skills..");
+		testsToDo.add(aTest);
+		
+		/*aTest = new Intent(appRef, CubeTextureGL10Activity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 500);
+		aTest.putExtra(STATUS, "Testing 3D skills..");
+		testsToDo.add(aTest);*/
+		
+			//--------------
+		
+		/*aTest = new Intent(appRef, CubeColorGLES2Activity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 0);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+			
+		aTest = new Intent(appRef, CubeColorGLES2Activity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 100);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		/*aTest = new Intent(appRef, CubeColorGLES2Activity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 100);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+		
+		
+		
+		//------------------------------------------------------------------------------------
+		
+		
+		//GraphicOperation 2D------------------------------------------------------------------
+		
+			//----------
+		
+		/*aTest = new Intent(appRef, ArcActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 1);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+		
+		aTest = new Intent(appRef, ArcActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 5);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		/*aTest = new Intent(appRef, ArcActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 5);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+		
+			//---------
+		
+		aTest = new Intent(appRef, CircleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+			//---------
+		
+		/*aTest = new Intent(appRef, ImageActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 3);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+		
+		aTest = new Intent(appRef, ImageActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 50);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		/*aTest = new Intent(appRef, ImageActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+		
+			//--------
+		
+		/*aTest = new Intent(appRef, RectangleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+		
+		aTest = new Intent(appRef, RectangleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+		
+		/*aTest = new Intent(appRef, RectangleActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(LEVEL_INT, 100);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);*/
+		
+			//---------
+		
+		aTest = new Intent(appRef, TextActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		testsToDo.add(aTest);
+			
+			//----------
+		// Screen Activity --------------------------------------------------------
+		//TODO Falta definir level
+		aTest = new Intent(appRef, ScreenActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);		
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, HardTestActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(STATUS, "Testing Screen skills..");
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, MediumTestActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(STATUS, "Testing Screen skills..");
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, LightTestActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(STATUS, "Testing Screen skills..");
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		testsToDo.add(aTest);
+		
+		
+		
+		
+		
+		//--------------------------------------------------------------------------------------------
+		
+		//Graph Operation -------------------------------------------------------------------
+		
+		/*aTest = new Intent(appRef, GraphOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);		
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.TINY_G_TXT]);
+		aTest.putExtra(STATUS, "Testing Graph skills...");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, GraphOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM_G_TXT]);
+		aTest.putExtra(STATUS, "Testing Graph skills...");
+		testsToDo.add(aTest);*/
+		
+		
+		
+		/*aTest = new Intent(appRef, GraphOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM3_G_TXT]);
+		aTest.putExtra(STATUS, "Testing Graph skills...");
+		testsToDo.add(aTest); */
+		
+		//------------------------------------------------------------------------------------------------------------------
+		
+	
+		aTest = new Intent(appRef, MailOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 80000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, true);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" +rawResourceNames[fileIndexes.MEDIUM_G_TXT]);
+		aTest.putExtra(STATUS, "Testing Mail skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, MemoryOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(STATUS, "Testing Memory skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, MemoryOperationNativeActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(STATUS, "Testing Native Memory skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, FileOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 1);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
+				+ rawResourceNames[fileIndexes.SMALL_TXT]);
+		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
+		aTest.putExtra(STATUS, "Testing File skills..");
+		aTest.putExtra(NETWORK_TEST, false);
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, DatabaseOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 300);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(STATUS, "Testing Database skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, FileOperationNativeActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 1);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/"
+				+ rawResourceNames[fileIndexes.SMALL_TXT]);
+		aTest.putExtra(STRETCH, appRef.getResources().getString(R.string.stretch));
+		aTest.putExtra(STATUS, "Testing Native File skills..");
+		testsToDo.add(aTest);
+		
+		//TODO Falta definir level
+				aTest = new Intent(appRef, StreamingActivity.class); 
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(NETWORK_TEST, true);
+				aTest.putExtra(LEVEL_INT, 10);
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 90000);
+				aTest.putExtra(STATUS, "Testing Streaming skills..");
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, StringOperationActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(NETWORK_TEST, false);
+				aTest.putExtra(LEVEL_INT, 10);
+				aTest.putExtra(SEARCHABLE, new FileOperation()
+				.testTJMreadSequentialAcessFile(
+						fileLocation + "/"
+								+ rawResourceNames[fileIndexes.SMALL_TXT]));
+				aTest.putExtra(SNIPPETS, snippets);	
+				aTest.putExtra(STATUS, "Testing String skills..");
+				testsToDo.add(aTest);
+				
+
+				aTest = new Intent(appRef, WebOperationActivity.class);
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(NETWORK_TEST, true);
+				aTest.putExtra(LEVEL_INT, 3);
+				aTest.putExtra(STATUS, "Testing Web skills..");
+				testsToDo.add(aTest);
+				
+				aTest = new Intent(appRef, DownloadOperationActivity.class); 
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 600000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(FILELOCATION, fileLocation);
+				aTest.putExtra(LEVEL_INT, 1);
+				aTest.putExtra(STATUS, "Testing Download skills..");
+				aTest.putExtra(NETWORK_TEST, true);
+				testsToDo.add(aTest);
+				
+				
+				aTest = new Intent(appRef, WebServiceActivity.class);
+				aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+				aTest.putExtra(THELASTTEST, false);
+				aTest.putExtra(BATTERYTEST, false);
+				aTest.putExtra(NETWORK_TEST, true);
+				aTest.putExtra(LEVEL_WEBSITE, "http://mcupdate.tumblr.com/api/read");
+				aTest.putExtra(STATUS, "Testing WebService skills..");
+				testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, GraphOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_FILENAME, fileLocation + "/" + rawResourceNames[fileIndexes.MEDIUM2_G_TXT]);
+		aTest.putExtra(STATUS, "Testing Graph skills...");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, IntegerOperationActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 17000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(STATUS, "Testing Integer skills..");
+		testsToDo.add(aTest);
+		
+		aTest = new Intent(appRef, FloatOperationActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 700000);
+		aTest.putExtra(THELASTTEST, true);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_DOUBLE, 999983);
+		aTest.putExtra(STATUS, "Testing Float skills..");
+		testsToDo.add(aTest);
+		
+		
+		aTest = new Intent(appRef, IntegerOperationNativeActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 1000);
+		aTest.putExtra(STATUS, "Testing Native Integer skills..");
+		testsToDo.add(aTest);
+		
+		
+		
+		aTest = new Intent(appRef, StringOperationNativeActivity.class); 
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 170000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(NETWORK_TEST, false);
+		aTest.putExtra(LEVEL_INT, 10);
+		aTest.putExtra(SEARCHABLE, new FileOperation()
+		.testTJMreadSequentialAcessFile(
+				fileLocation + "/"
+						+ rawResourceNames[fileIndexes.SMALL_TXT]));
+		aTest.putExtra(SNIPPETS, snippets);	
+		aTest.putExtra(STATUS, "Testing String skills..");
+		testsToDo.add(aTest);
+		
+		
+		
+		aTest = new Intent(appRef, FloatOperationNativeActivity.class);
+		aTest.putExtra(PerformanceTestActivity.MAXTIME, 240000);
+		aTest.putExtra(THELASTTEST, false);
+		aTest.putExtra(BATTERYTEST, false);
+		aTest.putExtra(STATUS, "Testing Native Float skills..");
+		aTest.putExtra(LEVEL_DOUBLE, 9979);
+		aTest.putExtra(NETWORK_TEST, false);
+		testsToDo.add(aTest);
+		
+
+		//--------------------------------------------------------------------------------------
+		
+		
+		
+		
+		
+		
+		btStartTest.setOnClickListener(new OnClickListener()
+	    {
+
+	        public void onClick(View v)
+	        {   
+	             doTests();
+	        } 
+
+	    });
+		
+		//TODO Esse método foi comentado quando mudei a versão do android para 2.3
+		 // btStartTest.setActivated(true);
+		 // E esse método foi adicionado
+		 btStartTest.setVisibility(View.VISIBLE);
+		
+		
+	}
