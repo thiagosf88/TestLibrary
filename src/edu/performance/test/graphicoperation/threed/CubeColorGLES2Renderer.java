@@ -301,7 +301,7 @@ public class CubeColorGLES2Renderer implements GLSurfaceView.Renderer
                 }
                 
                 Intent mIntent = new Intent();
-				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, false);
+				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, ((CubeColorGLES2Activity)context).isTheLast());
 				((CubeColorGLES2Activity)context).setResult(CubeColorGLES2Activity.RESULT_OK, mIntent);
 				System.out.println("saindo. Is it the last? " + false );
 				((CubeColorGLES2Activity)context).finish();

@@ -7,26 +7,28 @@ import edu.performance.test.PerformanceTestActivity;
 public class MailOperationActivity extends InternetPerformanceTestActivity {
 	
 	MailOperation operation;
-	protected String level, destination;
-	public static String DESTINATION = "DESTINATION";
+	protected String levelAttach, destination = "", messageText = "";
+	public static final String DESTINATION = "DESTINATION";
 	public static final String NOTIFY = "NOTIFY";
 	/**
 	 * Indica se será mostrada notificação enquando envia e-mail.
 	 */
 	protected boolean notify = false;
-	protected void onCreate(Bundle savedInstanceState) {
+protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		
 		if(getIntent().getExtras() != null){
-			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME) && getIntent().hasExtra(NOTIFY)  && getIntent().hasExtra(DESTINATION)){		
-			level = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME);
-			notify = getIntent().getExtras().getBoolean(NOTIFY);
+			if(getIntent().hasExtra(DESTINATION) && !getIntent().getExtras().getString(DESTINATION).trim().isEmpty()){
+				
+			levelAttach = getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME) ? getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME) : null;
+			messageText = getIntent().hasExtra(PerformanceTestActivity.LEVEL_STR) ? getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_STR) : "Email super curto. :)";
+			notify = getIntent().hasExtra(NOTIFY) ? getIntent().getExtras().getBoolean(NOTIFY) : false;
 			destination = getIntent().getExtras().getString(DESTINATION);
 			}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: arquivoAnexo ou notify!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: destino!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				finish();
@@ -40,7 +42,7 @@ public class MailOperationActivity extends InternetPerformanceTestActivity {
 			finish();
 		}
 		
-		operation = new MailOperation(this, level, destination);
+		operation = new MailOperation(this, levelAttach, destination, messageText);
 	}
 	
 	

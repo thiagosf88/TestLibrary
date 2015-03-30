@@ -1,10 +1,10 @@
 package edu.performance.test.mailoperation;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
+import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -26,6 +26,7 @@ import edu.performance.test.Library;
 import edu.performance.test.PerformanceTest;
 import edu.performance.test.PerformanceTestActivity;
 import edu.performance.test.R;
+import edu.performance.test.filesequentialoperation.FileSequentialOperation;
 
 /**
  * This class extends AsyncTask and it sends downloading files from oi website.
@@ -37,10 +38,12 @@ import edu.performance.test.R;
 public class MailOperation extends PerformanceTest<String> {
 	private final int NOT_ID = 7;
 	private String to = "";
+	private String text;
 
-	public MailOperation(PerformanceTestActivity activity, String level, String to) {
+	public MailOperation(PerformanceTestActivity activity, String level, String to, String text) {
 		super(level, activity);
 		this.to = to;
+		this.text = text;
 		activity.executeTest();
 
 	}
@@ -113,36 +116,69 @@ public class MailOperation extends PerformanceTest<String> {
 		}
 
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			Bundle extras = new Bundle();
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, (e.getMessage()));
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			activity.finishTest(extras);
 		}
 
 		if (session != null) {
 			try {
 				Message message = new MimeMessage(session);
 				// message.
-				message.setFrom(new InternetAddress("t.library@yahoo.com.br"));
+				message.setFrom(new InternetAddress(username));
 				message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(to));
-				message.setSubject("Level TestLibrary");
-				message.setText("This is a email created to test,"
-						+ "\n\n No spam to my email, please!");
+				message.setSubject("TestLibrary definir level depois");
+				final MimeBodyPart messageBodyPart = new MimeBodyPart();
+				new Thread(new Runnable() {
+					
+		            @Override
+		            public void run() {
+		            	try {
+		            		if(new File(text).isFile())
+							messageBodyPart.setContent(new FileSequentialOperation().testTJMreadSequentialAcessFile(text), "text/html");
+		            		else
+		            			messageBodyPart.setContent(text, "text");
+						} catch (MessagingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		            }
+		        }).start();
+		        
+		        Multipart multipart = new MimeMultipart();
+		        multipart.addBodyPart(messageBodyPart);
+		        
+				if (level != null && !level.isEmpty()) {
+					// creates multi-part				
 
-				MimeBodyPart messageBodyPart = new MimeBodyPart();
+					MimeBodyPart attachPart = new MimeBodyPart();
 
-				Multipart multipart = new MimeMultipart();
+					attachPart.attachFile(level);
 
-				messageBodyPart = new MimeBodyPart();
-				String file = level;
-				String fileName = "attachmentName.txt";
-				DataSource source = new FileDataSource(file);
-				messageBodyPart.setDataHandler(new DataHandler(source));
-				messageBodyPart.setFileName(fileName);
-				multipart.addBodyPart(messageBodyPart);
+					multipart.addBodyPart(attachPart);
 
+
+				}
 				message.setContent(multipart);
-
 				Transport.send(message);
 
+				
+
+			}
+			catch(AuthenticationFailedException afe){
+				
+			}
+			catch (MessagingException e) {
+				throw new RuntimeException(e);
+				
+
+			} catch (IOException e) {
+				System.err.println("Erro ao tentar carregar o arquivo: " + level);
+				e.printStackTrace();
+			}
+			finally{
 				if (((MailOperationActivity) activity).isNotify()) {
 					NotificationManager notifMgr = (NotificationManager) activity
 							.getApplicationContext().getSystemService(
@@ -150,16 +186,14 @@ public class MailOperation extends PerformanceTest<String> {
 
 					notifMgr.cancel(NOT_ID);
 				}
-
-			}
-
-			catch (MessagingException e) {
-				throw new RuntimeException(e);
-
 			}
 
 		} else {
-			System.out.println("Null session");
+Bundle extras = new Bundle();
+			activity.setResult(PerformanceTestActivity.RESULT_CANCELED);
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE,"Exceção: Não foi possível abrir uma sessão para envio. Algum erro está ocorrendo com o e-mail!");
+			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
+			activity.finishTest(extras);
 		}
 	}
 
@@ -167,18 +201,19 @@ public class MailOperation extends PerformanceTest<String> {
 
 		try {
 			testAMailOperation(this.getLevel(), to);
-			// new
-			// Send(activity.getApplicationContext()).execute(this.getLevel(),
-			// "thiago.soares@ymail.com");
+
 
 		} catch (RuntimeException ae) {
 			Bundle extras = new Bundle();
-			System.out.println(ae.getMessage());
+			//System.out.println(ae.getMessage());
+			activity.setResult(PerformanceTestActivity.RESULT_CANCELED);
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE,"Exceção na execução. Algum erro está ocorrendo com o e-mail! " + ((ae !=null && ae.getMessage() != null)?ae.getMessage() : "Runtime exception!"));
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			activity.finishTest(extras);
 		}
 
 		Bundle extras = new Bundle();
+		activity.setResult(PerformanceTestActivity.RESULT_OK);
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
 		activity.finishTest(extras);
 	}

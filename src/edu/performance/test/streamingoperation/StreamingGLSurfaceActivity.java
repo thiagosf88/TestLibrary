@@ -57,6 +57,7 @@ public class StreamingGLSurfaceActivity extends InternetPerformanceTestActivity 
 
 			else {
 				Bundle extras = new Bundle();
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: URI!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				Intent mIntent = new Intent();
 				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());

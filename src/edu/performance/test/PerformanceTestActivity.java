@@ -194,7 +194,9 @@ public abstract class PerformanceTestActivity extends Activity implements Perfor
                 if(!isBatteryTest()){
                 setTimeOver(true);
                 Intent mIntent = new Intent();
+                mIntent.putExtra(PerformanceTestInterface.ERROR_MESSAGE, "Ocorreu timeout. Avalie aumentar o tempo máximo do teste!");
                 mIntent.putExtra(PerformanceTestInterface.THELASTTEST, isTheLast());
+                mIntent.putExtra(PerformanceTestActivity.RESULT_WAS_OK, false);
 				setResult(PerformanceTestActivity.RESULT_CANCELED, mIntent);
 				
 				finish();

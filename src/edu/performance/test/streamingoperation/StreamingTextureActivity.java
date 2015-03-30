@@ -59,6 +59,7 @@ public class StreamingTextureActivity extends InternetPerformanceTestActivity im
 
 			else {
 				Bundle extras = new Bundle();
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: URI!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				Intent mIntent = new Intent();
 				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());
@@ -121,6 +122,7 @@ super.execute();
 			
 			mediaPlayer = new MediaPlayer();
 			mediaPlayer.setSurface(surf);
+			//TODO FIXME preparar tanto para URL como file
 			AssetFileDescriptor afd = getAssets().openFd("big_buck_bunny.mp4");
 			mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			mediaPlayer.prepare();

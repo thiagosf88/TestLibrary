@@ -18,6 +18,8 @@ public interface PerformanceTestInterface {
 		public static final String LEVEL_FILENAME = "LEVEL_FILENAME";
 		public static final String LEVEL_WEBSITE = "LEVEL_WEBSITE";
 		public static final String LEVEL_URL = "LEVEL_URL";
+		public static final String LEVEL_STR_ARR = "LEVEL_STR_ARR";
+		public static final String LEVEL_STR = "LEVEL_STR";
 		public static final String NETWORK_TEST = "NETWORKTEST";
 		public static final String STRING_ARRAY = "STRINGARRAY";
 		public static final String ERROR_MESSAGE = "ERRORMESSAGE";

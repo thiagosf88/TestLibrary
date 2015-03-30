@@ -51,9 +51,9 @@ public class Library extends Activity {
 	WakeLock wakeLock = null;
 	
 	int[] rawResourceIds = { R.raw.big,R.raw.medium, R.raw.listas, R.raw.tarefas,
-			R.raw.small, R.raw.tiny_g, R.raw.medium_g, R.raw.medium2_g, R.raw.medium3_g, R.raw.listadetestes};
+			R.raw.small, R.raw.tiny_g, R.raw.medium_g, R.raw.medium2_g, R.raw.medium3_g, R.raw.listadetestes, R.raw.testmail};
 	String[] rawResourceNames = { "big.txt", "medium.txt", "listas.xml", "tarefas.xml",
-			"small.txt", "tiny_g.txt", "medium_g.txt", "medium2_g.txt", "medium3_g.txt", "listadetestes.xml" };
+			"small.txt", "tiny_g.txt", "medium_g.txt", "medium2_g.txt", "medium3_g.txt", "listadetestes.xml", "testmail.html" };
 	HashMap<String, String> dirNames = null;
 	Library appRef = null;
 	public final static String DATA_FILE_NAME = WriteNeededFiles.REPORT_DIRECTORY_NAME + "/data_" + System.currentTimeMillis() + "_" + Build.MODEL + ".xml";
@@ -210,12 +210,9 @@ public class Library extends Activity {
 		Bundle results = data.getExtras();
 		if(resultCode == RESULT_OK)
 			System.out.println(testsToDo.get(countIntent).getStringExtra(PerformanceTestInterface.STATUS) + " executou corretamente!");
-		else if (results.containsKey(PerformanceTestInterface.ERROR_MESSAGE))
-			System.out.println(results.getString(PerformanceTestInterface.ERROR_MESSAGE));
-		else
+		else if (!results.containsKey(PerformanceTestInterface.ERROR_MESSAGE))
 			System.out.println(testsToDo.get(countIntent).getStringExtra(PerformanceTestInterface.STATUS) + " falhou!");
-		
-		if(resultCode == RESULT_CANCELED){
+		else{
 			//TODO This need a specific treatment when some test fails. To create list with error messages of each test for example.
 			//System.out.println(testsToDo.get(countIntent).getStringExtra(STATUS) + " failed!!!! :(");
 			(new FileSequentialOperation()).testTJMwriteSequentialFile(fileLocation + "/" + testsToDo.get(countIntent).getStringExtra(PerformanceTestInterface.STATUS)+ ".txt",

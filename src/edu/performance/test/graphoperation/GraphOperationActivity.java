@@ -22,7 +22,8 @@ public class GraphOperationActivity extends PerformanceTestActivity {
 			}
 		}
 		else{
-			Bundle extras = new Bundle();			
+			Bundle extras = new Bundle();	
+			extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "O método getIntent retornou Null!");
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			finishTest(extras);
 			setResult(RESULT_CANCELED);

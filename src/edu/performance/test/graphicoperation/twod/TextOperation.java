@@ -13,10 +13,6 @@ import edu.performance.test.graphicoperation.Operation;
 
 public class TextOperation extends Operation {
 	
-	public final String TEXT1 = "Master Degree";
-    public final String TEXT2 = "LSE_2015";
-    public final int TIMES = 10;
-
     private Paint bgPaint;
     class PaintText {
         public int x;
@@ -30,7 +26,8 @@ public class TextOperation extends Operation {
             this.text = text;
         }
     }
-//TODO FIXME Passar array de textos a serem desenhados
+
+    int sizeOfTextArray = 0;
 	public TextOperation(Context ctx, AttributeSet attrs) {
 		super(ctx);
 		context = ctx;
@@ -41,6 +38,7 @@ public class TextOperation extends Operation {
 		bgPaint = new Paint();
         bgPaint.setColor(Color.BLACK);
         bgPaint.setStyle(Paint.Style.FILL);
+        sizeOfTextArray = ((TextActivity)ctx).getTexts().length;
 	}
 
 	@Override
@@ -76,11 +74,11 @@ public class TextOperation extends Operation {
         int height = getHeight();
         int width  = getWidth();
         canvas.drawRect(0,0,width,height,bgPaint);
-       
+        
         int cx;
         int cy;
         int color; 
-        for(int i=0; i<TIMES; i++) {
+        for(int i=0; i< sizeOfTextArray; i++) {
             cx = (int)((mRandom.nextInt() % (width*0.8) ) + (width*0.1));
             cy = (int)((mRandom.nextInt() % (height*0.8) ) + (height*0.1));
 
@@ -99,10 +97,7 @@ public class TextOperation extends Operation {
             p.setColor(color);
             p.setTextSize(42 + (mRandom.nextInt()%28));
 
-            if(mRandom.nextInt()%2 == 0)
-                canvas.drawText(TEXT1, cx, cy, p);
-            else
-                canvas.drawText(TEXT2, cx, cy, p);
+            canvas.drawText(((TextActivity)context).getTexts()[i], cx, cy, p);
         }
     }
 	

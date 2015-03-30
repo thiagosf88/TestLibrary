@@ -1,7 +1,6 @@
 package edu.performance.test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,7 +17,6 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.Intent;
-import edu.performance.test.filerandomoperation.FileRandomOperation;
 
 public class TestsManager {
 	
@@ -76,7 +74,7 @@ public class TestsManager {
 								e.printStackTrace();
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block
-								System.err.println("A classe defina por: " + testItem.getChildNodes().item(a).getTextContent() + " não foi encontrada na biblioteca");
+								System.err.println("A classe definida por: " + testItem.getChildNodes().item(a).getTextContent() + " não foi encontrada na biblioteca");
 							}
 						if(testItem.getChildNodes().item(a).getNodeName().contains("extraBool"))
 							aTest.putExtra(((Element)testItem.getChildNodes().item(a)).getAttribute("name"), Boolean.parseBoolean(testItem.getChildNodes().item(a).getTextContent()));

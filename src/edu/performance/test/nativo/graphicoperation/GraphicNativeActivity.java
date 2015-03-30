@@ -1,5 +1,6 @@
 package edu.performance.test.nativo.graphicoperation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -13,8 +14,9 @@ import edu.performance.test.R;
 
 public class GraphicNativeActivity extends PerformanceTestActivity implements SurfaceHolder.Callback
 {
-
-
+	
+	 GraphicNativeActivity appRef;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,7 @@ public class GraphicNativeActivity extends PerformanceTestActivity implements Su
         setContentView(R.layout.main);
         SurfaceView surfaceView = (SurfaceView)findViewById(R.id.surfaceview);
         surfaceView.getHolder().addCallback(this);
+        appRef = this;
         surfaceView.setOnClickListener(new OnClickListener() {
                 public void onClick(View view) {
                     Toast toast = Toast.makeText(GraphicNativeActivity.this,
@@ -61,6 +64,24 @@ public class GraphicNativeActivity extends PerformanceTestActivity implements Su
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
+    	
+    	new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(appRef.getMAX_TIME_MS());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                
+                Intent mIntent = new Intent();
+				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, appRef.isTheLast());
+				appRef.setResult(PerformanceTestActivity.RESULT_OK, mIntent);
+				appRef.finish();
+                
+                
+            }
+        }).start();
     	nativeSetSurface(holder.getSurface());
     }
 

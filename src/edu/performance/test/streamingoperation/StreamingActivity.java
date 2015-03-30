@@ -25,7 +25,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 	ActivityThread mythread;
 	public static final String STREAMSIZE = "STREAMSIZE";
 	boolean isTheLast = true;
-	//TODO FIXME mudar para parametro level
+	
 	String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
 
 	@Override
@@ -70,6 +70,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 
 			else {
 				Bundle extras = new Bundle();
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: URI");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				Intent mIntent = new Intent();
 				mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());
@@ -80,6 +81,7 @@ public class StreamingActivity extends InternetPerformanceTestActivity implement
 			}
 		} else {
 			Bundle extras = new Bundle();
+			
 			extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 			Intent mIntent = new Intent();
 			mIntent.putExtra(PerformanceTestActivity.THELASTTEST, isTheLast());
