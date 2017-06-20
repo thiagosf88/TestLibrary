@@ -15,21 +15,20 @@ import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import edu.performance.test.Library;
 import edu.performance.test.PerformanceTestActivity;
-import edu.performance.test.StorageTests;
+import edu.performance.test.PerformanceTest;
+
 
 /**
- * This class extends ReadAndWrite because some new attributes are needed beside
- * those inherited from PerformanceTest and it performs file manipulation.
- * Currently the implemented operations are: - Sequentially Access -- read --
- * write - Randomly Access -- read -- write
  * 
  * @author Thiago
  */
-public class FileSequentialOperation extends StorageTests {
+public class FileSequentialOperation extends PerformanceTest<String> {
 
-	public FileSequentialOperation(PerformanceTestActivity activity, String filePath, String stretch, int level) {
-		super(activity, level);
-		this.setFilePath(filePath);
+	private String dirName;
+	private String stretch;
+	//
+	public FileSequentialOperation(PerformanceTestActivity activity, String stretch, string level) {
+		super(level, activity);
 		this.setStretch(stretch);
 		if(activity != null)
 			activity.executeTest();
@@ -46,10 +45,10 @@ public class FileSequentialOperation extends StorageTests {
 
 	public void execute() {
 		
-		testTJMwriteSequentialFile(this.getFilePath(),
-				this.getStretch()); // não testado ainda
+		testTJMwriteSequentialFile(this.getLevel(),
+				this.getStretch()); //TODO não testado ainda
 	
-		testTJMreadSequentialAcessFile(this.getFilePath());
+		testTJMreadSequentialAcessFile(this.getLevel());
 		
 		Bundle extras = new Bundle();			
 		extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, true);
@@ -61,24 +60,22 @@ public class FileSequentialOperation extends StorageTests {
 	/**
 	 * This method tries to open a existent file determined by path and read it
 	 * sequentially. It is missing to use level parameter.
-	 * 
-	 * @param path
+
+	 * @param level
 	 *            Determines the path to the file that will be sequentially
 	 *            read.
-	 * @param level
-	 *            ??
 	 */
-	public String testTJMreadSequentialAcessFile(String filePath) {
+	public String testTJMreadSequentialAcessFile(String level) {
 
 		BufferedReader br = null;
 
 		String text = "";
 		try {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(
-					filePath)), 8192);
+					level)), 8192);
 		} catch (FileNotFoundException e1) {
 
-			System.out.println("Arquivo não encontrado: " + filePath);
+			System.out.println("Arquivo não encontrado: " + level);
 			
 			return null;
 		} // 2nd arg is buffer size
@@ -104,34 +101,22 @@ public class FileSequentialOperation extends StorageTests {
 		return text;
 	}
 
-	/**
-	 * This method tries to open a existent file determined by path and read it
-	 * randomly starting in "position" and put text inside a byte array whose
-	 * length is level.
-	 * 
-	 * @param path
-	 *            Determines the path to the file that will be randomly read.
-	 * @param positions
-	 *            Determines the position where will be started the read.
-	 * @param level
-	 *            Determines the size of byte array that will receive the read
-	 *            text.
-	 */
+
 	
 
 	/**
 	 * This method creates a directory structure and a file to write inside it a
 	 * part of text determined by strecth.
 	 * 
-	 * @param filename
+	 * @param level
 	 *            Indicates the name of the file that will be created.
 	 * @param stretch
 	 *            Is the part of the text that will be written inside the file.
 	 */
-	public void testTJMwriteSequentialFile(String filename,
+	public void testTJMwriteSequentialFile(String level,
 			String stretch) {
 
-		File file = new File(filename);
+		File file = new File(level);
 		// if file doesnt exists, then create it
 		try {
 			if (!file.exists()) {

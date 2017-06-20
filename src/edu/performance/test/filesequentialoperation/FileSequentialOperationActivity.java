@@ -14,15 +14,15 @@ public class FileSequentialOperationActivity extends PerformanceTestActivity {
 		if(getIntent().getExtras() != null){
 			if(getIntent().hasExtra(PerformanceTestActivity.LEVEL_FILENAME)
 					&& getIntent().hasExtra(PerformanceTestActivity.STRETCH)
-					&& getIntent().hasExtra(PerformanceTestActivity.LEVEL_INT)){
-			filePath = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME);
+					){
+			level = getIntent().getExtras().getString(PerformanceTestActivity.LEVEL_FILENAME);
 			stretch = getIntent().getExtras().getString(PerformanceTestActivity.STRETCH);
 			
-			level = getIntent().getExtras().getInt(PerformanceTestActivity.LEVEL_INT);
+			
 		}
 			else{
 				Bundle extras = new Bundle();
-				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level, filename ou stretch!");
+				extras.putString(PerformanceTestActivity.ERROR_MESSAGE, "Não foram fornecidos parâmetros mínimos: level ou stretch!");
 				extras.putBoolean(PerformanceTestActivity.RESULT_WAS_OK, false);
 				finishTest(extras);
 				finish();
@@ -39,7 +39,7 @@ public class FileSequentialOperationActivity extends PerformanceTestActivity {
 	}
 		
 			status.setText(message);
-			operation = new FileSequentialOperation(this, filePath, stretch, level);
+			operation = new FileSequentialOperation(this, stretch, level);
 		
 		
 		
